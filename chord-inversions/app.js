@@ -7,21 +7,19 @@ class ChordAndStringSelector {
     constructor() {
         this._CHORDS = ["C", "C#", "D", "D#", "E", "F", "G", "G#", "A", "A#", "B"];
         this._CHORD_SUFFIXES = ["", "m", "7", "m7", "sus4"]
-
     }
 
     /**
      * Returns a random chord and string number from the selection.
-     * @param {*} numberOfStrings 
      */
     select(numberOfStrings) {
         // Set the chord
         let chordName = this._CHORDS[Math.floor(Math.random() * this._CHORDS.length)];
 
-        // set the chord suffix
+        // Set the chord suffix
         chordName += this._CHORD_SUFFIXES[Math.floor(Math.random() * this._CHORD_SUFFIXES.length)];
 
-        // set the string number of the chord root
+        // Set the string number of the chord root
         const stringNumber = Math.floor(Math.random() * numberOfStrings);
 
         return [chordName, stringNumber];
@@ -29,6 +27,9 @@ class ChordAndStringSelector {
 }
 
 
+/**
+ * Gets a chord and string number from the selector and applies it to the html elements.
+ */
 function updateSelection(selector) {
     [chordName, stringNumber] = selector.select(6);
 
