@@ -20,7 +20,7 @@ class ChordAndStringSelector {
         chordName += this._CHORD_SUFFIXES[Math.floor(Math.random() * this._CHORD_SUFFIXES.length)];
 
         // Set the string number of the chord root
-        const stringNumber = Math.floor(Math.random() * numberOfStrings);
+        const stringNumber = Math.floor(Math.random() * numberOfStrings) + 1;
 
         return [chordName, stringNumber];
     }
