@@ -3,21 +3,24 @@ DICTIONARY = {
         {
             "nominative": "собака",
             "genitive": {"text": "собаки", "caseRule": 2, "spellingRule": 0},
+            "accusative": {"text": "собаку", "caseRule": 4},
             "dative": {"text": "собаке", "caseRule": 2},
             "gender": "f"
         },
         {
             "nominative": "кошка",
             "genitive": {"text": "кошки", "caseRule": 2, "spellingRule": 0},
+            "accusative": {"text": "кошку", "caseRule": 4},
             "dative": {"text": "кошке", "caseRule": 2},
             "gender": "f"
         },
         {
             "nominative": "человек",
             "genitive": {"text": "человека", "caseRule": 0},
+            "accusative": {"text": "человека", "caseRule": 1},
             "dative": {"text": "человеку", "caseRule": 0},
             "gender": "m"
-        }
+        },
     ],
 
     "caseRules": {
@@ -28,6 +31,15 @@ DICTIONARY = {
             "For feminine nouns ending in я or ь, replace with и",
             "For neuter nouns ending in о, replace with а",
             "For neuter nouns ending in е, replace with я"
+        ],
+        "accusative": [
+            "For inanimate masculine nouns there is no change",
+            "For animate masculine nouns ending in a consonant, add а",
+            "For animate masculine nouns ending in й, replace with я",
+            "For animate masculine nouns ending in ь, replace with я",
+            "For feminine nouns ending in а, replace with у",
+            "For feminine nouns ending in я, replace with ю",
+            "For inanimate neuter nouns there is no change"
         ],
         "dative": [
             "For masculine nouns ending in a consonant, add у",
