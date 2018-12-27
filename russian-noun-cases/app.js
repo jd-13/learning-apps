@@ -109,13 +109,24 @@ class CaseChoiceQuestion extends BaseQuestion {
             availableCases = availableCases.slice(caseIdx);
         }
 
-        this._questionPhrase = chosenPhrase.text;
+        // Get the text for the feedback
+        let feedbackLine1 = `${chosenPhrase.targetCase} case: `;
+        feedbackLine1 = feedbackLine1.concat(`${dictionary.caseRules[chosenPhrase.targetCase][correctNounCase.caseRule]}`);
+        feedbackLine1 = feedbackLine1.charAt(0).toUpperCase() + feedbackLine1.slice(1);
+
+        let feedbackLine2 = "";
+        if (correctNounCase.hasOwnProperty("spellingRule")) {
+            feedbackLine2 = dictionary.spellingRules[correctNounCase.spellingRule];
+        }
+
+        this._questionText = chosenPhrase.text;
         this._answer = correctNounCase.text;
+        this._feedbackText = [feedbackLine1, feedbackLine2];
     }
 
     renderQuestion($questionContainer, $nextBtn, $isCorrect, $feedbackLine1, $feedbackLine2) {
         // Prepare the data
-        const splitPhrase = this._questionPhrase.split("||");
+        const splitPhrase = this._questionText.split("||");
 
         let shuffledAnswers = [...this._incorrectChoices];
         shuffledAnswers.push(this._answer);
@@ -146,8 +157,8 @@ class CaseChoiceQuestion extends BaseQuestion {
                 $isCorrect.text("Correct!");
             } else {
                 $isCorrect.text("Oops!");
-                // $feedbackLine1.text(that._feedbackText[0]);
-                // $feedbackLine2.text(that._feedbackText[1]);
+                $feedbackLine1.text(that._feedbackText[0]);
+                $feedbackLine2.text(that._feedbackText[1]);
             }
         });
     }
