@@ -95,7 +95,7 @@ class CaseChoiceQuestion extends BaseQuestion {
         const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
         // Choose a noun to substitute into the phrase
-        const nouns = dictionary.nouns.animate;
+        const nouns = dictionary.nouns[chosenPhrase.nounType];
         const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
 
         // Lookup the correct case of the noun for this phrase
