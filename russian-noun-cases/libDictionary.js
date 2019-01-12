@@ -1,30 +1,34 @@
 DICTIONARY = {
-    "nouns": [
-        {
-            "nominative": {"text": "собака"},
-            "genitive": {"text": "собаки", "caseRule": 2, "spellingRule": 0},
-            "accusative": {"text": "собаку", "caseRule": 4},
-            "dative": {"text": "собаке", "caseRule": 2},
-        },
-        {
-            "nominative": {"text": "кошка"},
-            "genitive": {"text": "кошки", "caseRule": 2, "spellingRule": 0},
-            "accusative": {"text": "кошку", "caseRule": 4},
-            "dative": {"text": "кошке", "caseRule": 2},
-        },
-        {
-            "nominative": {"text": "человек"},
-            "genitive": {"text": "человека", "caseRule": 0},
-            "accusative": {"text": "человека", "caseRule": 1},
-            "dative": {"text": "человеку", "caseRule": 0},
-        },
-        {
-            "nominative": {"text": "женщина"},
-            "genitive": {"text": "женщины", "caseRule": 2},
-            "accusative": {"text": "женщину", "caseRule": 4},
-            "dative": {"text": "женщине", "caseRule": 2}
-        }
-    ],
+    "nouns": {
+        "animate": [
+            {
+                "nominative": {"text": "собака"},
+                "genitive": {"text": "собаки", "caseRule": 2, "spellingRule": 0},
+                "accusative": {"text": "собаку", "caseRule": 4},
+                "dative": {"text": "собаке", "caseRule": 2},
+            },
+            {
+                "nominative": {"text": "кошка"},
+                "genitive": {"text": "кошки", "caseRule": 2, "spellingRule": 0},
+                "accusative": {"text": "кошку", "caseRule": 4},
+                "dative": {"text": "кошке", "caseRule": 2},
+            },
+            {
+                "nominative": {"text": "человек"},
+                "genitive": {"text": "человека", "caseRule": 0},
+                "accusative": {"text": "человека", "caseRule": 1},
+                "dative": {"text": "человеку", "caseRule": 0},
+            },
+            {
+                "nominative": {"text": "женщина"},
+                "genitive": {"text": "женщины", "caseRule": 2},
+                "accusative": {"text": "женщину", "caseRule": 4},
+                "dative": {"text": "женщине", "caseRule": 2}
+            }
+        ],
+
+        "inanimate": []
+    },
 
     "caseRules": {
         "genitive": [

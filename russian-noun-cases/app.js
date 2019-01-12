@@ -36,7 +36,8 @@ class SimpleQuestion extends BaseQuestion {
         super();
 
         // Choose a noun at random
-        const chosenNoun = dictionary.nouns[Math.floor(Math.random() * dictionary.nouns.length)];
+        const nouns = dictionary.nouns.animate;
+        const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
         
         // Choose a target case at random, exclude the first case as this will always be nominative
         const availableCases = Object.keys(chosenNoun).slice(1);
@@ -94,7 +95,7 @@ class CaseChoiceQuestion extends BaseQuestion {
         const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
         // Choose a noun to substitute into the phrase
-        const nouns = dictionary.nouns;
+        const nouns = dictionary.nouns.animate;
         const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
 
         // Lookup the correct case of the noun for this phrase
