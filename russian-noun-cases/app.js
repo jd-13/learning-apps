@@ -118,7 +118,7 @@ class SimpleQuestion extends BaseQuestion {
             // Enable the next button
             $nextBtn.prop("disabled", false);
 
-            if ($("#answerInput").val() === that._answer) {
+            if ($("#answerInput").val().toLowerCase() === that._answer) {
                 $isCorrect.text("Correct!");
             } else {
                 $isCorrect.text("Oops!");
@@ -246,7 +246,7 @@ class CaseChoiceQuestion extends BaseQuestion {
             // Enable the next button
             $nextBtn.prop("disabled", false);
 
-            if ($(this).text() === that._answer) {
+            if ($(this).text().toLowerCase() === that._answer) {
                 $isCorrect.text("Correct!");
             } else {
                 $isCorrect.text("Oops!");
