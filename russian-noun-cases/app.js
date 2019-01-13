@@ -227,8 +227,6 @@ class CaseChoiceQuestion extends BaseQuestion {
             } else {
                 correctPronounCase = correctPronounCase.inanimate;
             }
-
-            console.log(correctPronounCase);
         }
 
         // Pick two other cases at random, exclude the correct case
@@ -249,8 +247,6 @@ class CaseChoiceQuestion extends BaseQuestion {
 
             this._incorrectChoices.push(incorrectChoice);
             availableCases = availableCases.slice(caseIdx);
-
-            console.log(incorrectChoice);
         }
 
         // Get the text for the feedback
