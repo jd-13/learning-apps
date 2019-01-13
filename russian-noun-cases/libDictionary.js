@@ -159,13 +159,15 @@ DICTIONARY = {
                 "dative": "вам",
                 "instrumental": "вами"
             },
-            {
-                "nominative": "мы",
-                "genitive": "нас",
-                "accusative": "нас",
-                "dative": "нам",
-                "instrumental": "нами"
-            }
+
+            // TODO: handle plurals nouns
+            // {
+            //     "nominative": "мы",
+            //     "genitive": "нас",
+            //     "accusative": "нас",
+            //     "dative": "нам",
+            //     "instrumental": "нами"
+            // }
         ],
 
         "possessive":
@@ -304,17 +306,17 @@ DICTIONARY = {
         // Possessive
         {
             "text": "|| дом",
-            "targetCase": "genitive",
+            "targetCase": "nominative",
             "pronounType": "possessive",
             "gender": "masculine",
-            "animate": false
+            "isAnimate": false
         },
         {
             "text": "|| кошка",
-            "targetCase": "genitive",
+            "targetCase": "nominative",
             "pronounType": "possessive",
             "gender": "feminine",
-            "animate": false
+            "isAnimate": false
         }
     ]
 };
