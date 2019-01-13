@@ -35,6 +35,15 @@ class SimpleQuestion extends BaseQuestion {
     constructor(dictionary) {
         super();
 
+        // Choose a noun or pronoun
+        if (Math.random() > 0.5) {
+            this._setupNoun(dictionary);
+        } else {
+            this._setupPronoun(dictionary)
+        }
+    }
+
+    _setupNoun(dictionary) {
         // Choose a noun at random
         const nouns = dictionary.nouns.animate;
         const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
@@ -53,9 +62,43 @@ class SimpleQuestion extends BaseQuestion {
             feedbackLine2 = dictionary.spellingRules[chosenCase.spellingRule];
         }
 
+        // Store the results
         this._questionText = `What is the ${chosenCaseKey} case of ${chosenNoun.nominative.text}?`;
         this._answer = chosenNoun[chosenCaseKey].text;
         this._feedbackText = [feedbackLine1, feedbackLine2]
+    }
+
+    _setupPronoun(dictionary) {
+        let chosenPronoun = undefined;
+
+        // Choose personal or possesive
+        if (Math.random() > 0.5) {
+            const pronouns = dictionary.pronouns.personal;
+            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+        } else {
+            const pronouns = dictionary.pronouns.possessive;
+
+            // Choose gender
+            const genders = Object.keys(pronouns);
+            const chosenGender = genders[Math.floor(Math.random() * genders.length)];
+
+            // Choose the pronoun
+            chosenPronoun = pronouns[chosenGender][
+                Math.floor(Math.random() * pronouns[chosenGender].length)];
+        }
+
+        // Choose a target case at random, exclude the first case as this will always be nominative
+        const availableCases = Object.keys(chosenPronoun).slice(1);
+        const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
+        const answer = chosenPronoun[chosenCaseKey];
+
+        // Get the text for the feedback
+        const feedbackLine1 = `The correct answer is ${answer}`;
+
+        // Store the results
+        this._questionText = `What is the ${chosenCaseKey} case of ${chosenPronoun.nominative}?`;
+        this._answer = answer;
+        this._feedbackText = [feedbackLine1, ""]
     }
 
     renderQuestion($questionContainer, $nextBtn, $isCorrect, $feedbackLine1, $feedbackLine2) {
@@ -90,8 +133,17 @@ class CaseChoiceQuestion extends BaseQuestion {
     constructor(dictionary) {
         super();
 
+        // Choose a noun or pronoun
+        if (Math.random() > 0.5) {
+            this._setupNoun(dictionary);
+        } else {
+            this._setupPronoun(dictionary)
+        }
+    }
+
+    _setupNoun(dictionary) {
         // Choose a phrase from the dictionary
-        const phrases = dictionary.caseChoicePhrases;
+        const phrases = dictionary.nounChoicePhrases;
         const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
         // Choose a noun to substitute into the phrase
@@ -120,9 +172,49 @@ class CaseChoiceQuestion extends BaseQuestion {
             feedbackLine2 = dictionary.spellingRules[correctNounCase.spellingRule];
         }
 
+        // Store the results
         this._questionText = chosenPhrase.text;
         this._answer = correctNounCase.text;
         this._feedbackText = [feedbackLine1, feedbackLine2];
+    }
+
+    _setupPronoun(dictionary) {
+        // Choose a phrase from the dictionary
+        const phrases = dictionary.pronounChoicePhrases;
+        const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+        // Get the pronoun
+        let chosenPronoun = undefined;
+        if (chosenPhrase.pronounType === "personal") {
+            const pronouns = dictionary.pronouns.personal;
+            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+
+        } else {
+            const pronouns = dictionary.pronouns.possessive[chosenPhrase.gender];
+
+            // Choose the pronoun
+            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+        }
+
+        // Lookup the correct case of the noun for this phrase
+        const correctPronounCase = chosenPronoun[chosenPhrase.targetCase];
+
+        // Pick two other cases at random, exclude the correct case
+        let availableCases = Object.keys(chosenPronoun).filter(word => word !== chosenPhrase.targetCase);
+        this._incorrectChoices = [];
+        for (let idx = 0; idx < 2; idx++) {
+            const caseIdx = Math.floor(Math.random() * availableCases.length);
+            this._incorrectChoices.push(chosenPronoun[availableCases[caseIdx]]);
+            availableCases = availableCases.slice(caseIdx);
+        }
+
+        // Get the text for the feedback
+        const feedbackLine1 = `The correct answer is ${correctPronounCase}`;
+
+        // Store the results
+        this._questionText = chosenPhrase.text;
+        this._answer = correctPronounCase;
+        this._feedbackText = [feedbackLine1, ""];
     }
 
     renderQuestion($questionContainer, $nextBtn, $isCorrect, $feedbackLine1, $feedbackLine2) {
