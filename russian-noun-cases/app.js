@@ -90,13 +90,34 @@ class SimpleQuestion extends BaseQuestion {
         // Choose a target case at random, exclude the first case as this will always be nominative
         const availableCases = Object.keys(chosenPronoun).slice(1);
         const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
-        const answer = chosenPronoun[chosenCaseKey];
+        let answer = chosenPronoun[chosenCaseKey];
+
+        let questionSuffix = "";
+
+        // Handle the accusative case
+        if (typeof answer === "object") {
+            if (Math.random() > 0.5) {
+                answer = answer.animate;
+
+                // Specify animate/inanimate if they are different
+                if (answer.animate !== answer.inanimate) {
+                    questionSuffix = " (animate)";
+                }
+            } else {
+                answer = answer.inanimate;
+
+                // Specify animate/inanimate if they are different
+                if (answer.animate !== answer.inanimate) {
+                    questionSuffix = " (inanimate)";
+                }
+            }
+        }
 
         // Get the text for the feedback
         const feedbackLine1 = `The correct answer is ${answer}`;
 
         // Store the results
-        this._questionText = `What is the ${chosenCaseKey} case of ${chosenPronoun.nominative}?`;
+        this._questionText = `What is the ${chosenCaseKey} case of ${chosenPronoun.nominative}${questionSuffix}?`;
         this._answer = answer;
         this._feedbackText = [feedbackLine1, ""]
     }
@@ -197,15 +218,39 @@ class CaseChoiceQuestion extends BaseQuestion {
         }
 
         // Lookup the correct case of the noun for this phrase
-        const correctPronounCase = chosenPronoun[chosenPhrase.targetCase];
+        let correctPronounCase = chosenPronoun[chosenPhrase.targetCase];
+
+        // Handle the accusative case
+        if (typeof correctPronounCase === "object") {
+            if (chosenPhrase.isAnimate) {
+                correctPronounCase = correctPronounCase.animate;
+            } else {
+                correctPronounCase = correctPronounCase.inanimate;
+            }
+
+            console.log(correctPronounCase);
+        }
 
         // Pick two other cases at random, exclude the correct case
         let availableCases = Object.keys(chosenPronoun).filter(word => word !== chosenPhrase.targetCase);
         this._incorrectChoices = [];
         for (let idx = 0; idx < 2; idx++) {
             const caseIdx = Math.floor(Math.random() * availableCases.length);
-            this._incorrectChoices.push(chosenPronoun[availableCases[caseIdx]]);
+            let incorrectChoice = chosenPronoun[availableCases[caseIdx]];
+
+            // Handle the accusative case
+            if (typeof correctPronounCase === "object") {
+                if (Math.random() > 0.5) {
+                    incorrectChoice = incorrectChoice.animate;
+                } else {
+                    incorrectChoice = incorrectChoice.inanimate;
+                }
+            }
+
+            this._incorrectChoices.push(incorrectChoice);
             availableCases = availableCases.slice(caseIdx);
+
+            console.log(incorrectChoice);
         }
 
         // Get the text for the feedback
@@ -226,7 +271,7 @@ class CaseChoiceQuestion extends BaseQuestion {
         shuffleArray(shuffledAnswers);
 
         // Add the questions elements to the document
-        let questionHTML = "<div>Choose the correct case for the noun in the below phrase:</div><br>";
+        let questionHTML = "<div>Choose the correct case for the noun/pronoun in the below phrase:</div><br>";
         questionHTML = questionHTML.concat("<div class=\"columns is-vcentered is-centered\">");
         questionHTML = questionHTML.concat(`<div class=\"column is-narrow\">${splitPhrase[0]}</div>`);
         questionHTML = questionHTML.concat("<div class=\"column is-narrow\">");
