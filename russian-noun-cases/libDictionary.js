@@ -53,6 +53,13 @@ DICTIONARY = {
                 "accusative": {"text": "мяч", "caseRule": 0},
                 "dative": {"text": "мячу", "caseRule": 0},
                 "instrumental": {"text": "мячом", "caseRule": 0}
+            },
+            {
+                "nominative": {"text": "дом"},
+                "genitive": {"text": "дома", "caseRule": 0},
+                "accusative": {"text": "дом", "caseRule": 0},
+                "dative": {"text": "дому", "caseRule": 0},
+                "instrumental": {"text": "домом", "caseRule": 0}
             }
         ]
     },
@@ -107,40 +114,63 @@ DICTIONARY = {
     ],
 
     "nounChoicePhrases": [
-        {
-            "text": "мяч ||",
-            "targetCase": "genitive",
-            "nounType": "animate"
+        { // мяч собаки
+            "text": "|| ||",
+            "substitutions": [
+                {
+                    "targetCase": "nominative",
+                    "nounType": "inanimate"
+                },
+                {
+                    "targetCase": "genitive",
+                    "nounType": "animate"
+                }
+            ]
         },
-        {
-            "text": "дом ||",
-            "targetCase": "genitive",
-            "nounType": "animate"
+        { // у меня есть яблоки
+            "text": "у || есть ||",
+            "substitutions": [
+                {
+                    "targetCase": "genitive",
+                    "nounType": "animate"
+                },
+                {
+                    "targetCase": "nominative",
+                    "nounType": "inanimate"
+                }
+            ]
         },
-        {
-            "text": "у || есть яблоки",
-            "targetCase": "genitive",
-            "nounType": "animate"
-        },
-        {
-            "text": "у || есть мяч",
-            "targetCase": "genitive",
-            "nounType": "animate"
-        },
-        {
+        { // чай пожалуйста
             "text": "|| пожалуйста",
-            "targetCase": "nominative",
-            "nounType": "inanimate"
+            "substitutions": [
+                {
+                    "targetCase": "nominative",
+                    "nounType": "inanimate"
+                }
+            ]
         },
-        {
+        { // у неё нет масла
             "text": "у неё нет ||",
-            "targetCase": "genitive",
-            "nounType": "inanimate"
+            "substitutions": [
+                {
+                    "targetCase": "genitive",
+                    "nounType": "inanimate"
+                }
+            ]
         },
-        {
-            "text": "у ребёнка нет ||",
-            "targetCase": "genitive",
-            "nounType": "inanimate"
+        { // у ребёнка нет яблоки
+            "text": "у || нет ||",
+            "substitutions": [
+                {
+                    "targetCase": "genitive",
+                    "nounType": "animate"
+                },
+                {
+                    "targetCase": "genitive",
+                    "nounType": "inanimate"
+                }
+            ]
+
         }
     ],
 

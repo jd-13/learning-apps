@@ -153,20 +153,32 @@ class CaseChoiceQuestion extends BaseQuestion {
         }
     }
 
+    /**
+     * Chooses a phrase from the dictionary, then substitutes a noun for the || characters, choosing
+     * the correct form of the noun and two incorrect forms.
+     *
+     * @param {*} dictionary 
+     */
     _setupNoun(dictionary) {
         // Choose a phrase from the dictionary
         const phrases = dictionary.nounChoicePhrases;
         const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
+        // If there are multiple substitutions available, randomly choose one to quiz the user on
+        const questionSubstIdx = Math.floor(Math.random() * chosenPhrase.substitutions.length);
+        const questionSubst = chosenPhrase.substitutions[questionSubstIdx];
+
         // Choose a noun to substitute into the phrase
-        const nouns = dictionary.nouns[chosenPhrase.nounType];
+        const nouns = dictionary.nouns[questionSubst.nounType];
         const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
 
         // Lookup the correct case of the noun for this phrase
-        const correctNounCase = chosenNoun[chosenPhrase.targetCase];
+        const correctNounCase = chosenNoun[questionSubst.targetCase];
 
         // Pick two other cases at random, exclude the correct case
-        let availableCases = Object.keys(chosenNoun).filter(word => word !== chosenPhrase.targetCase);
+        let availableCases =
+            Object.keys(chosenNoun).filter(word => word !== questionSubst.targetCase);
+
         this._incorrectChoices = [];
         for (let idx = 0; idx < 2; idx++) {
             const caseIdx = Math.floor(Math.random() * availableCases.length);
@@ -174,10 +186,34 @@ class CaseChoiceQuestion extends BaseQuestion {
             availableCases = availableCases.slice(caseIdx);
         }
 
+        // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
+        // on
+        let questionText = chosenPhrase.text;
+        const substToken = "||";
+        let substitutionNumber = 0;
+        for (let idx = 0; (idx = questionText.indexOf(substToken, idx)) > -1; idx++) {
+
+            if (substitutionNumber != questionSubstIdx) {
+                const thisSubstitution = chosenPhrase.substitutions[substitutionNumber];
+                const substNouns = dictionary.nouns[thisSubstitution.nounType];
+                const thisNoun = substNouns[Math.floor(Math.random() * substNouns.length)][thisSubstitution.targetCase]["text"];
+
+                questionText = questionText.substring(0, idx)
+                               + thisNoun
+                               + questionText.substring(idx + substToken.length);
+            }
+
+            substitutionNumber++;
+        }
+
         // Get the text for the feedback
-        let feedbackLine1 = `${chosenPhrase.targetCase} case: `;
-        feedbackLine1 = feedbackLine1.concat(`${dictionary.caseRules[chosenPhrase.targetCase][correctNounCase.caseRule]}`);
+        let feedbackLine1 = `${questionSubst.targetCase} case`;
         feedbackLine1 = feedbackLine1.charAt(0).toUpperCase() + feedbackLine1.slice(1);
+
+        // Nominative case has no case rule
+        if (correctNounCase.hasOwnProperty("caseRule")) {
+            feedbackLine1 = feedbackLine1.concat(`: ${dictionary.caseRules[questionSubst.targetCase][correctNounCase.caseRule]}`);
+        }
 
         let feedbackLine2 = "";
         if (correctNounCase.hasOwnProperty("spellingRule")) {
@@ -185,7 +221,7 @@ class CaseChoiceQuestion extends BaseQuestion {
         }
 
         // Store the results
-        this._questionText = chosenPhrase.text;
+        this._questionText = questionText;
         this._answer = correctNounCase.text;
         this._feedbackText = [feedbackLine1, feedbackLine2];
     }
