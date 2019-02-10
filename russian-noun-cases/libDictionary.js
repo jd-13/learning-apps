@@ -60,6 +60,13 @@ DICTIONARY = {
                 "accusative": {"text": "дом", "caseRule": 0},
                 "dative": {"text": "дому", "caseRule": 0},
                 "instrumental": {"text": "домом", "caseRule": 0}
+            },
+            {
+                "nominative": {"text": "коробка"},
+                "genitive": {"text": "коробки", "caseRule": 2, "spellingRule": 0},
+                "accusative": {"text": "коробку", "caseRule": 4},
+                "dative": {"text": "коробке", "caseRule": 2},
+                "instrumental": {"text": "коробкой", "caseRule": 3}
             }
         ]
     },
