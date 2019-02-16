@@ -67,6 +67,13 @@ DICTIONARY = {
                 "accusative": {"text": "коробку", "caseRule": 4},
                 "dative": {"text": "коробке", "caseRule": 2},
                 "instrumental": {"text": "коробкой", "caseRule": 3}
+            },
+            {
+                "nominative": {"text": "вода"},
+                "genitive": {"text": "воды", "caseRule": 2},
+                "accusative": {"text": "воду", "caseRule": 4},
+                "dative": {"text": "воде", "caseRule": 2},
+                "instrumental": {"text": "водой", "caseRule": 1}
             }
         ]
     },
