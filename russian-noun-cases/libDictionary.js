@@ -7,28 +7,32 @@ DICTIONARY = {
                 "genitive": {"text": "собаки", "caseRule": 2, "spellingRule": 0},
                 "accusative": {"text": "собаку", "caseRule": 4},
                 "dative": {"text": "собаке", "caseRule": 2},
-                "instrumental": {"text": "собакой", "caseRule": 3}
+                "instrumental": {"text": "собакой", "caseRule": 3},
+                "prepositional": {"text": "собаке", "caseRule": 2}
             },
             {
                 "nominative": {"text": "кошка"},
                 "genitive": {"text": "кошки", "caseRule": 2, "spellingRule": 0},
                 "accusative": {"text": "кошку", "caseRule": 4},
                 "dative": {"text": "кошке", "caseRule": 2},
-                "instrumental": {"text": "кошкой", "caseRule": 3}
+                "instrumental": {"text": "кошкой", "caseRule": 3},
+                "prepositional": {"text": "кошке", "caseRule": 2}
             },
             {
                 "nominative": {"text": "человек"},
                 "genitive": {"text": "человека", "caseRule": 0},
                 "accusative": {"text": "человека", "caseRule": 1},
                 "dative": {"text": "человеку", "caseRule": 0},
-                "instrumental": {"text": "человеком", "caseRule": 0}
+                "instrumental": {"text": "человеком", "caseRule": 0},
+                "prepositional": {"text": "человеке", "caseRule": 0}
             },
             {
                 "nominative": {"text": "женщина"},
                 "genitive": {"text": "женщины", "caseRule": 2},
                 "accusative": {"text": "женщину", "caseRule": 4},
                 "dative": {"text": "женщине", "caseRule": 2},
-                "instrumental": {"text": "женщиной", "caseRule": 3}
+                "instrumental": {"text": "женщиной", "caseRule": 3},
+                "prepositional": {"text": "женщине", "caseRule": 2}
             }
         ],
 
@@ -38,42 +42,48 @@ DICTIONARY = {
                 "genitive": {"text": "чая", "caseRule": 1},
                 "accusative": {"text": "чая", "caseRule": 2},
                 "dative": {"text": "чаю", "caseRule": 1},
-                "instrumental": {"text": "чаем", "caseRule": 1}
+                "instrumental": {"text": "чаем", "caseRule": 1},
+                "prepositional": {"text": "чае", "caseRule": 2}
             },
             {
                 "nominative": {"text": "масло"},
                 "genitive": {"text": "масла", "caseRule": 4},
                 "accusative": {"text": "масло", "caseRule": 6},
                 "dative": {"text": "маслу", "caseRule": 4},
-                "instrumental": {"text": "маслом", "caseRule": 6}
+                "instrumental": {"text": "маслом", "caseRule": 6},
+                "prepositional": {"text": "масле", "caseRule": 4}
             },
             {
                 "nominative": {"text": "мяч"},
                 "genitive": {"text": "мяча", "caseRule": 0},
                 "accusative": {"text": "мяч", "caseRule": 0},
                 "dative": {"text": "мячу", "caseRule": 0},
-                "instrumental": {"text": "мячом", "caseRule": 0}
+                "instrumental": {"text": "мячом", "caseRule": 0},
+                "prepositional": {"text": "мяче", "caseRule": 0}
             },
             {
                 "nominative": {"text": "дом"},
                 "genitive": {"text": "дома", "caseRule": 0},
                 "accusative": {"text": "дом", "caseRule": 0},
                 "dative": {"text": "дому", "caseRule": 0},
-                "instrumental": {"text": "домом", "caseRule": 0}
+                "instrumental": {"text": "домом", "caseRule": 0},
+                "prepositional": {"text": "доме", "caseRule": 0}
             },
             {
                 "nominative": {"text": "коробка"},
                 "genitive": {"text": "коробки", "caseRule": 2, "spellingRule": 0},
                 "accusative": {"text": "коробку", "caseRule": 4},
                 "dative": {"text": "коробке", "caseRule": 2},
-                "instrumental": {"text": "коробкой", "caseRule": 3}
+                "instrumental": {"text": "коробкой", "caseRule": 3},
+                "prepositional": {"text": "коробке", "caseRule": 2}
             },
             {
                 "nominative": {"text": "вода"},
                 "genitive": {"text": "воды", "caseRule": 2},
                 "accusative": {"text": "воду", "caseRule": 4},
                 "dative": {"text": "воде", "caseRule": 2},
-                "instrumental": {"text": "водой", "caseRule": 1}
+                "instrumental": {"text": "водой", "caseRule": 1},
+                "prepositional": {"text": "воде", "caseRule": 2}
             }
         ]
     },
@@ -112,6 +122,14 @@ DICTIONARY = {
             /*4*/"For feminine nouns ending in я, replace with ей (ёй if stressed)",
             /*5*/"For feminine nouns ending in ь, add ю",
             /*6*/"For neuter nouns add м"
+        ],
+        "prepositional": [
+            /*0*/"For nouns ending in a consonant, add е",
+            /*1*/"For nouns ending in ь (masculine), replace with е",
+            /*2*/"For nouns ending in а, я or й, replace with е",
+            /*3*/"For nouns ending in ь (feminine), replace with и",
+            /*4*/"For nouns ending in о, replace with е",
+            /*5*/"For nouns ending in ия, ий, or ие, replace with ии"
         ]
     },
 
@@ -184,7 +202,24 @@ DICTIONARY = {
                     "nounType": "inanimate"
                 }
             ]
-
+        },
+        { // на доме TODO: на can also take accusative case, need to clarify
+            "text": "на ||",
+            "substitutions": [
+                {
+                    "targetCase": "prepositional",
+                    "nounType": "inanimate"
+                }
+            ]
+        },
+        { // в доме TODO: в can also take nominative case, need to clarify
+            "text": "в ||",
+            "substitutions": [
+                {
+                    "targetCase": "prepositional",
+                    "nounType": "inanimate"
+                }
+            ]
         }
     ],
 
