@@ -84,6 +84,22 @@ DICTIONARY = {
                 "dative": {"text": "воде", "caseRule": 2},
                 "instrumental": {"text": "водой", "caseRule": 1},
                 "prepositional": {"text": "воде", "caseRule": 2}
+            },
+            {
+                "nominative": {"text": "парк"},
+                "genitive": {"text": "парка", "caseRule": 0},
+                "accusative": {"text": "парк", "caseRule": 0},
+                "dative": {"text": "парку", "caseRule": 0},
+                "instrumental": {"text": "парком", "caseRule": 0},
+                "prepositional": {"text": "парке", "caseRule": 0}
+            },
+            {
+                "nominative": {"text": "тарелка"},
+                "genitive": {"text": "тарелки", "caseRule": 2, "spellingRule": 0},
+                "accusative": {"text": "тарелку", "caseRule": 4},
+                "dative": {"text": "тарелке", "caseRule": 2},
+                "instrumental": {"text": "тарелкой", "caseRule": 3},
+                "prepositional": {"text": "тарелке", "caseRule": 2}
             }
         ]
     },
@@ -217,6 +233,32 @@ DICTIONARY = {
             "substitutions": [
                 {
                     "targetCase": "prepositional",
+                    "nounType": "inanimate"
+                }
+            ]
+        },
+        { // яблоко на столе
+            "text": "|| на ||",
+            "substitutions": [
+                {
+                    "targetCase": "nominative",
+                    "nounType": "inanimate"
+                },
+                {
+                    "targetCase": "prepositional",
+                    "nounType": "inanimate"
+                }
+            ]
+        },
+        { // девочка видит маму
+            "text": "|| видит ||",
+            "substitutions": [
+                {
+                    "targetCase": "nominative",
+                    "nounType": "animate"
+                },
+                {
+                    "targetCase": "accusative",
                     "nounType": "inanimate"
                 }
             ]
@@ -430,6 +472,20 @@ DICTIONARY = {
         {
             "text": "|| кошка",
             "targetCase": "nominative",
+            "pronounType": "possessive",
+            "gender": "feminine",
+            "isAnimate": false
+        },
+        {
+            "text": "это || книга",
+            "targetCase": "nominative",
+            "pronounType": "possessive",
+            "gender": "feminine",
+            "isAnimate": false
+        },
+        {
+            "text": "я вижу || маму",
+            "targetCase": "accusative",
             "pronounType": "possessive",
             "gender": "feminine",
             "isAnimate": false
