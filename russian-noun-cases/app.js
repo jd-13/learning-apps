@@ -1,7 +1,7 @@
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = array[i];
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
@@ -11,47 +11,22 @@ function shuffleArray(array) {
  * Randomly generates a new question from the provided dictionary.
  */
 function newQuestion(dictionary) {
-    const questionTypes = [SimpleQuestion, CaseChoiceQuestion];
+    var questionTypes = [SimpleQuestion, CaseChoiceQuestion];
 
     return new questionTypes[Math.floor(Math.random() * questionTypes.length)](dictionary);
 }
 
-const main = function() {
+var main = function main() {
 
-    // Collect the necessary elements
-    let $questionContainer = $("#questionContainer");
-    let $nextBtn = $("#nextBtn");
-    let $isCorrect = $("#isCorrect");
-    let $feedbackLine1 = $("#feedbackLine1");
-    let $feedbackLine2 = $("#feedbackLine2");
+    // Add empty feedback element
+    ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
     // Load the first question
-    let question = newQuestion(DICTIONARY);
-    question.renderQuestion($questionContainer,
-                            $nextBtn,
-                            $isCorrect,
-                            $feedbackLine1,
-                            $feedbackLine2);
+    var question = newQuestion(DICTIONARY);
+    question.renderQuestion();
 
-    // Set the next button handler
-    $nextBtn.click(function() {
-        // Disable this button
-        $(this).prop("disabled", true);
-
-        // Clear the feedback and text fields
-        $questionContainer.empty();
-        $isCorrect.text("");
-        $feedbackLine1.text("");
-        $feedbackLine2.text("");
-
-        // Load the next question
-        question = newQuestion(DICTIONARY);
-        question.renderQuestion($questionContainer,
-                                $nextBtn,
-                                $isCorrect,
-                                $feedbackLine1,
-                                $feedbackLine2);
-    });
-}
+    // Disable the next button
+    ReactDOM.render(React.createElement(NextButtonElement, { disabled: true }), nextButton);
+};
 
 $(document).ready(main);

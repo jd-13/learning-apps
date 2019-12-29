@@ -17,31 +17,28 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="mainSection">
 
-            <div class="contianer has-text-centered" id="questionContainer"></div>
-
-            <br>
-
-            <div class="container has-text-centered is-size-4" id="isCorrect"></div>
+            <div class="container has-text-centered" id="questionContainer"></div>
 
             <br>
 
-            <div class="container has-text-centered" id="feedbackLine1"></div>
-            <div class="container has-text-centered" id="feedbackLine2"></div>
+            <div id="feedback"></div>
 
         </section>
 
         <section class="section">
-            <div class="container has-text-centered">
-                <button type="button" class="button is-success" id="nextBtn" disabled>Next</button>
-            </div>
+            <div id="nextButton"></div>
         </section>
 
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+
         <script src="libDictionary.js"></script>
+        <script src="libElements.js"></script>
         <script src="libQuestions.js"></script>
         <script src="app.js"></script>
     </body>
