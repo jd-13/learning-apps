@@ -33,6 +33,22 @@ DICTIONARY = {
                 "dative": {"text": "женщине", "caseRule": 2},
                 "instrumental": {"text": "женщиной", "caseRule": 3},
                 "prepositional": {"text": "женщине", "caseRule": 2}
+            },
+            {
+                "nominative": {"text": "медведь"},
+                "genitive": {"text": "медведя", "caseRule": 1},
+                "accusative": {"text": "медведя", "caseRule": 3},
+                "dative": {"text": "медведю", "caseRule": 1},
+                "instrumental": {"text": "медведем", "caseRule": 2},
+                "prepositional": {"text": "медведе", "caseRule": 1}
+            },
+            {
+                "nominative": {"text": "змея"},
+                "genitive": {"text": "змеи", "caseRule": 3},
+                "accusative": {"text": "змею", "caseRule": 5},
+                "dative": {"text": "змее", "caseRule": 2},
+                "instrumental": {"text": "змеёй", "caseRule": 4},
+                "prepositional": {"text": "змее", "caseRule": 2}
             }
         ],
 
@@ -100,6 +116,22 @@ DICTIONARY = {
                 "dative": {"text": "тарелке", "caseRule": 2},
                 "instrumental": {"text": "тарелкой", "caseRule": 3},
                 "prepositional": {"text": "тарелке", "caseRule": 2}
+            },
+            {
+                "nominative": {"text": "город"},
+                "genitive": {"text": "города", "caseRule": 0},
+                "accusative": {"text": "город", "caseRule": 0},
+                "dative": {"text": "городу", "caseRule": 0},
+                "instrumental": {"text": "городом", "caseRule": 0},
+                "prepositional": {"text": "городе", "caseRule": 0}
+            },
+            {
+                "nominative": {"text": "дерево"},
+                "genitive": {"text": "дерева", "caseRule": 4},
+                "accusative": {"text": "дерево", "caseRule": 6},
+                "dative": {"text": "дереву", "caseRule": 4},
+                "instrumental": {"text": "деревом", "caseRule": 6},
+                "prepositional": {"text": "дереве", "caseRule": 4}
             }
         ]
     },
