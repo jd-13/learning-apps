@@ -122,7 +122,7 @@ class CaseChoiceQuestionElement extends React.Component {
             <div>
                 <div>Choose the correct case for the noun/pronoun in the below phrase:</div>
                 <br></br>
-                <div class="columns is-vcentered is-centered">
+                <div class="columns is-vcentered is-centered is-mobile">
                     <div class="column is-narrow">{splitPhrase[0]}</div>
                     <div class="column is-narrow">
 

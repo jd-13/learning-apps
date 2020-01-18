@@ -207,7 +207,7 @@ var CaseChoiceQuestionElement = function (_React$Component4) {
                 React.createElement("br", null),
                 React.createElement(
                     "div",
-                    { "class": "columns is-vcentered is-centered" },
+                    { "class": "columns is-vcentered is-centered is-mobile" },
                     React.createElement(
                         "div",
                         { "class": "column is-narrow" },
