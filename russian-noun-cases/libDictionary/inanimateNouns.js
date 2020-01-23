@@ -78,5 +78,13 @@ INANIMATE_NOUNS = [
         "dative": {"text": "дереву", "caseRule": 4},
         "instrumental": {"text": "деревом", "caseRule": 6},
         "prepositional": {"text": "дереве", "caseRule": 4}
+    },
+    {
+        "nominative": {"text": "шуба"},
+        "genitive": {"text": "шубы", "caseRule": 2},
+        "accusative": {"text": "шубу", "caseRule": 4},
+        "dative": {"text": "шубе", "caseRule": 2},
+        "instrumental": {"text": "шубой", "caseRule": 3},
+        "prepositional": {"text": "шубе", "caseRule": 2}
     }
 ]
