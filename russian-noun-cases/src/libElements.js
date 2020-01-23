@@ -45,6 +45,29 @@ class FeedbackElement extends React.Component {
     }
 }
 
+class ReportButtonElement extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const reportTitle = `Reported: ${this.props.reportTitle}`;
+        const reportBody = `--------------------%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: ${this.props.reportBody}`;
+        const reportUrl = `https://github.com/jd-13/learning-apps/issues/new?title=${reportTitle}&body=${reportBody}&labels=reported-question`;
+
+        return (
+            <div>
+                <a href={reportUrl} target="_blank" rel="noopener">
+                    <button type="button" class="button is-danger is-outlined">
+                        <span class="icon"><i class="far fa-flag"></i></span>
+                        <span>Report</span>
+                    </button>
+                </a>
+            </div>
+        );
+    }
+}
+
 class SimpleQuestionElement extends React.Component {
     constructor(props) {
         super(props);
@@ -71,6 +94,9 @@ class SimpleQuestionElement extends React.Component {
             answerInput.value = "";
         }
 
+        const reportTitle = this.props.questionText;
+        const reportBody = `[${this.props.answer}]`;
+
         return (
             <div>
                 <div>{this.props.questionText}</div>
@@ -82,6 +108,10 @@ class SimpleQuestionElement extends React.Component {
                     <br></br>
                     <button type="button" class="button" id="submitBtn" onClick={e => this.onSubmit(e)}>Submit</button>
                 </div>
+
+                <section class="section">
+                    <ReportButtonElement reportTitle={reportTitle} reportBody={reportBody}/>
+                </section>
             </div>
         );
     }
@@ -115,6 +145,10 @@ class CaseChoiceQuestionElement extends React.Component {
         shuffledAnswers.push(this.props.answer);
         shuffleArray(shuffledAnswers);
 
+        // For bug reports
+        const reportTitle = this.props.questionText;
+        const reportBody = `[${shuffledAnswers}][${this.props.answer}]`;
+
         // For the nested JSX
         let that = this;
 
@@ -133,6 +167,10 @@ class CaseChoiceQuestionElement extends React.Component {
                     </div>
                     <div class="column is-narrow">{splitPhrase[1]}</div>
                 </div>
+
+                <section class="section">
+                    <ReportButtonElement reportTitle={reportTitle} reportBody={reportBody}/>
+                </section>
 
             </div>
         );

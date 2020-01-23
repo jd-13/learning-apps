@@ -94,8 +94,52 @@ var FeedbackElement = function (_React$Component2) {
     return FeedbackElement;
 }(React.Component);
 
-var SimpleQuestionElement = function (_React$Component3) {
-    _inherits(SimpleQuestionElement, _React$Component3);
+var ReportButtonElement = function (_React$Component3) {
+    _inherits(ReportButtonElement, _React$Component3);
+
+    function ReportButtonElement(props) {
+        _classCallCheck(this, ReportButtonElement);
+
+        return _possibleConstructorReturn(this, (ReportButtonElement.__proto__ || Object.getPrototypeOf(ReportButtonElement)).call(this, props));
+    }
+
+    _createClass(ReportButtonElement, [{
+        key: "render",
+        value: function render() {
+            var reportTitle = "Reported: " + this.props.reportTitle;
+            var reportBody = "--------------------%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: " + this.props.reportBody;
+            var reportUrl = "https://github.com/jd-13/learning-apps/issues/new?title=" + reportTitle + "&body=" + reportBody + "&labels=reported-question";
+
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "a",
+                    { href: reportUrl, target: "_blank", rel: "noopener" },
+                    React.createElement(
+                        "button",
+                        { type: "button", "class": "button is-danger is-outlined" },
+                        React.createElement(
+                            "span",
+                            { "class": "icon" },
+                            React.createElement("i", { "class": "far fa-flag" })
+                        ),
+                        React.createElement(
+                            "span",
+                            null,
+                            "Report"
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ReportButtonElement;
+}(React.Component);
+
+var SimpleQuestionElement = function (_React$Component4) {
+    _inherits(SimpleQuestionElement, _React$Component4);
 
     function SimpleQuestionElement(props) {
         _classCallCheck(this, SimpleQuestionElement);
@@ -119,13 +163,16 @@ var SimpleQuestionElement = function (_React$Component3) {
     }, {
         key: "render",
         value: function render() {
-            var _this5 = this;
+            var _this6 = this;
 
             // Clear the previous answer if one exists
             var answerInput = document.querySelector("#answerInput");
             if (answerInput != null) {
                 answerInput.value = "";
             }
+
+            var reportTitle = this.props.questionText;
+            var reportBody = "[" + this.props.answer + "]";
 
             return React.createElement(
                 "div",
@@ -148,10 +195,15 @@ var SimpleQuestionElement = function (_React$Component3) {
                     React.createElement(
                         "button",
                         { type: "button", "class": "button", id: "submitBtn", onClick: function onClick(e) {
-                                return _this5.onSubmit(e);
+                                return _this6.onSubmit(e);
                             } },
                         "Submit"
                     )
+                ),
+                React.createElement(
+                    "section",
+                    { "class": "section" },
+                    React.createElement(ReportButtonElement, { reportTitle: reportTitle, reportBody: reportBody })
                 )
             );
         }
@@ -160,8 +212,8 @@ var SimpleQuestionElement = function (_React$Component3) {
     return SimpleQuestionElement;
 }(React.Component);
 
-var CaseChoiceQuestionElement = function (_React$Component4) {
-    _inherits(CaseChoiceQuestionElement, _React$Component4);
+var CaseChoiceQuestionElement = function (_React$Component5) {
+    _inherits(CaseChoiceQuestionElement, _React$Component5);
 
     function CaseChoiceQuestionElement(props) {
         _classCallCheck(this, CaseChoiceQuestionElement);
@@ -192,6 +244,10 @@ var CaseChoiceQuestionElement = function (_React$Component4) {
             var shuffledAnswers = [].concat(_toConsumableArray(this.props.incorrectChoices));
             shuffledAnswers.push(this.props.answer);
             shuffleArray(shuffledAnswers);
+
+            // For bug reports
+            var reportTitle = this.props.questionText;
+            var reportBody = "[" + shuffledAnswers + "][" + this.props.answer + "]";
 
             // For the nested JSX
             var that = this;
@@ -236,6 +292,11 @@ var CaseChoiceQuestionElement = function (_React$Component4) {
                         { "class": "column is-narrow" },
                         splitPhrase[1]
                     )
+                ),
+                React.createElement(
+                    "section",
+                    { "class": "section" },
+                    React.createElement(ReportButtonElement, { reportTitle: reportTitle, reportBody: reportBody })
                 )
             );
         }
