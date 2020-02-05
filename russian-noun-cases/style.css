@@ -9,3 +9,18 @@
 #feedbackLine1, #feedbackLine2 {
     min-height: 24px;
 }
+
+#nextButton {
+    margin: 10px;
+}
+
+/* Make hero smaller on phones */
+@media screen and (max-width: 35em) {
+    .hero-body {
+        height: fit-content;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
