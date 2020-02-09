@@ -64,7 +64,7 @@ var SimpleQuestion = function (_BaseQuestion) {
 
             // Choose a noun at random
             var nouns = dictionary.nouns.animate;
-            var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
 
             console.log("Chose noun: " + chosenNoun.nominative.text);
 
@@ -201,7 +201,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
 
             // Choose a noun to substitute into the phrase
             var nouns = dictionary.nouns[questionSubst.nounType];
-            var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
 
             // Lookup the correct case of the noun for this phrase
             var correctNounCase = chosenNoun[questionSubst.targetCase];

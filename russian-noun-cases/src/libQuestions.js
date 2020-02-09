@@ -34,7 +34,7 @@ class SimpleQuestion extends BaseQuestion {
 
         // Choose a noun at random
         const nouns = dictionary.nouns.animate;
-        const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
+        const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
 
         console.log(`Chose noun: ${chosenNoun.nominative.text}`);
 
@@ -158,7 +158,7 @@ class CaseChoiceQuestion extends BaseQuestion {
 
         // Choose a noun to substitute into the phrase
         const nouns = dictionary.nouns[questionSubst.nounType];
-        const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
+        const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
 
         // Lookup the correct case of the noun for this phrase
         const correctNounCase = chosenNoun[questionSubst.targetCase];
