@@ -20,6 +20,8 @@ class SimpleQuestion extends BaseQuestion {
     constructor(dictionary) {
         super();
 
+        console.log("Creating SimpleQuestion");
+
         // Choose a noun or pronoun
         if (Math.random() > 0.5) {
             this._setupNoun(dictionary);
@@ -29,9 +31,12 @@ class SimpleQuestion extends BaseQuestion {
     }
 
     _setupNoun(dictionary) {
+
         // Choose a noun at random
         const nouns = dictionary.nouns.animate;
         const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
+
+        console.log(`Chose noun: ${chosenNoun.nominative.text}`);
 
         // Choose a target case at random, exclude the first case as this will always be nominative
         const availableCases = Object.keys(chosenNoun).slice(1);
@@ -71,6 +76,8 @@ class SimpleQuestion extends BaseQuestion {
             chosenPronoun = pronouns[chosenGender][
                 Math.floor(Math.random() * pronouns[chosenGender].length)];
         }
+
+        console.log(`Chose pronoun: ${chosenPronoun.nominative}`);
 
         // Choose a target case at random, exclude the first case as this will always be nominative
         const availableCases = Object.keys(chosenPronoun).slice(1);
@@ -116,6 +123,8 @@ class CaseChoiceQuestion extends BaseQuestion {
     constructor(dictionary) {
         super();
 
+        console.log("Creating CaseChoiceQuestion");
+
         // Choose a noun or pronoun
         if (Math.random() > 0.5) {
             this._setupNoun(dictionary);
@@ -134,6 +143,8 @@ class CaseChoiceQuestion extends BaseQuestion {
         // Choose a phrase from the dictionary
         const phrases = dictionary.nounChoicePhrases;
         const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+        console.log(`Chose noun phrase: ${chosenPhrase.text}`);
 
         // If there are multiple substitutions available, randomly choose one to quiz the user on
         const questionSubstIdx = Math.floor(Math.random() * chosenPhrase.substitutions.length);
@@ -201,6 +212,8 @@ class CaseChoiceQuestion extends BaseQuestion {
         // Choose a phrase from the dictionary
         const phrases = dictionary.pronounChoicePhrases;
         const chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+        console.log(`Chose pronoun phrase: ${chosenPhrase.text}`);
 
         // Get the pronoun
         let chosenPronoun = undefined;

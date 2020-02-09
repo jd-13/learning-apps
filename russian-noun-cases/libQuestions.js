@@ -43,9 +43,11 @@ var SimpleQuestion = function (_BaseQuestion) {
     function SimpleQuestion(dictionary) {
         _classCallCheck(this, SimpleQuestion);
 
-        // Choose a noun or pronoun
         var _this = _possibleConstructorReturn(this, (SimpleQuestion.__proto__ || Object.getPrototypeOf(SimpleQuestion)).call(this));
 
+        console.log("Creating SimpleQuestion");
+
+        // Choose a noun or pronoun
         if (Math.random() > 0.5) {
             _this._setupNoun(dictionary);
         } else {
@@ -57,9 +59,12 @@ var SimpleQuestion = function (_BaseQuestion) {
     _createClass(SimpleQuestion, [{
         key: "_setupNoun",
         value: function _setupNoun(dictionary) {
+
             // Choose a noun at random
             var nouns = dictionary.nouns.animate;
             var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)];
+
+            console.log("Chose noun: " + chosenNoun.nominative.text);
 
             // Choose a target case at random, exclude the first case as this will always be nominative
             var availableCases = Object.keys(chosenNoun).slice(1);
@@ -99,6 +104,8 @@ var SimpleQuestion = function (_BaseQuestion) {
                 // Choose the pronoun
                 chosenPronoun = _pronouns[chosenGender][Math.floor(Math.random() * _pronouns[chosenGender].length)];
             }
+
+            console.log("Chose pronoun: " + chosenPronoun.nominative);
 
             // Choose a target case at random, exclude the first case as this will always be nominative
             var availableCases = Object.keys(chosenPronoun).slice(1);
@@ -150,9 +157,11 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
     function CaseChoiceQuestion(dictionary) {
         _classCallCheck(this, CaseChoiceQuestion);
 
-        // Choose a noun or pronoun
         var _this2 = _possibleConstructorReturn(this, (CaseChoiceQuestion.__proto__ || Object.getPrototypeOf(CaseChoiceQuestion)).call(this));
 
+        console.log("Creating CaseChoiceQuestion");
+
+        // Choose a noun or pronoun
         if (Math.random() > 0.5) {
             _this2._setupNoun(dictionary);
         } else {
@@ -175,6 +184,8 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             // Choose a phrase from the dictionary
             var phrases = dictionary.nounChoicePhrases;
             var chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+            console.log("Chose noun phrase: " + chosenPhrase.text);
 
             // If there are multiple substitutions available, randomly choose one to quiz the user on
             var questionSubstIdx = Math.floor(Math.random() * chosenPhrase.substitutions.length);
@@ -242,6 +253,8 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             // Choose a phrase from the dictionary
             var phrases = dictionary.pronounChoicePhrases;
             var chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+            console.log("Chose pronoun phrase: " + chosenPhrase.text);
 
             // Get the pronoun
             var chosenPronoun = undefined;

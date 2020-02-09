@@ -11,12 +11,14 @@ function shuffleArray(array) {
  * Randomly generates a new question from the provided dictionary.
  */
 function newQuestion(dictionary) {
-    const questionTypes = [SimpleQuestion, CaseChoiceQuestion];
+    console.log("New question requested");
 
+    const questionTypes = [SimpleQuestion, CaseChoiceQuestion];
     return new questionTypes[Math.floor(Math.random() * questionTypes.length)](dictionary);
 }
 
 const main = function() {
+    console.log("Initialising");
 
     // Add empty feedback element
     ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
