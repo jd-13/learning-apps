@@ -38,15 +38,11 @@ var NextButtonElement = function (_React$Component) {
             var _this2 = this;
 
             return React.createElement(
-                "div",
-                null,
-                React.createElement(
-                    "button",
-                    { type: "button", className: "button is-success", id: "nextButton", disabled: this.props.disabled, onClick: function onClick(e) {
-                            return _this2.onClick(e);
-                        } },
-                    "Next"
-                )
+                "button",
+                { type: "button", className: "button is-success", id: "nextButton", disabled: this.props.disabled, onClick: function onClick(e) {
+                        return _this2.onClick(e);
+                    } },
+                "Next"
             );
         }
     }]);
@@ -82,24 +78,20 @@ var ReportButtonElement = function (_React$Component2) {
             var reportUrl = "https://github.com/jd-13/learning-apps/issues/new?title=" + reportTitle + "&body=" + reportBody + "&labels=reported-question";
 
             return React.createElement(
-                "div",
-                null,
+                "a",
+                { href: reportUrl, target: "_blank", rel: "noopener" },
                 React.createElement(
-                    "a",
-                    { href: reportUrl, target: "_blank", rel: "noopener" },
+                    "button",
+                    { type: "button", className: "button is-danger is-outlined" },
                     React.createElement(
-                        "button",
-                        { type: "button", className: "button is-danger is-outlined" },
-                        React.createElement(
-                            "span",
-                            { className: "icon" },
-                            React.createElement("i", { className: "far fa-flag" })
-                        ),
-                        React.createElement(
-                            "span",
-                            null,
-                            "Report"
-                        )
+                        "span",
+                        { className: "icon" },
+                        React.createElement("i", { className: "far fa-flag" })
+                    ),
+                    React.createElement(
+                        "span",
+                        null,
+                        "Report"
                     )
                 )
             );
@@ -122,12 +114,16 @@ var MainButtonsElement = function (_React$Component3) {
         key: "render",
         value: function render() {
             return React.createElement(
-                "section",
-                { className: "section" },
+                "div",
+                { className: "columns is-centered is-mobile" },
                 React.createElement(
                     "div",
-                    { className: "container has-text-centered" },
-                    React.createElement(ReportButtonElement, { reportTitle: this.props.reportTitle, reportBody: this.props.reportBody }),
+                    { className: "column is-narrow has-text-centered" },
+                    React.createElement(ReportButtonElement, { reportTitle: this.props.reportTitle, reportBody: this.props.reportBody })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "column is-narrow has-text-centered" },
                     React.createElement(NextButtonElement, { disabled: this.props.nextButtonDisabled })
                 )
             );

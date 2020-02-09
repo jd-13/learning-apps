@@ -21,9 +21,7 @@ class NextButtonElement extends React.Component {
 
     render() {
         return (
-            <div>
-                <button type="button" className="button is-success" id="nextButton" disabled={this.props.disabled} onClick={e => this.onClick(e)}>Next</button>
-            </div>
+            <button type="button" className="button is-success" id="nextButton" disabled={this.props.disabled} onClick={e => this.onClick(e)}>Next</button>
         );
     }
 }
@@ -49,14 +47,12 @@ class ReportButtonElement extends React.Component {
         const reportUrl = `https://github.com/jd-13/learning-apps/issues/new?title=${reportTitle}&body=${reportBody}&labels=reported-question`;
 
         return (
-            <div>
-                <a href={reportUrl} target="_blank" rel="noopener">
-                    <button type="button" className="button is-danger is-outlined">
-                        <span className="icon"><i className="far fa-flag"></i></span>
-                        <span>Report</span>
-                    </button>
-                </a>
-            </div>
+            <a href={reportUrl} target="_blank" rel="noopener">
+                <button type="button" className="button is-danger is-outlined">
+                    <span className="icon"><i className="far fa-flag"></i></span>
+                    <span>Report</span>
+                </button>
+            </a>
         );
     }
 }
@@ -68,12 +64,14 @@ class MainButtonsElement extends React.Component {
 
     render() {
         return (
-            <section className="section">
-                <div className="container has-text-centered">
+            <div className="columns is-centered is-mobile">
+                <div className="column is-narrow has-text-centered">
                     <ReportButtonElement reportTitle={this.props.reportTitle} reportBody={this.props.reportBody}/>
+                </div>
+                <div className="column is-narrow has-text-centered">
                     <NextButtonElement disabled={this.props.nextButtonDisabled}/>
                 </div>
-            </section>
+            </div>
         )
     }
 }
