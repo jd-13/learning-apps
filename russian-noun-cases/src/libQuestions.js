@@ -229,15 +229,16 @@ class CaseChoiceQuestion extends BaseQuestion {
         // Get the pronoun
         let chosenPronoun = undefined;
         if (chosenPhrase.pronounType === "personal") {
+            // Choose a personal pronoun
             const pronouns = dictionary.pronouns.personal;
             chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
 
         } else {
+            // Choose a possesive pronoun
             const pronouns = dictionary.pronouns.possessive[chosenPhrase.gender];
-
-            // Choose the pronoun
             chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
         }
+        console.log(`Chosen pronoun: ${chosenPronoun.nominative}`);
 
         // Lookup the correct case of the noun for this phrase
         let correctPronounCase = chosenPronoun[chosenPhrase.targetCase];
@@ -250,6 +251,7 @@ class CaseChoiceQuestion extends BaseQuestion {
                 correctPronounCase = correctPronounCase.inanimate;
             }
         }
+        console.log(`Correct case: ${correctPronounCase}`);
 
         // Pick two other cases at random, exclude the correct case
         let availableCases = Object.keys(chosenPronoun).filter(word => word !== chosenPhrase.targetCase);
@@ -259,7 +261,7 @@ class CaseChoiceQuestion extends BaseQuestion {
             let incorrectChoice = chosenPronoun[availableCases[caseIdx]];
 
             // Handle the accusative case
-            if (typeof correctPronounCase === "object") {
+            if (typeof incorrectChoice === "object") {
                 if (Math.random() > 0.5) {
                     incorrectChoice = incorrectChoice.animate;
                 } else {
