@@ -159,9 +159,11 @@ class CaseChoiceQuestion extends BaseQuestion {
         // Choose a noun to substitute into the phrase
         const nouns = dictionary.nouns[questionSubst.nounType];
         const chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
+        console.log(`Chose noun: ${chosenNoun.nominative.text}`);
 
         // Lookup the correct case of the noun for this phrase
         const correctNounCase = chosenNoun[questionSubst.targetCase];
+        console.log(`Correct noun case: ${correctNounCase.text}`);
 
         // Pick two other cases at random, exclude the correct case
         let availableCases =
@@ -173,6 +175,7 @@ class CaseChoiceQuestion extends BaseQuestion {
             this._incorrectChoices.push(chosenNoun[availableCases[caseIdx]].text);
             availableCases = availableCases.slice(caseIdx);
         }
+        console.log(`Incorrect choices: ${this._incorrectChoices}`);
 
         // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
         // on
@@ -182,9 +185,11 @@ class CaseChoiceQuestion extends BaseQuestion {
         for (let idx = 0; (idx = questionText.indexOf(substToken, idx)) > -1; idx++) {
 
             if (substitutionNumber != questionSubstIdx) {
+                console.log(`Subtitution number ${substitutionNumber}`);
+
                 const thisSubstitution = chosenPhrase.substitutions[substitutionNumber];
                 const substNouns = dictionary.nouns[thisSubstitution.nounType];
-                const thisNoun = substNouns[Math.floor(Math.random() * substNouns.length)][thisSubstitution.targetCase]["text"];
+                const thisNoun = substNouns[Math.floor(Math.random() * substNouns.length)].singular[thisSubstitution.targetCase]["text"];
 
                 questionText = questionText.substring(0, idx)
                                + thisNoun

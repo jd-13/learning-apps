@@ -202,9 +202,11 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             // Choose a noun to substitute into the phrase
             var nouns = dictionary.nouns[questionSubst.nounType];
             var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
+            console.log("Chose noun: " + chosenNoun.nominative.text);
 
             // Lookup the correct case of the noun for this phrase
             var correctNounCase = chosenNoun[questionSubst.targetCase];
+            console.log("Correct noun case: " + correctNounCase.text);
 
             // Pick two other cases at random, exclude the correct case
             var availableCases = Object.keys(chosenNoun).filter(function (word) {
@@ -217,6 +219,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
                 this._incorrectChoices.push(chosenNoun[availableCases[caseIdx]].text);
                 availableCases = availableCases.slice(caseIdx);
             }
+            console.log("Incorrect choices: " + this._incorrectChoices);
 
             // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
             // on
@@ -226,9 +229,11 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             for (var _idx = 0; (_idx = questionText.indexOf(substToken, _idx)) > -1; _idx++) {
 
                 if (substitutionNumber != questionSubstIdx) {
+                    console.log("Subtitution number " + substitutionNumber);
+
                     var thisSubstitution = chosenPhrase.substitutions[substitutionNumber];
                     var substNouns = dictionary.nouns[thisSubstitution.nounType];
-                    var thisNoun = substNouns[Math.floor(Math.random() * substNouns.length)][thisSubstitution.targetCase]["text"];
+                    var thisNoun = substNouns[Math.floor(Math.random() * substNouns.length)].singular[thisSubstitution.targetCase]["text"];
 
                     questionText = questionText.substring(0, _idx) + thisNoun + questionText.substring(_idx + substToken.length);
                 }
