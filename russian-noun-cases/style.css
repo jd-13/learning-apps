@@ -1,15 +1,3 @@
-#isCorrect {
-    min-height: 36px;
-}
-
-#mainSection {
-    min-height: 540px;
-}
-
-#feedbackLine1, #feedbackLine2 {
-    min-height: 24px;
-}
-
 #nextButton {
     margin: 10px;
 }

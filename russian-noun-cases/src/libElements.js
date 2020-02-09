@@ -1,6 +1,6 @@
 const feedbackDiv = document.querySelector("#feedback");
 const questionDiv = document.querySelector("#questionContainer");
-const nextButton = document.querySelector("#nextButton");
+const buttonsDiv = document.querySelector("#mainButtons")
 
 class NextButtonElement extends React.Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class NextButtonElement extends React.Component {
 
     onClick(e) {
         // Disable this button
-        ReactDOM.render(<NextButtonElement disabled={true}/>, nextButton);
+        ReactDOM.render(<MainButtonsElement reportTitle="" reportBody="" nextButtonDisabled={true}/>, buttonsDiv);
 
         // Clear the feedback and text fields
         ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
@@ -21,10 +21,60 @@ class NextButtonElement extends React.Component {
 
     render() {
         return (
-            <div class="container has-text-centered">
-                <button type="button" class="button is-success" id="nextButton" disabled={this.props.disabled} onClick={e => this.onClick(e)}>Next</button>
+            <div>
+                <button type="button" className="button is-success" id="nextButton" disabled={this.props.disabled} onClick={e => this.onClick(e)}>Next</button>
             </div>
         );
+    }
+}
+
+class ReportButtonElement extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // Sometimes we want to update MainButtonsElement to enable NextButtonElement but don't want
+        // to update this element
+        if (nextProps.reportTitle === undefined || nextProps.reportBody === undefined) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    render() {
+        const reportTitle = `Reported: ${this.props.reportTitle}`;
+        const reportBody = `--------------------%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: ${this.props.reportBody}`;
+        const reportUrl = `https://github.com/jd-13/learning-apps/issues/new?title=${reportTitle}&body=${reportBody}&labels=reported-question`;
+
+        return (
+            <div>
+                <a href={reportUrl} target="_blank" rel="noopener">
+                    <button type="button" className="button is-danger is-outlined">
+                        <span className="icon"><i className="far fa-flag"></i></span>
+                        <span>Report</span>
+                    </button>
+                </a>
+            </div>
+        );
+    }
+}
+
+class MainButtonsElement extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <section className="section">
+                <div className="container has-text-centered">
+                    <ReportButtonElement reportTitle={this.props.reportTitle} reportBody={this.props.reportBody}/>
+                    <NextButtonElement disabled={this.props.nextButtonDisabled}/>
+                </div>
+            </section>
+        )
     }
 }
 
@@ -36,33 +86,10 @@ class FeedbackElement extends React.Component {
     render() {
         return (
             <div>
-                <div class="container has-text-centered is-size-4" id="isCorrect">{this.props.isCorrect}</div>
+                <div className="container has-text-centered is-size-4" id="isCorrect">{this.props.isCorrect}</div>
                 <br></br>
-                <div class="container has-text-centered" id="feedbackLine1">{this.props.feedbackLine1}</div>
-                <div class="container has-text-centered" id="feedbackLine2">{this.props.feedbackLine2}</div>
-            </div>
-        );
-    }
-}
-
-class ReportButtonElement extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const reportTitle = `Reported: ${this.props.reportTitle}`;
-        const reportBody = `--------------------%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: ${this.props.reportBody}`;
-        const reportUrl = `https://github.com/jd-13/learning-apps/issues/new?title=${reportTitle}&body=${reportBody}&labels=reported-question`;
-
-        return (
-            <div>
-                <a href={reportUrl} target="_blank" rel="noopener">
-                    <button type="button" class="button is-danger is-outlined">
-                        <span class="icon"><i class="far fa-flag"></i></span>
-                        <span>Report</span>
-                    </button>
-                </a>
+                <div className="container has-text-centered" id="feedbackLine1">{this.props.feedbackLine1}</div>
+                <div className="container has-text-centered" id="feedbackLine2">{this.props.feedbackLine2}</div>
             </div>
         );
     }
@@ -74,9 +101,6 @@ class SimpleQuestionElement extends React.Component {
     }
 
     onSubmit(e) {
-        // Enable the next button
-        ReactDOM.render(<NextButtonElement disabled={false}/>, nextButton);
-
         // Check the answer
         if ($("#answerInput").val().toLowerCase() === this.props.answer) {
             ReactDOM.render(<FeedbackElement isCorrect={"Correct!"} feedbackLine1={this.props.feedbackLine1} feedbackLine2={this.props.feedbackLine2}/>,
@@ -85,6 +109,8 @@ class SimpleQuestionElement extends React.Component {
             ReactDOM.render(<FeedbackElement isCorrect={"Oops!"} feedbackLine1={this.props.feedbackLine1} feedbackLine2={this.props.feedbackLine2}/>,
                             feedbackDiv);
         }
+
+        ReactDOM.render(<MainButtonsElement nextButtonDisabled={false}/>, buttonsDiv);
     }
 
     render() {
@@ -93,9 +119,6 @@ class SimpleQuestionElement extends React.Component {
         if (answerInput != null) {
             answerInput.value = "";
         }
-
-        const reportTitle = this.props.questionText;
-        const reportBody = `[${this.props.answer}]`;
 
         return (
             <div>
@@ -106,12 +129,8 @@ class SimpleQuestionElement extends React.Component {
                 </div>
                 <div>
                     <br></br>
-                    <button type="button" class="button" id="submitBtn" onClick={e => this.onSubmit(e)}>Submit</button>
+                    <button type="button" className="button" id="submitBtn" onClick={e => this.onSubmit(e)}>Submit</button>
                 </div>
-
-                <section class="section">
-                    <ReportButtonElement reportTitle={reportTitle} reportBody={reportBody}/>
-                </section>
             </div>
         );
     }
@@ -123,9 +142,6 @@ class CaseChoiceQuestionElement extends React.Component {
     }
 
     onAnswer(e) {
-        // Enable the next button
-        ReactDOM.render(<NextButtonElement disabled={false}/>, nextButton);
-
         const answerText = e.target.textContent.toLowerCase();
 
         if (answerText === this.props.answer) {
@@ -135,19 +151,13 @@ class CaseChoiceQuestionElement extends React.Component {
             ReactDOM.render(<FeedbackElement isCorrect={"Oops!"} feedbackLine1={this.props.feedbackLine1} feedbackLine2={this.props.feedbackLine2}/>,
                             feedbackDiv);
         }
+
+        ReactDOM.render(<MainButtonsElement nextButtonDisabled={false}/>, buttonsDiv);
     }
 
     render() {
         // Prepare the data
         const splitPhrase = this.props.questionText.split("||");
-
-        let shuffledAnswers = [...this.props.incorrectChoices];
-        shuffledAnswers.push(this.props.answer);
-        shuffleArray(shuffledAnswers);
-
-        // For bug reports
-        const reportTitle = this.props.questionText;
-        const reportBody = `[${shuffledAnswers}][${this.props.answer}]`;
 
         // For the nested JSX
         let that = this;
@@ -156,22 +166,17 @@ class CaseChoiceQuestionElement extends React.Component {
             <div>
                 <div>Choose the correct case for the noun/pronoun in the below phrase:</div>
                 <br></br>
-                <div class="columns is-vcentered is-centered is-mobile">
-                    <div class="column is-narrow">{splitPhrase[0]}</div>
-                    <div class="column is-narrow">
+                <div className="columns is-vcentered is-centered is-mobile">
+                    <div className="column is-narrow">{splitPhrase[0]}</div>
+                    <div className="column is-narrow">
 
-                        {shuffledAnswers.map(function(object) {
-                            return <div><button type="button" class="button multiAnswer" onClick={e => that.onAnswer(e)}>{object}</button><br></br></div>;
+                        {this.props.shuffledAnswers.map(function(object) {
+                            return <div><button type="button" className="button multiAnswer" onClick={e => that.onAnswer(e)}>{object}</button><br></br></div>;
                         })}
 
                     </div>
-                    <div class="column is-narrow">{splitPhrase[1]}</div>
+                    <div className="column is-narrow">{splitPhrase[1]}</div>
                 </div>
-
-                <section class="section">
-                    <ReportButtonElement reportTitle={reportTitle} reportBody={reportBody}/>
-                </section>
-
             </div>
         );
     }

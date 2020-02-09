@@ -1,7 +1,5 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -10,7 +8,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var feedbackDiv = document.querySelector("#feedback");
 var questionDiv = document.querySelector("#questionContainer");
-var nextButton = document.querySelector("#nextButton");
+var buttonsDiv = document.querySelector("#mainButtons");
 
 var NextButtonElement = function (_React$Component) {
     _inherits(NextButtonElement, _React$Component);
@@ -25,7 +23,7 @@ var NextButtonElement = function (_React$Component) {
         key: "onClick",
         value: function onClick(e) {
             // Disable this button
-            ReactDOM.render(React.createElement(NextButtonElement, { disabled: true }), nextButton);
+            ReactDOM.render(React.createElement(MainButtonsElement, { reportTitle: "", reportBody: "", nextButtonDisabled: true }), buttonsDiv);
 
             // Clear the feedback and text fields
             ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
@@ -41,10 +39,10 @@ var NextButtonElement = function (_React$Component) {
 
             return React.createElement(
                 "div",
-                { "class": "container has-text-centered" },
+                null,
                 React.createElement(
                     "button",
-                    { type: "button", "class": "button is-success", id: "nextButton", disabled: this.props.disabled, onClick: function onClick(e) {
+                    { type: "button", className: "button is-success", id: "nextButton", disabled: this.props.disabled, onClick: function onClick(e) {
                             return _this2.onClick(e);
                         } },
                     "Next"
@@ -56,46 +54,8 @@ var NextButtonElement = function (_React$Component) {
     return NextButtonElement;
 }(React.Component);
 
-var FeedbackElement = function (_React$Component2) {
-    _inherits(FeedbackElement, _React$Component2);
-
-    function FeedbackElement(props) {
-        _classCallCheck(this, FeedbackElement);
-
-        return _possibleConstructorReturn(this, (FeedbackElement.__proto__ || Object.getPrototypeOf(FeedbackElement)).call(this, props));
-    }
-
-    _createClass(FeedbackElement, [{
-        key: "render",
-        value: function render() {
-            return React.createElement(
-                "div",
-                null,
-                React.createElement(
-                    "div",
-                    { "class": "container has-text-centered is-size-4", id: "isCorrect" },
-                    this.props.isCorrect
-                ),
-                React.createElement("br", null),
-                React.createElement(
-                    "div",
-                    { "class": "container has-text-centered", id: "feedbackLine1" },
-                    this.props.feedbackLine1
-                ),
-                React.createElement(
-                    "div",
-                    { "class": "container has-text-centered", id: "feedbackLine2" },
-                    this.props.feedbackLine2
-                )
-            );
-        }
-    }]);
-
-    return FeedbackElement;
-}(React.Component);
-
-var ReportButtonElement = function (_React$Component3) {
-    _inherits(ReportButtonElement, _React$Component3);
+var ReportButtonElement = function (_React$Component2) {
+    _inherits(ReportButtonElement, _React$Component2);
 
     function ReportButtonElement(props) {
         _classCallCheck(this, ReportButtonElement);
@@ -104,6 +64,17 @@ var ReportButtonElement = function (_React$Component3) {
     }
 
     _createClass(ReportButtonElement, [{
+        key: "shouldComponentUpdate",
+        value: function shouldComponentUpdate(nextProps, nextState) {
+            // Sometimes we want to update MainButtonsElement to enable NextButtonElement but don't want
+            // to update this element
+            if (nextProps.reportTitle === undefined || nextProps.reportBody === undefined) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
             var reportTitle = "Reported: " + this.props.reportTitle;
@@ -118,11 +89,11 @@ var ReportButtonElement = function (_React$Component3) {
                     { href: reportUrl, target: "_blank", rel: "noopener" },
                     React.createElement(
                         "button",
-                        { type: "button", "class": "button is-danger is-outlined" },
+                        { type: "button", className: "button is-danger is-outlined" },
                         React.createElement(
                             "span",
-                            { "class": "icon" },
-                            React.createElement("i", { "class": "far fa-flag" })
+                            { className: "icon" },
+                            React.createElement("i", { className: "far fa-flag" })
                         ),
                         React.createElement(
                             "span",
@@ -138,8 +109,74 @@ var ReportButtonElement = function (_React$Component3) {
     return ReportButtonElement;
 }(React.Component);
 
-var SimpleQuestionElement = function (_React$Component4) {
-    _inherits(SimpleQuestionElement, _React$Component4);
+var MainButtonsElement = function (_React$Component3) {
+    _inherits(MainButtonsElement, _React$Component3);
+
+    function MainButtonsElement(props) {
+        _classCallCheck(this, MainButtonsElement);
+
+        return _possibleConstructorReturn(this, (MainButtonsElement.__proto__ || Object.getPrototypeOf(MainButtonsElement)).call(this, props));
+    }
+
+    _createClass(MainButtonsElement, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "section",
+                { className: "section" },
+                React.createElement(
+                    "div",
+                    { className: "container has-text-centered" },
+                    React.createElement(ReportButtonElement, { reportTitle: this.props.reportTitle, reportBody: this.props.reportBody }),
+                    React.createElement(NextButtonElement, { disabled: this.props.nextButtonDisabled })
+                )
+            );
+        }
+    }]);
+
+    return MainButtonsElement;
+}(React.Component);
+
+var FeedbackElement = function (_React$Component4) {
+    _inherits(FeedbackElement, _React$Component4);
+
+    function FeedbackElement(props) {
+        _classCallCheck(this, FeedbackElement);
+
+        return _possibleConstructorReturn(this, (FeedbackElement.__proto__ || Object.getPrototypeOf(FeedbackElement)).call(this, props));
+    }
+
+    _createClass(FeedbackElement, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "div",
+                    { className: "container has-text-centered is-size-4", id: "isCorrect" },
+                    this.props.isCorrect
+                ),
+                React.createElement("br", null),
+                React.createElement(
+                    "div",
+                    { className: "container has-text-centered", id: "feedbackLine1" },
+                    this.props.feedbackLine1
+                ),
+                React.createElement(
+                    "div",
+                    { className: "container has-text-centered", id: "feedbackLine2" },
+                    this.props.feedbackLine2
+                )
+            );
+        }
+    }]);
+
+    return FeedbackElement;
+}(React.Component);
+
+var SimpleQuestionElement = function (_React$Component5) {
+    _inherits(SimpleQuestionElement, _React$Component5);
 
     function SimpleQuestionElement(props) {
         _classCallCheck(this, SimpleQuestionElement);
@@ -150,29 +187,25 @@ var SimpleQuestionElement = function (_React$Component4) {
     _createClass(SimpleQuestionElement, [{
         key: "onSubmit",
         value: function onSubmit(e) {
-            // Enable the next button
-            ReactDOM.render(React.createElement(NextButtonElement, { disabled: false }), nextButton);
-
             // Check the answer
             if ($("#answerInput").val().toLowerCase() === this.props.answer) {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Correct!", feedbackLine1: this.props.feedbackLine1, feedbackLine2: this.props.feedbackLine2 }), feedbackDiv);
             } else {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Oops!", feedbackLine1: this.props.feedbackLine1, feedbackLine2: this.props.feedbackLine2 }), feedbackDiv);
             }
+
+            ReactDOM.render(React.createElement(MainButtonsElement, { nextButtonDisabled: false }), buttonsDiv);
         }
     }, {
         key: "render",
         value: function render() {
-            var _this6 = this;
+            var _this7 = this;
 
             // Clear the previous answer if one exists
             var answerInput = document.querySelector("#answerInput");
             if (answerInput != null) {
                 answerInput.value = "";
             }
-
-            var reportTitle = this.props.questionText;
-            var reportBody = "[" + this.props.answer + "]";
 
             return React.createElement(
                 "div",
@@ -194,16 +227,11 @@ var SimpleQuestionElement = function (_React$Component4) {
                     React.createElement("br", null),
                     React.createElement(
                         "button",
-                        { type: "button", "class": "button", id: "submitBtn", onClick: function onClick(e) {
-                                return _this6.onSubmit(e);
+                        { type: "button", className: "button", id: "submitBtn", onClick: function onClick(e) {
+                                return _this7.onSubmit(e);
                             } },
                         "Submit"
                     )
-                ),
-                React.createElement(
-                    "section",
-                    { "class": "section" },
-                    React.createElement(ReportButtonElement, { reportTitle: reportTitle, reportBody: reportBody })
                 )
             );
         }
@@ -212,8 +240,8 @@ var SimpleQuestionElement = function (_React$Component4) {
     return SimpleQuestionElement;
 }(React.Component);
 
-var CaseChoiceQuestionElement = function (_React$Component5) {
-    _inherits(CaseChoiceQuestionElement, _React$Component5);
+var CaseChoiceQuestionElement = function (_React$Component6) {
+    _inherits(CaseChoiceQuestionElement, _React$Component6);
 
     function CaseChoiceQuestionElement(props) {
         _classCallCheck(this, CaseChoiceQuestionElement);
@@ -224,9 +252,6 @@ var CaseChoiceQuestionElement = function (_React$Component5) {
     _createClass(CaseChoiceQuestionElement, [{
         key: "onAnswer",
         value: function onAnswer(e) {
-            // Enable the next button
-            ReactDOM.render(React.createElement(NextButtonElement, { disabled: false }), nextButton);
-
             var answerText = e.target.textContent.toLowerCase();
 
             if (answerText === this.props.answer) {
@@ -234,20 +259,14 @@ var CaseChoiceQuestionElement = function (_React$Component5) {
             } else {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Oops!", feedbackLine1: this.props.feedbackLine1, feedbackLine2: this.props.feedbackLine2 }), feedbackDiv);
             }
+
+            ReactDOM.render(React.createElement(MainButtonsElement, { nextButtonDisabled: false }), buttonsDiv);
         }
     }, {
         key: "render",
         value: function render() {
             // Prepare the data
             var splitPhrase = this.props.questionText.split("||");
-
-            var shuffledAnswers = [].concat(_toConsumableArray(this.props.incorrectChoices));
-            shuffledAnswers.push(this.props.answer);
-            shuffleArray(shuffledAnswers);
-
-            // For bug reports
-            var reportTitle = this.props.questionText;
-            var reportBody = "[" + shuffledAnswers + "][" + this.props.answer + "]";
 
             // For the nested JSX
             var that = this;
@@ -263,22 +282,22 @@ var CaseChoiceQuestionElement = function (_React$Component5) {
                 React.createElement("br", null),
                 React.createElement(
                     "div",
-                    { "class": "columns is-vcentered is-centered is-mobile" },
+                    { className: "columns is-vcentered is-centered is-mobile" },
                     React.createElement(
                         "div",
-                        { "class": "column is-narrow" },
+                        { className: "column is-narrow" },
                         splitPhrase[0]
                     ),
                     React.createElement(
                         "div",
-                        { "class": "column is-narrow" },
-                        shuffledAnswers.map(function (object) {
+                        { className: "column is-narrow" },
+                        this.props.shuffledAnswers.map(function (object) {
                             return React.createElement(
                                 "div",
                                 null,
                                 React.createElement(
                                     "button",
-                                    { type: "button", "class": "button multiAnswer", onClick: function onClick(e) {
+                                    { type: "button", className: "button multiAnswer", onClick: function onClick(e) {
                                             return that.onAnswer(e);
                                         } },
                                     object
@@ -289,14 +308,9 @@ var CaseChoiceQuestionElement = function (_React$Component5) {
                     ),
                     React.createElement(
                         "div",
-                        { "class": "column is-narrow" },
+                        { className: "column is-narrow" },
                         splitPhrase[1]
                     )
-                ),
-                React.createElement(
-                    "section",
-                    { "class": "section" },
-                    React.createElement(ReportButtonElement, { reportTitle: reportTitle, reportBody: reportBody })
                 )
             );
         }

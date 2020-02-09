@@ -115,7 +115,13 @@ class SimpleQuestion extends BaseQuestion {
     }
 
     renderQuestion() {
+        // Render the question
         ReactDOM.render(<SimpleQuestionElement questionText={this._questionText} answer={this._answer} feedbackLine1={this._feedbackText[0]} feedbackLine2={this._feedbackText[1]}/>, questionDiv);
+
+        // Render the buttons
+        const reportTitle = this._questionText;
+        const reportBody = `[${this._answer}]`;
+        ReactDOM.render(<MainButtonsElement reportTitle={reportTitle} reportBody={reportBody} nextButtonDisabled={true}/>, buttonsDiv);
     }
 }
 
@@ -270,6 +276,17 @@ class CaseChoiceQuestion extends BaseQuestion {
     }
 
     renderQuestion() {
-        ReactDOM.render(<CaseChoiceQuestionElement questionText={this._questionText} answer={this._answer} incorrectChoices={this._incorrectChoices} feedbackLine1={this._feedbackText[0]} feedbackLine2={this._feedbackText[1]}/>, questionDiv);
+        // Prepare the answer choices
+        shuffledAnswers = [...this._incorrectChoices];
+        shuffledAnswers.push(this._answer);
+        shuffleArray(shuffledAnswers);
+
+        // Render the question
+        ReactDOM.render(<CaseChoiceQuestionElement questionText={this._questionText} answer={this._answer} shuffledAnswers={shuffledAnswers} incorrectChoices={this._incorrectChoices} feedbackLine1={this._feedbackText[0]} feedbackLine2={this._feedbackText[1]}/>, questionDiv);
+
+        // Render the buttons
+        const reportTitle = this._questionText;
+        const reportBody = `[${this._shuffledAnswers}][${this._answer}]`;
+        ReactDOM.render(<MainButtonsElement reportTitle={reportTitle} reportBody={reportBody} nextButtonDisabled={true}/>, buttonsDiv);
     }
 }

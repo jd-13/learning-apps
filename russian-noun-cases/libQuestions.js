@@ -2,6 +2,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
@@ -144,7 +146,13 @@ var SimpleQuestion = function (_BaseQuestion) {
     }, {
         key: "renderQuestion",
         value: function renderQuestion() {
+            // Render the question
             ReactDOM.render(React.createElement(SimpleQuestionElement, { questionText: this._questionText, answer: this._answer, feedbackLine1: this._feedbackText[0], feedbackLine2: this._feedbackText[1] }), questionDiv);
+
+            // Render the buttons
+            var reportTitle = this._questionText;
+            var reportBody = "[" + this._answer + "]";
+            ReactDOM.render(React.createElement(MainButtonsElement, { reportTitle: reportTitle, reportBody: reportBody, nextButtonDisabled: true }), buttonsDiv);
         }
     }]);
 
@@ -313,7 +321,18 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
     }, {
         key: "renderQuestion",
         value: function renderQuestion() {
-            ReactDOM.render(React.createElement(CaseChoiceQuestionElement, { questionText: this._questionText, answer: this._answer, incorrectChoices: this._incorrectChoices, feedbackLine1: this._feedbackText[0], feedbackLine2: this._feedbackText[1] }), questionDiv);
+            // Prepare the answer choices
+            shuffledAnswers = [].concat(_toConsumableArray(this._incorrectChoices));
+            shuffledAnswers.push(this._answer);
+            shuffleArray(shuffledAnswers);
+
+            // Render the question
+            ReactDOM.render(React.createElement(CaseChoiceQuestionElement, { questionText: this._questionText, answer: this._answer, shuffledAnswers: shuffledAnswers, incorrectChoices: this._incorrectChoices, feedbackLine1: this._feedbackText[0], feedbackLine2: this._feedbackText[1] }), questionDiv);
+
+            // Render the buttons
+            var reportTitle = this._questionText;
+            var reportBody = "[" + this._shuffledAnswers + "][" + this._answer + "]";
+            ReactDOM.render(React.createElement(MainButtonsElement, { reportTitle: reportTitle, reportBody: reportBody, nextButtonDisabled: true }), buttonsDiv);
         }
     }]);
 
