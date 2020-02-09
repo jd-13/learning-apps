@@ -26,9 +26,6 @@ const main = function() {
     // Load the first question
     let question = newQuestion(DICTIONARY);
     question.renderQuestion();
-
-    // Disable the next button
-    ReactDOM.render(<NextButtonElement disabled={true}/>, nextButton);
 }
 
 $(document).ready(main);
