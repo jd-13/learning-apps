@@ -1,4 +1,4 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -63,17 +63,17 @@ var SimpleQuestion = function (_BaseQuestion) {
         value: function _setupNoun(dictionary) {
 
             // Choose a noun at random
-            var nouns = dictionary.nouns.animate;
-            var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
-
+            var chosenNoun = Dictionary.getRandomNoun(isAnimate = true);
             console.log("Chose noun: " + chosenNoun.nominative.text);
 
-            // Choose a target case at random, exclude the first case as this will always be nominative
-            var availableCases = Object.keys(chosenNoun).slice(1);
-            var chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
-            var chosenCase = chosenNoun[chosenCaseKey];
+            var _Dictionary$getRandom = Dictionary.getRandomCaseForNoun(chosenNoun),
+                _Dictionary$getRandom2 = _slicedToArray(_Dictionary$getRandom, 2),
+                chosenCaseKey = _Dictionary$getRandom2[0],
+                chosenCase = _Dictionary$getRandom2[1];
 
             // Get the text for the feedback
+
+
             var feedbackLine1 = dictionary.caseRules[chosenCaseKey][chosenCase.caseRule];
 
             // Check if we need to explain a spelling rule
@@ -90,57 +90,35 @@ var SimpleQuestion = function (_BaseQuestion) {
     }, {
         key: "_setupPronoun",
         value: function _setupPronoun(dictionary) {
-            var chosenPronoun = undefined;
 
-            // Choose personal or possesive
-            if (Math.random() > 0.5) {
-                var pronouns = dictionary.pronouns.personal;
-                chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
-            } else {
-                var _pronouns = dictionary.pronouns.possessive;
-
-                // Choose gender
-                var genders = Object.keys(_pronouns);
-                var chosenGender = genders[Math.floor(Math.random() * genders.length)];
-
-                // Choose the pronoun
-                chosenPronoun = _pronouns[chosenGender][Math.floor(Math.random() * _pronouns[chosenGender].length)];
-            }
-
+            var chosenPronoun = Dictionary.getRandomPronoun();
             console.log("Chose pronoun: " + chosenPronoun.nominative);
 
-            // Choose a target case at random, exclude the first case as this will always be nominative
-            var availableCases = Object.keys(chosenPronoun).slice(1);
-            var chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
-            var answer = chosenPronoun[chosenCaseKey];
+            var _Dictionary$getRandom3 = Dictionary.getRandomCaseForPronoun(chosenPronoun),
+                _Dictionary$getRandom4 = _slicedToArray(_Dictionary$getRandom3, 3),
+                chosenCaseKey = _Dictionary$getRandom4[0],
+                isAnimate = _Dictionary$getRandom4[1],
+                chosenCase = _Dictionary$getRandom4[2];
+
+            // For the accusative case we need to specify in the question text whether the object should
+            // be animate or inanimate
+
 
             var questionSuffix = "";
-
-            // Handle the accusative case
-            if ((typeof answer === "undefined" ? "undefined" : _typeof(answer)) === "object") {
-                if (Math.random() > 0.5) {
-                    answer = answer.animate;
-
-                    // Specify animate/inanimate if they are different
-                    if (answer.animate !== answer.inanimate) {
-                        questionSuffix = " (animate)";
-                    }
+            if (chosenCaseKey === "accusative") {
+                if (isAnimate) {
+                    questionSuffix = " (animate)";
                 } else {
-                    answer = answer.inanimate;
-
-                    // Specify animate/inanimate if they are different
-                    if (answer.animate !== answer.inanimate) {
-                        questionSuffix = " (inanimate)";
-                    }
+                    questionSuffix = " (inanimate)";
                 }
             }
 
             // Get the text for the feedback
-            var feedbackLine1 = "The correct answer is " + answer;
+            var feedbackLine1 = "The correct answer is " + chosenCase;
 
             // Store the results
             this._questionText = "What is the " + chosenCaseKey + " case of " + chosenPronoun.nominative + questionSuffix + "?";
-            this._answer = answer;
+            this._answer = chosenCase;
             this._feedbackText = [feedbackLine1, ""];
         }
     }, {
@@ -190,9 +168,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
         key: "_setupNoun",
         value: function _setupNoun(dictionary) {
             // Choose a phrase from the dictionary
-            var phrases = dictionary.nounChoicePhrases;
-            var chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-
+            var chosenPhrase = Dictionary.getRandomNounChoicePhrase();
             console.log("Chose noun phrase: " + chosenPhrase.text);
 
             // If there are multiple substitutions available, randomly choose one to quiz the user on
@@ -200,8 +176,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             var questionSubst = chosenPhrase.substitutions[questionSubstIdx];
 
             // Choose a noun to substitute into the phrase
-            var nouns = dictionary.nouns[questionSubst.nounType];
-            var chosenNoun = nouns[Math.floor(Math.random() * nouns.length)].singular;
+            var chosenNoun = Dictionary.getRandomNoun(isAnimate = questionSubst.nounType === "animate");
             console.log("Chose noun: " + chosenNoun.nominative.text);
 
             // Lookup the correct case of the noun for this phrase
@@ -209,16 +184,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             console.log("Correct noun case: " + correctNounCase.text);
 
             // Pick two other cases at random, exclude the correct case
-            var availableCases = Object.keys(chosenNoun).filter(function (word) {
-                return word !== questionSubst.targetCase;
-            });
-
-            this._incorrectChoices = [];
-            for (var idx = 0; idx < 2; idx++) {
-                var caseIdx = Math.floor(Math.random() * availableCases.length);
-                this._incorrectChoices.push(chosenNoun[availableCases[caseIdx]].text);
-                availableCases = availableCases.slice(caseIdx);
-            }
+            this._incorrectChoices = Dictionary.getIncorrectNounCasesForNounChoicePhrase(questionSubst, chosenNoun);
             console.log("Incorrect choices: " + this._incorrectChoices);
 
             // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
@@ -226,16 +192,15 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             var questionText = chosenPhrase.text;
             var substToken = "||";
             var substitutionNumber = 0;
-            for (var _idx = 0; (_idx = questionText.indexOf(substToken, _idx)) > -1; _idx++) {
+            for (var idx = 0; (idx = questionText.indexOf(substToken, idx)) > -1; idx++) {
 
                 if (substitutionNumber != questionSubstIdx) {
                     console.log("Subtitution number " + substitutionNumber);
 
                     var thisSubstitution = chosenPhrase.substitutions[substitutionNumber];
-                    var substNouns = dictionary.nouns[thisSubstitution.nounType];
-                    var thisNoun = substNouns[Math.floor(Math.random() * substNouns.length)].singular[thisSubstitution.targetCase]["text"];
+                    var thisNoun = Dictionary.getRandomNoun(isAnimate = thisSubstitution.nounType === "isAnimate");
 
-                    questionText = questionText.substring(0, _idx) + thisNoun + questionText.substring(_idx + substToken.length);
+                    questionText = questionText.substring(0, idx) + thisNoun[thisSubstitution.targetCase].text + questionText.substring(idx + substToken.length);
                 }
 
                 substitutionNumber++;
@@ -264,58 +229,19 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
         key: "_setupPronoun",
         value: function _setupPronoun(dictionary) {
             // Choose a phrase from the dictionary
-            var phrases = dictionary.pronounChoicePhrases;
-            var chosenPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-
+            var chosenPhrase = Dictionary.getRandomPronounChoicePhrase();
             console.log("Chose pronoun phrase: " + chosenPhrase.text);
 
             // Get the pronoun
-            var chosenPronoun = undefined;
-            if (chosenPhrase.pronounType === "personal") {
-                // Choose a personal pronoun
-                var pronouns = dictionary.pronouns.personal;
-                chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
-            } else {
-                // Choose a possesive pronoun
-                var _pronouns2 = dictionary.pronouns.possessive[chosenPhrase.gender];
-                chosenPronoun = _pronouns2[Math.floor(Math.random() * _pronouns2.length)];
-            }
+            var chosenPronoun = Dictionary.getRandomPronounForPronounChoicePhrase(chosenPhrase);
             console.log("Chosen pronoun: " + chosenPronoun.nominative);
 
             // Lookup the correct case of the noun for this phrase
-            var correctPronounCase = chosenPronoun[chosenPhrase.targetCase];
-
-            // Handle the accusative case
-            if ((typeof correctPronounCase === "undefined" ? "undefined" : _typeof(correctPronounCase)) === "object") {
-                if (chosenPhrase.isAnimate) {
-                    correctPronounCase = correctPronounCase.animate;
-                } else {
-                    correctPronounCase = correctPronounCase.inanimate;
-                }
-            }
+            var correctPronounCase = Dictionary.getCorrectPronounDeclensionForPronounChoicePhrase(chosenPhrase, chosenPronoun);
             console.log("Correct case: " + correctPronounCase);
 
             // Pick two other cases at random, exclude the correct case
-            var availableCases = Object.keys(chosenPronoun).filter(function (word) {
-                return word !== chosenPhrase.targetCase;
-            });
-            this._incorrectChoices = [];
-            for (var idx = 0; idx < 2; idx++) {
-                var caseIdx = Math.floor(Math.random() * availableCases.length);
-                var incorrectChoice = chosenPronoun[availableCases[caseIdx]];
-
-                // Handle the accusative case
-                if ((typeof incorrectChoice === "undefined" ? "undefined" : _typeof(incorrectChoice)) === "object") {
-                    if (Math.random() > 0.5) {
-                        incorrectChoice = incorrectChoice.animate;
-                    } else {
-                        incorrectChoice = incorrectChoice.inanimate;
-                    }
-                }
-
-                this._incorrectChoices.push(incorrectChoice);
-                availableCases = availableCases.slice(caseIdx);
-            }
+            this._incorrectChoices = Dictionary.getIncorrectPronounCasesForPronounChoicePhrase(chosenPhrase, chosenPronoun);
 
             // Get the text for the feedback
             var feedbackLine1 = "The correct answer is " + correctPronounCase;
