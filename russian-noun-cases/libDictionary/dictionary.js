@@ -388,6 +388,55 @@ DICTIONARY = {
     ]
 };
 
+class Noun {
+    constructor(json) {
+        this._json = json;
+    }
+
+    getRandomCase() {
+        // Choose a case at random, exclude the first case as this will always be nominative
+        const availableCases = Object.keys(this._json.singular).slice(1);
+        const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
+        const chosenCase = this._json.singular[chosenCaseKey];
+
+        return [chosenCaseKey, chosenCase];
+    }
+
+    getSingularDeclensions() { return this._json.singular; }
+
+    getSingularDeclension(caseKey) {
+        return this._json.singular[caseKey];
+    }
+
+    getPluralDeclensions() { return this._json.plural; }
+
+    getPluralDeclension(caseKey) {
+        return this._json.plural[caseKey];
+    }
+
+    /**
+     * Returns an array of randomly chosen declensions for the given noun, all of which are
+     * incorrect for the given phrase.substitution.
+     */
+     getRandomDeclensions(numDeclensions, exludeCase) {
+        // Pick two cases at random, exclude the correct case
+        let availableCases =
+            Object.keys(this._json.singular).filter(word => word !== exludeCase);
+
+        let incorrectChoices = [];
+        for (let idx = 0; idx < numDeclensions; idx++) {
+            // Choose a case at random
+            const caseIdx = Math.floor(Math.random() * availableCases.length);
+            incorrectChoices.push(this._json.singular[availableCases[caseIdx]].text);
+
+            // Remove the chosen case from the options
+            availableCases = availableCases.slice(caseIdx);
+        }
+
+        return incorrectChoices;
+    }
+}
+
 /**
  * Provides the interface to the dictionary data structure. Nothing should access the JSON data
  * directly.
@@ -402,19 +451,7 @@ class Dictionary {
             nouns = ANIMATE_NOUNS;
         }
 
-        return nouns[Math.floor(Math.random() * nouns.length)].singular;
-    }
-
-    /**
-     * Returns a randomly chosen case and declension for the given noun.
-     */
-    static getRandomCaseForNoun(noun) {
-        // Choose a case at random, exclude the first case as this will always be nominative
-        const availableCases = Object.keys(noun).slice(1);
-        const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
-        const chosenCase = noun[chosenCaseKey];
-
-        return [chosenCaseKey, chosenCase];
+        return new Noun(nouns[Math.floor(Math.random() * nouns.length)]);
     }
 
     /**
@@ -476,28 +513,6 @@ class Dictionary {
         // Lookup a random choice phrase from the dictionary
         const phrases = DICTIONARY.nounChoicePhrases;
         return phrases[Math.floor(Math.random() * phrases.length)];
-    }
-
-    /**
-     * Returns an array of randomly chosen declensions for the given noun, all of which are
-     * incorrect for the given phrase.substitution.
-     */
-    static getIncorrectNounCasesForNounChoicePhrase(phraseSubst, noun) {
-        // Pick two cases at random, exclude the correct case
-        let availableCases =
-            Object.keys(noun).filter(word => word !== phraseSubst.targetCase);
-
-        let incorrectChoices = [];
-        for (let idx = 0; idx < 2; idx++) {
-            // Choose a case at random
-            const caseIdx = Math.floor(Math.random() * availableCases.length);
-            incorrectChoices.push(noun[availableCases[caseIdx]].text);
-
-            // Remove the chosen case from the options
-            availableCases = availableCases.slice(caseIdx);
-        }
-
-        return incorrectChoices;
     }
 
     /**

@@ -64,27 +64,27 @@ var SimpleQuestion = function (_BaseQuestion) {
 
             // Choose a noun at random
             var chosenNoun = Dictionary.getRandomNoun(isAnimate = true);
-            console.log("Chose noun: " + chosenNoun.nominative.text);
+            console.log("Chose noun: " + chosenNoun.getSingularDeclension("nominative").text);
 
-            var _Dictionary$getRandom = Dictionary.getRandomCaseForNoun(chosenNoun),
-                _Dictionary$getRandom2 = _slicedToArray(_Dictionary$getRandom, 2),
-                chosenCaseKey = _Dictionary$getRandom2[0],
-                chosenCase = _Dictionary$getRandom2[1];
+            var _chosenNoun$getRandom = chosenNoun.getRandomCase(),
+                _chosenNoun$getRandom2 = _slicedToArray(_chosenNoun$getRandom, 2),
+                chosenCase = _chosenNoun$getRandom2[0],
+                chosenDeclension = _chosenNoun$getRandom2[1];
 
             // Get the text for the feedback
 
 
-            var feedbackLine1 = dictionary.caseRules[chosenCaseKey][chosenCase.caseRule];
+            var feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule];
 
             // Check if we need to explain a spelling rule
             var feedbackLine2 = "";
-            if (chosenCase.hasOwnProperty("spellingRule")) {
-                feedbackLine2 = dictionary.spellingRules[chosenCase.spellingRule];
+            if (chosenDeclension.hasOwnProperty("spellingRule")) {
+                feedbackLine2 = dictionary.spellingRules[chosenDeclension.spellingRule];
             }
 
             // Store the results
-            this._questionText = "What is the " + chosenCaseKey + " case of " + chosenNoun.nominative.text + "?";
-            this._answer = chosenNoun[chosenCaseKey].text;
+            this._questionText = "What is the " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
+            this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
             this._feedbackText = [feedbackLine1, feedbackLine2];
         }
     }, {
@@ -94,11 +94,11 @@ var SimpleQuestion = function (_BaseQuestion) {
             var chosenPronoun = Dictionary.getRandomPronoun();
             console.log("Chose pronoun: " + chosenPronoun.nominative);
 
-            var _Dictionary$getRandom3 = Dictionary.getRandomCaseForPronoun(chosenPronoun),
-                _Dictionary$getRandom4 = _slicedToArray(_Dictionary$getRandom3, 3),
-                chosenCaseKey = _Dictionary$getRandom4[0],
-                isAnimate = _Dictionary$getRandom4[1],
-                chosenCase = _Dictionary$getRandom4[2];
+            var _Dictionary$getRandom = Dictionary.getRandomCaseForPronoun(chosenPronoun),
+                _Dictionary$getRandom2 = _slicedToArray(_Dictionary$getRandom, 3),
+                chosenCaseKey = _Dictionary$getRandom2[0],
+                isAnimate = _Dictionary$getRandom2[1],
+                chosenCase = _Dictionary$getRandom2[2];
 
             // For the accusative case we need to specify in the question text whether the object should
             // be animate or inanimate
@@ -177,14 +177,14 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
 
             // Choose a noun to substitute into the phrase
             var chosenNoun = Dictionary.getRandomNoun(isAnimate = questionSubst.nounType === "animate");
-            console.log("Chose noun: " + chosenNoun.nominative.text);
+            console.log("Chose noun: " + chosenNoun.getSingularDeclension("nominative").text);
 
             // Lookup the correct case of the noun for this phrase
-            var correctNounCase = chosenNoun[questionSubst.targetCase];
+            var correctNounCase = chosenNoun.getSingularDeclension(questionSubst.targetCase);
             console.log("Correct noun case: " + correctNounCase.text);
 
             // Pick two other cases at random, exclude the correct case
-            this._incorrectChoices = Dictionary.getIncorrectNounCasesForNounChoicePhrase(questionSubst, chosenNoun);
+            this._incorrectChoices = chosenNoun.getRandomDeclensions(2, questionSubst.targetCase);
             console.log("Incorrect choices: " + this._incorrectChoices);
 
             // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
@@ -200,7 +200,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
                     var thisSubstitution = chosenPhrase.substitutions[substitutionNumber];
                     var thisNoun = Dictionary.getRandomNoun(isAnimate = thisSubstitution.nounType === "isAnimate");
 
-                    questionText = questionText.substring(0, idx) + thisNoun[thisSubstitution.targetCase].text + questionText.substring(idx + substToken.length);
+                    questionText = questionText.substring(0, idx) + thisNoun.getSingularDeclension(thisSubstitution.targetCase).text + questionText.substring(idx + substToken.length);
                 }
 
                 substitutionNumber++;
