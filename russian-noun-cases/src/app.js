@@ -13,7 +13,7 @@ function shuffleArray(array) {
 function newQuestion(dictionary) {
     console.log("New question requested");
 
-    const questionTypes = [/*SimpleQuestion,*/ CaseChoiceQuestion];
+    const questionTypes = [SimpleQuestion, CaseChoiceQuestion];
     return new questionTypes[Math.floor(Math.random() * questionTypes.length)](dictionary);
 }
 
