@@ -216,24 +216,23 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
         value: function _setupPronoun() {
             // Choose a phrase from the dictionary
             var chosenPhrase = Dictionary.getRandomPronounChoicePhrase();
-            console.log("Chose pronoun phrase: " + chosenPhrase.text);
-
-            // Get the pronoun
-            var chosenPronoun = Dictionary.getRandomPronoun(chosenPhrase.pronounType, chosenPhrase.gender);
-            console.log("Chosen pronoun: " + chosenPronoun.getDeclension("nominative"));
+            console.log("Chose pronoun phrase: " + chosenPhrase.getText());
 
             // Lookup the correct case of the noun for this phrase
-            var correctPronounCase = Dictionary.getCorrectPronounDeclensionForPronounChoicePhrase(chosenPhrase, chosenPronoun);
-            console.log("Correct case: " + correctPronounCase);
 
-            // Pick two other cases at random, exclude the correct case
-            this._incorrectChoices = Dictionary.getIncorrectPronounCasesForPronounChoicePhrase(chosenPhrase, chosenPronoun);
+            var _chosenPhrase$getCorr = chosenPhrase.getCorrectAndIncorrectPronounDeclensions(),
+                _chosenPhrase$getCorr2 = _slicedToArray(_chosenPhrase$getCorr, 2),
+                correctPronounCase = _chosenPhrase$getCorr2[0],
+                incorrectChoices = _chosenPhrase$getCorr2[1];
+
+            this._incorrectChoices = incorrectChoices;
+            console.log("Correct case: " + correctPronounCase);
 
             // Get the text for the feedback
             var feedbackLine1 = "The correct answer is " + correctPronounCase;
 
             // Store the results
-            this._questionText = chosenPhrase.text;
+            this._questionText = chosenPhrase.getText();
             this._answer = correctPronounCase;
             this._feedbackText = [feedbackLine1, ""];
         }

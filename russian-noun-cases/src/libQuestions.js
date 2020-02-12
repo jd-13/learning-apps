@@ -154,24 +154,18 @@ class CaseChoiceQuestion extends BaseQuestion {
     _setupPronoun() {
         // Choose a phrase from the dictionary
         const chosenPhrase = Dictionary.getRandomPronounChoicePhrase();
-        console.log(`Chose pronoun phrase: ${chosenPhrase.text}`);
-
-        // Get the pronoun
-        let chosenPronoun = Dictionary.getRandomPronoun(chosenPhrase.pronounType, chosenPhrase.gender);
-        console.log(`Chosen pronoun: ${chosenPronoun.getDeclension("nominative")}`);
+        console.log(`Chose pronoun phrase: ${chosenPhrase.getText()}`);
 
         // Lookup the correct case of the noun for this phrase
-        let correctPronounCase = Dictionary.getCorrectPronounDeclensionForPronounChoicePhrase(chosenPhrase, chosenPronoun);
+        let [correctPronounCase, incorrectChoices] = chosenPhrase.getCorrectAndIncorrectPronounDeclensions();
+        this._incorrectChoices = incorrectChoices;
         console.log(`Correct case: ${correctPronounCase}`);
-
-        // Pick two other cases at random, exclude the correct case
-        this._incorrectChoices = Dictionary.getIncorrectPronounCasesForPronounChoicePhrase(chosenPhrase, chosenPronoun);
 
         // Get the text for the feedback
         const feedbackLine1 = `The correct answer is ${correctPronounCase}`;
 
         // Store the results
-        this._questionText = chosenPhrase.text;
+        this._questionText = chosenPhrase.getText();
         this._answer = correctPronounCase;
         this._feedbackText = [feedbackLine1, ""];
     }

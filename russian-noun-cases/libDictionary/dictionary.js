@@ -301,6 +301,8 @@ class Pronoun {
         this._json = json;
     }
 
+    getText() { return this._json.text; }
+
     /**
      * Returns a randomly chosen case and declension for this pronoun.
      */
@@ -329,6 +331,65 @@ class Pronoun {
     }
 
     getDeclension(caseKey) { return this._json[caseKey]; }
+}
+
+class PronounChoicePhrase {
+    constructor(json) {
+        this._json = json;
+    }
+
+    _getCorrectPronounDeclension(pronoun) {
+        let correctPronounCase = pronoun.getDeclension([this._json.targetCase]);
+
+        // Handle the accusative case
+        if (typeof correctPronounCase === "object") {
+            if (this._json.isAnimate) {
+                correctPronounCase = correctPronounCase.animate;
+            } else {
+                correctPronounCase = correctPronounCase.inanimate;
+            }
+        }
+
+        return correctPronounCase;
+    }
+
+    _getIncorrectPronounDeclensions(pronoun) {
+        // Get the list of cases to choose from, exclude the correct one
+        let availableCases = Object.keys(pronoun._json).filter(word => word !== this._json.targetCase);
+
+        let incorrectChoices = [];
+        for (let idx = 0; idx < 2; idx++) {
+            const caseIdx = Math.floor(Math.random() * availableCases.length);
+            let incorrectChoice = pronoun._json[availableCases[caseIdx]];
+
+            // Handle the accusative case
+            if (typeof incorrectChoice === "object") {
+                if (Math.random() > 0.5) {
+                    incorrectChoice = incorrectChoice.animate;
+                } else {
+                    incorrectChoice = incorrectChoice.inanimate;
+                }
+            }
+
+            incorrectChoices.push(incorrectChoice);
+            availableCases = availableCases.slice(caseIdx);
+        }
+
+        return incorrectChoices;
+    }
+
+    /**
+     * Returns the correct and randomly chosen incorrect declensions of the given pronoun to be
+     * substituted into the given phrase.
+     */
+    getCorrectAndIncorrectPronounDeclensions() {
+        const chosenPronoun = Dictionary.getRandomPronoun(this._json.pronounType, this._json.gender);
+
+        const correctPronounCase = this._getCorrectPronounDeclension(chosenPronoun);
+        const incorrectChoices = this._getIncorrectPronounDeclensions(chosenPronoun);
+
+        return [correctPronounCase, incorrectChoices];
+    }
 }
 
 /**
@@ -393,53 +454,6 @@ class Dictionary {
      */
     static getRandomPronounChoicePhrase() {
         const phrases = DICTIONARY.pronounChoicePhrases;
-        return phrases[Math.floor(Math.random() * phrases.length)];
-    }
-
-    /**
-     * Returns the correct declension of the given pronoun to be substituted into the given phrase.
-     */
-    static getCorrectPronounDeclensionForPronounChoicePhrase(phrase, pronoun) {
-        let correctPronounCase = pronoun.getDeclension([phrase.targetCase]);
-
-        // Handle the accusative case
-        if (typeof correctPronounCase === "object") {
-            if (phrase.isAnimate) {
-                correctPronounCase = correctPronounCase.animate;
-            } else {
-                correctPronounCase = correctPronounCase.inanimate;
-            }
-        }
-
-        return correctPronounCase;
-    }
-
-    /**
-     * Returns an array of randomly chosen declensions for the given pronoun, all of which are
-     * incorrect for the given phrase.
-     */
-    static getIncorrectPronounCasesForPronounChoicePhrase(phrase, pronoun) {
-        // Get the list of cases to choose from, exclude the correct one
-        let availableCases = Object.keys(pronoun._json).filter(word => word !== phrase.targetCase);
-
-        let incorrectChoices = [];
-        for (let idx = 0; idx < 2; idx++) {
-            const caseIdx = Math.floor(Math.random() * availableCases.length);
-            let incorrectChoice = pronoun._json[availableCases[caseIdx]];
-
-            // Handle the accusative case
-            if (typeof incorrectChoice === "object") {
-                if (Math.random() > 0.5) {
-                    incorrectChoice = incorrectChoice.animate;
-                } else {
-                    incorrectChoice = incorrectChoice.inanimate;
-                }
-            }
-
-            incorrectChoices.push(incorrectChoice);
-            availableCases = availableCases.slice(caseIdx);
-        }
-
-        return incorrectChoices;
+        return new PronounChoicePhrase(phrases[Math.floor(Math.random() * phrases.length)]);
     }
 }
