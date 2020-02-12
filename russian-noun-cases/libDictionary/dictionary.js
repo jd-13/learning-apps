@@ -212,7 +212,7 @@ class Noun {
         let availableCases = Object.keys(this._json.singular);
 
         if (excludeCase != undefined) {
-            availableCases = availableCases.slice(availableCases.indexOf(excludeCase));
+            availableCases.splice(availableCases.indexOf(excludeCase), 1);
         }
 
         const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
