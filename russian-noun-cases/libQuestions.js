@@ -66,7 +66,7 @@ var SimpleQuestion = function (_BaseQuestion) {
             var chosenNoun = Dictionary.getRandomNoun(isAnimate = true);
             console.log("Chose noun: " + chosenNoun.getSingularDeclension("nominative").text);
 
-            var _chosenNoun$getRandom = chosenNoun.getRandomCase(),
+            var _chosenNoun$getRandom = chosenNoun.getRandomCase("nominative"),
                 _chosenNoun$getRandom2 = _slicedToArray(_chosenNoun$getRandom, 2),
                 chosenCase = _chosenNoun$getRandom2[0],
                 chosenDeclension = _chosenNoun$getRandom2[1];
@@ -92,7 +92,7 @@ var SimpleQuestion = function (_BaseQuestion) {
         value: function _setupPronoun(dictionary) {
 
             var chosenPronoun = Dictionary.getRandomPronoun();
-            console.log("Chose pronoun: " + chosenPronoun.nominative);
+            console.log("Chose pronoun: " + chosenPronoun.getDeclension("nominative"));
 
             var _chosenPronoun$getRan = chosenPronoun.getRandomCase(),
                 _chosenPronoun$getRan2 = _slicedToArray(_chosenPronoun$getRan, 3),
@@ -117,7 +117,7 @@ var SimpleQuestion = function (_BaseQuestion) {
             var feedbackLine1 = "The correct answer is " + chosenCase;
 
             // Store the results
-            this._questionText = "What is the " + chosenCaseKey + " case of " + chosenPronoun.nominative + questionSuffix + "?";
+            this._questionText = "What is the " + chosenCaseKey + " case of " + chosenPronoun.getDeclension("nominative") + questionSuffix + "?";
             this._answer = chosenCase;
             this._feedbackText = [feedbackLine1, ""];
         }

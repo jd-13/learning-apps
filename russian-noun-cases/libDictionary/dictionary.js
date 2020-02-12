@@ -208,9 +208,13 @@ class Noun {
         this._json = json;
     }
 
-    getRandomCase() {
-        // Choose a case at random, exclude the first case as this will always be nominative
-        const availableCases = Object.keys(this._json.singular).slice(1);
+    getRandomCase(excludeCase=undefined) {
+        let availableCases = Object.keys(this._json.singular);
+
+        if (excludeCase != undefined) {
+            availableCases = availableCases.slice(availableCases.indexOf(excludeCase));
+        }
+
         const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
         const chosenCase = this._json.singular[chosenCaseKey];
 

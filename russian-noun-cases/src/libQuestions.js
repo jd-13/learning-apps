@@ -36,7 +36,7 @@ class SimpleQuestion extends BaseQuestion {
         const chosenNoun = Dictionary.getRandomNoun(isAnimate=true);
         console.log(`Chose noun: ${chosenNoun.getSingularDeclension("nominative").text}`);
 
-        const [chosenCase, chosenDeclension] = chosenNoun.getRandomCase();
+        const [chosenCase, chosenDeclension] = chosenNoun.getRandomCase("nominative");
 
         // Get the text for the feedback
         const feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule];
@@ -56,7 +56,7 @@ class SimpleQuestion extends BaseQuestion {
     _setupPronoun(dictionary) {
 
         const chosenPronoun = Dictionary.getRandomPronoun();
-        console.log(`Chose pronoun: ${chosenPronoun.nominative}`);
+        console.log(`Chose pronoun: ${chosenPronoun.getDeclension("nominative")}`);
 
         const [chosenCaseKey, isAnimate, chosenCase] = chosenPronoun.getRandomCase();
 
@@ -75,7 +75,7 @@ class SimpleQuestion extends BaseQuestion {
         const feedbackLine1 = `The correct answer is ${chosenCase}`;
 
         // Store the results
-        this._questionText = `What is the ${chosenCaseKey} case of ${chosenPronoun.nominative}${questionSuffix}?`;
+        this._questionText = `What is the ${chosenCaseKey} case of ${chosenPronoun.getDeclension("nominative")}${questionSuffix}?`;
         this._answer = chosenCase;
         this._feedbackText = [feedbackLine1, ""]
     }
