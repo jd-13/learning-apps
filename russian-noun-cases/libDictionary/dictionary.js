@@ -301,8 +301,6 @@ class Pronoun {
         this._json = json;
     }
 
-    getText() { return this._json.text; }
-
     /**
      * Returns a randomly chosen case and declension for this pronoun.
      */
@@ -377,6 +375,8 @@ class PronounChoicePhrase {
 
         return incorrectChoices;
     }
+
+    getText() { return this._json.text; }
 
     /**
      * Returns the correct and randomly chosen incorrect declensions of the given pronoun to be
