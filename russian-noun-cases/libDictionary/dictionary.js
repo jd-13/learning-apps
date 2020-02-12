@@ -256,6 +256,43 @@ class Noun {
     }
 }
 
+class NounChoicePhrase {
+    constructor(json) {
+        this._json = json;
+    }
+
+    /**
+     * Does all but one of the substitutions in the phrase, returning the phrase and the
+     * substitution data for the substitution it hasn't performed.
+     */
+    getPreparedText() {
+        const questionSubstIdx = Math.floor(Math.random() * this._json.substitutions.length);
+        const questionSubst = this._json.substitutions[questionSubstIdx];
+
+        // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
+        // on
+        let preparedText = this._json.text;
+        const substToken = "||";
+        let substitutionNumber = 0;
+        for (let idx = 0; (idx = preparedText.indexOf(substToken, idx)) > -1; idx++) {
+
+            if (substitutionNumber != questionSubstIdx) {
+                const thisSubstitution = this._json.substitutions[substitutionNumber];
+                const thisNoun = Dictionary.getRandomNoun((thisSubstitution.nounType === "isAnimate"));
+
+                preparedText = preparedText.substring(0, idx)
+                               + thisNoun.getSingularDeclension(thisSubstitution.targetCase).text
+                               + preparedText.substring(idx + substToken.length);
+            }
+
+            substitutionNumber++;
+        }
+
+
+        return [questionSubst, preparedText];
+    }
+}
+
 /**
  * Represents a personal or possesive pronoun of a particular gender and all its declensions.
  */
@@ -348,7 +385,7 @@ class Dictionary {
     static getRandomNounChoicePhrase() {
         // Lookup a random choice phrase from the dictionary
         const phrases = DICTIONARY.nounChoicePhrases;
-        return phrases[Math.floor(Math.random() * phrases.length)];
+        return new NounChoicePhrase(phrases[Math.floor(Math.random() * phrases.length)]);
     }
 
     /**

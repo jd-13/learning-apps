@@ -26,7 +26,7 @@ class SimpleQuestion extends BaseQuestion {
         if (Math.random() > 0.5) {
             this._setupNoun(dictionary);
         } else {
-            this._setupPronoun(dictionary)
+            this._setupPronoun();
         }
     }
 
@@ -53,7 +53,7 @@ class SimpleQuestion extends BaseQuestion {
         this._feedbackText = [feedbackLine1, feedbackLine2]
     }
 
-    _setupPronoun(dictionary) {
+    _setupPronoun() {
 
         const chosenPronoun = Dictionary.getRandomPronoun();
         console.log(`Chose pronoun: ${chosenPronoun.getDeclension("nominative")}`);
@@ -101,7 +101,7 @@ class CaseChoiceQuestion extends BaseQuestion {
         if (Math.random() > 0.5) {
             this._setupNoun(dictionary);
         } else {
-            this._setupPronoun(dictionary)
+            this._setupPronoun();
         }
     }
 
@@ -114,11 +114,10 @@ class CaseChoiceQuestion extends BaseQuestion {
     _setupNoun(dictionary) {
         // Choose a phrase from the dictionary
         const chosenPhrase = Dictionary.getRandomNounChoicePhrase();
-        console.log(`Chose noun phrase: ${chosenPhrase.text}`);
+        console.log(`Chose noun phrase: ${chosenPhrase._json.text}`);
 
-        // If there are multiple substitutions available, randomly choose one to quiz the user on
-        const questionSubstIdx = Math.floor(Math.random() * chosenPhrase.substitutions.length);
-        const questionSubst = chosenPhrase.substitutions[questionSubstIdx];
+        // Prepare the question text
+        const [questionSubst, questionText] = chosenPhrase.getPreparedText();
 
         // Choose a noun to substitute into the phrase
         const chosenNoun = Dictionary.getRandomNoun(isAnimate=(questionSubst.nounType === "animate"));
@@ -131,27 +130,6 @@ class CaseChoiceQuestion extends BaseQuestion {
         // Pick two other cases at random, exclude the correct case
         this._incorrectChoices = chosenNoun.getRandomDeclensions(2, questionSubst.targetCase);
         console.log(`Incorrect choices: ${this._incorrectChoices}`);
-
-        // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
-        // on
-        let questionText = chosenPhrase.text;
-        const substToken = "||";
-        let substitutionNumber = 0;
-        for (let idx = 0; (idx = questionText.indexOf(substToken, idx)) > -1; idx++) {
-
-            if (substitutionNumber != questionSubstIdx) {
-                console.log(`Subtitution number ${substitutionNumber}`);
-
-                const thisSubstitution = chosenPhrase.substitutions[substitutionNumber];
-                const thisNoun = Dictionary.getRandomNoun(isAnimate=(thisSubstitution.nounType === "isAnimate"));
-
-                questionText = questionText.substring(0, idx)
-                               + thisNoun.getSingularDeclension(thisSubstitution.targetCase).text
-                               + questionText.substring(idx + substToken.length);
-            }
-
-            substitutionNumber++;
-        }
 
         // Get the text for the feedback
         let feedbackLine1 = `${questionSubst.targetCase} case`;
@@ -173,7 +151,7 @@ class CaseChoiceQuestion extends BaseQuestion {
         this._feedbackText = [feedbackLine1, feedbackLine2];
     }
 
-    _setupPronoun(dictionary) {
+    _setupPronoun() {
         // Choose a phrase from the dictionary
         const chosenPhrase = Dictionary.getRandomPronounChoicePhrase();
         console.log(`Chose pronoun phrase: ${chosenPhrase.text}`);
