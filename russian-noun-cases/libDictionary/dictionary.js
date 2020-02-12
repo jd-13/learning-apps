@@ -200,6 +200,9 @@ DICTIONARY = {
     ]
 };
 
+/**
+ * Represents a noun and all its declensions.
+ */
 class Noun {
     constructor(json) {
         this._json = json;
@@ -227,8 +230,8 @@ class Noun {
     }
 
     /**
-     * Returns an array of randomly chosen declensions for the given noun, all of which are
-     * incorrect for the given phrase.substitution.
+     * Returns an array of randomly chosen declensions for this noun, all of which are incorrect for
+     * the given phrase.substitution.
      */
      getRandomDeclensions(numDeclensions, exludeCase) {
         // Pick two cases at random, exclude the correct case
@@ -247,6 +250,44 @@ class Noun {
 
         return incorrectChoices;
     }
+}
+
+/**
+ * Represents a personal or possesive pronoun of a particular gender and all its declensions.
+ */
+class Pronoun {
+    constructor(json) {
+        this._json = json;
+    }
+
+    /**
+     * Returns a randomly chosen case and declension for this pronoun.
+     */
+    getRandomCase() {
+        // Choose a case at random, exclude the first case as this will always be nominative
+        const availableCases = Object.keys(this._json).slice(1);
+        const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
+        let chosenCase = this._json[chosenCaseKey];
+
+        // Accusative possesive pronouns have different declensions for animate and inanimate
+        // objects, handle this here
+        let isAnimate = undefined;
+        if (typeof chosenCase === "object") {
+
+            // Choose animate or inanimate randomly
+            if (Math.random() > 0.5) {
+                chosenCase = chosenCase.animate;
+                isAnimate = true;
+            } else {
+                chosenCase = chosenCase.inanimate;
+                isAnimate = false;
+            }
+        }
+
+        return [chosenCaseKey, isAnimate, chosenCase];
+    }
+
+    getDeclension(caseKey) { return this._json[caseKey]; }
 }
 
 /**
@@ -269,53 +310,32 @@ class Dictionary {
     /**
      * Returns a randomly chosen pronoun from the dictionary.
      */
-    static getRandomPronoun() {
+    static getRandomPronoun(pronounType=undefined, gender=undefined) {
         let chosenPronoun = undefined;
 
-        // Choose personal or possesive randomly
-        if (Math.random() > 0.5) {
+        // Pick a pronoun type randomly
+        if (pronounType === undefined) {
+            const types = ["personal", "posessive"]
+            pronounType = types[Math.floor(Math.random() * types.length)];
+        }
+
+        // Pick a gender randomly
+        if (gender === undefined) {
+            const genders = ["masculine", "feminine", "neuter", "plural"];
+            gender = genders[Math.floor(Math.random() * genders.length)];
+        }
+
+        if (pronounType === "personal") {
+            // Choose a personal pronoun
             const pronouns = PRONOUNS.personal;
             chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
         } else {
-            const pronouns = PRONOUNS.possessive;
-
-            // Possesive pronouns have genders, choose gender randomly
-            const genders = Object.keys(pronouns);
-            const chosenGender = genders[Math.floor(Math.random() * genders.length)];
-
-            // Choose the pronoun
-            chosenPronoun = pronouns[chosenGender][
-                Math.floor(Math.random() * pronouns[chosenGender].length)];
+            // Choose a possesive pronoun
+            const pronouns = PRONOUNS.possessive[gender];
+            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
         }
 
-        return chosenPronoun;
-    }
-
-    /**
-     * Returns a randomly chosen case and declension for the given pronoun.
-     */
-    static getRandomCaseForPronoun(pronoun) {
-        // Choose a case at random, exclude the first case as this will always be nominative
-        const availableCases = Object.keys(pronoun).slice(1);
-        const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
-        let chosenCase = pronoun[chosenCaseKey];
-
-        // Accusative possesive pronouns have different declensions for animate and inanimate
-        // objects, handle this here
-        let isAnimate = undefined;
-        if (typeof chosenCase === "object") {
-
-            // Choose animate or inanimate randomly
-            if (Math.random() > 0.5) {
-                chosenCase = chosenCase.animate;
-                isAnimate = true;
-            } else {
-                chosenCase = chosenCase.inanimate;
-                isAnimate = false;
-            }
-        }
-
-        return [chosenCaseKey, isAnimate, chosenCase];
+        return new Pronoun(chosenPronoun);
     }
 
     /**
@@ -336,29 +356,10 @@ class Dictionary {
     }
 
     /**
-     * Returns a randomly chosen pronoun for the given pronoun phrase.
-     */
-    static getRandomPronounForPronounChoicePhrase(phrase) {
-        let chosenPronoun = undefined;
-        if (phrase.pronounType === "personal") {
-            // Choose a personal pronoun
-            const pronouns = PRONOUNS.personal;
-            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
-
-        } else {
-            // Choose a possesive pronoun
-            const pronouns = PRONOUNS.possessive[phrase.gender];
-            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
-        }
-
-        return chosenPronoun;
-    }
-
-    /**
      * Returns the correct declension of the given pronoun to be substituted into the given phrase.
      */
     static getCorrectPronounDeclensionForPronounChoicePhrase(phrase, pronoun) {
-        let correctPronounCase = pronoun[phrase.targetCase];
+        let correctPronounCase = pronoun.getDeclension([phrase.targetCase]);
 
         // Handle the accusative case
         if (typeof correctPronounCase === "object") {
@@ -378,12 +379,12 @@ class Dictionary {
      */
     static getIncorrectPronounCasesForPronounChoicePhrase(phrase, pronoun) {
         // Get the list of cases to choose from, exclude the correct one
-        let availableCases = Object.keys(pronoun).filter(word => word !== phrase.targetCase);
+        let availableCases = Object.keys(pronoun._json).filter(word => word !== phrase.targetCase);
 
         let incorrectChoices = [];
         for (let idx = 0; idx < 2; idx++) {
             const caseIdx = Math.floor(Math.random() * availableCases.length);
-            let incorrectChoice = pronoun[availableCases[caseIdx]];
+            let incorrectChoice = pronoun._json[availableCases[caseIdx]];
 
             // Handle the accusative case
             if (typeof incorrectChoice === "object") {

@@ -94,11 +94,11 @@ var SimpleQuestion = function (_BaseQuestion) {
             var chosenPronoun = Dictionary.getRandomPronoun();
             console.log("Chose pronoun: " + chosenPronoun.nominative);
 
-            var _Dictionary$getRandom = Dictionary.getRandomCaseForPronoun(chosenPronoun),
-                _Dictionary$getRandom2 = _slicedToArray(_Dictionary$getRandom, 3),
-                chosenCaseKey = _Dictionary$getRandom2[0],
-                isAnimate = _Dictionary$getRandom2[1],
-                chosenCase = _Dictionary$getRandom2[2];
+            var _chosenPronoun$getRan = chosenPronoun.getRandomCase(),
+                _chosenPronoun$getRan2 = _slicedToArray(_chosenPronoun$getRan, 3),
+                chosenCaseKey = _chosenPronoun$getRan2[0],
+                isAnimate = _chosenPronoun$getRan2[1],
+                chosenCase = _chosenPronoun$getRan2[2];
 
             // For the accusative case we need to specify in the question text whether the object should
             // be animate or inanimate
@@ -233,8 +233,8 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
             console.log("Chose pronoun phrase: " + chosenPhrase.text);
 
             // Get the pronoun
-            var chosenPronoun = Dictionary.getRandomPronounForPronounChoicePhrase(chosenPhrase);
-            console.log("Chosen pronoun: " + chosenPronoun.nominative);
+            var chosenPronoun = Dictionary.getRandomPronoun(chosenPhrase.pronounType, chosenPhrase.gender);
+            console.log("Chosen pronoun: " + chosenPronoun.getDeclension("nominative"));
 
             // Lookup the correct case of the noun for this phrase
             var correctPronounCase = Dictionary.getCorrectPronounDeclensionForPronounChoicePhrase(chosenPhrase, chosenPronoun);

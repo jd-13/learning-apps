@@ -58,7 +58,7 @@ class SimpleQuestion extends BaseQuestion {
         const chosenPronoun = Dictionary.getRandomPronoun();
         console.log(`Chose pronoun: ${chosenPronoun.nominative}`);
 
-        const [chosenCaseKey, isAnimate, chosenCase] = Dictionary.getRandomCaseForPronoun(chosenPronoun);
+        const [chosenCaseKey, isAnimate, chosenCase] = chosenPronoun.getRandomCase();
 
         // For the accusative case we need to specify in the question text whether the object should
         // be animate or inanimate
@@ -179,8 +179,8 @@ class CaseChoiceQuestion extends BaseQuestion {
         console.log(`Chose pronoun phrase: ${chosenPhrase.text}`);
 
         // Get the pronoun
-        let chosenPronoun = Dictionary.getRandomPronounForPronounChoicePhrase(chosenPhrase);
-        console.log(`Chosen pronoun: ${chosenPronoun.nominative}`);
+        let chosenPronoun = Dictionary.getRandomPronoun(chosenPhrase.pronounType, chosenPhrase.gender);
+        console.log(`Chosen pronoun: ${chosenPronoun.getDeclension("nominative")}`);
 
         // Lookup the correct case of the noun for this phrase
         let correctPronounCase = Dictionary.getCorrectPronounDeclensionForPronounChoicePhrase(chosenPhrase, chosenPronoun);
