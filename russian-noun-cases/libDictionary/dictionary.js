@@ -160,194 +160,6 @@ DICTIONARY = {
         }
     ],
 
-    "pronouns": {
-        "personal": [
-            {
-                "nominative": "я",
-                "genitive": "меня",
-                "accusative": "меня",
-                "dative": "мне",
-                "instrumental": "мной"
-            },
-            {
-                "nominative": "ты",
-                "genitive": "тебя",
-                "accusative": "тебя",
-                "dative": "тебе",
-                "instrumental": "тобой"
-            },
-            // TODO: confirm where we need to use него, неё, них
-            // {
-            //     "nominative": "он",
-            //     "genitive": "его",
-            //     "accusative": "его",
-            //     "dative": "ему",
-            //     "instrumental": "им"
-            // },
-            // {
-            //     "nominative": "она",
-            //     "genitive": "её",
-            //     "accusative": "её",
-            //     "dative": "ей",
-            //     "instrumental": "ей"
-            // },
-            // {
-            //     "nominative": "оно",
-            //     "genitive": "его",
-            //     "accusative": "его",
-            //     "dative": "ему",
-            //     "instrumental": "им"
-            // },
-            // {
-            //     "nominative": "они",
-            //     "genitive": "их",
-            //     "accusative": "их",
-            //     "dative": "им",
-            //     "instrumental": "ими"
-            // },
-            {
-                "nominative": "вы",
-                "genitive": "вас",
-                "accusative": "вас",
-                "dative": "вам",
-                "instrumental": "вами"
-            },
-
-            // TODO: handle plurals nouns
-            // {
-            //     "nominative": "мы",
-            //     "genitive": "нас",
-            //     "accusative": "нас",
-            //     "dative": "нам",
-            //     "instrumental": "нами"
-            // }
-        ],
-
-        "possessive":
-        {
-            "masculine": [
-                {
-                    "nominative": "мой",
-                    "genitive": "моего",
-                    "accusative": {"inanimate": "мой", "animate": "моего"},
-                    "dative": "моему",
-                    "instrumental": "моим"
-                },
-                {
-                    "nominative": "твой",
-                    "genitive": "твоего",
-                    "accusative": {"inanimate": "твой", "animate": "твоего"},
-                    "dative": "твоему",
-                    "instrumental": "твоим"
-                },
-                {
-                    "nominative": "наш",
-                    "genitive": "нашего",
-                    "accusative": {"inanimate": "наш", "animate": "нашего"},
-                    "dative": "нашему",
-                    "instrumental": "нашим"
-                },
-                {
-                    "nominative": "ваш",
-                    "genitive": "вашего",
-                    "accusative": {"inanimate": "ваш", "animate": "вашего"},
-                    "dative": "вашему",
-                    "instrumental": "вашим"
-                }
-            ],
-            "feminine": [
-                {
-                    "nominative": "моя",
-                    "genitive": "моей",
-                    "accusative": {"inanimate": "мою", "animate": "мою"},
-                    "dative": "моей",
-                    "instrumental": "моей"
-                },
-                {
-                    "nominative": "твоя",
-                    "genitive": "твоей",
-                    "accusative": {"inanimate": "твою", "animate": "твою"},
-                    "dative": "твоей",
-                    "instrumental": "твоей"
-                },
-                {
-                    "nominative": "наша",
-                    "genitive": "нашей",
-                    "accusative": {"inanimate": "нашу", "animate": "нашу"},
-                    "dative": "нашей",
-                    "instrumental": "нашей"
-                },
-                {
-                    "nominative": "ваша",
-                    "genitive": "вашей",
-                    "accusative": {"inanimate": "вашу", "animate": "вашу"},
-                    "dative": "вашей",
-                    "instrumental": "вашей"
-                }
-            ],
-            "neuter": [
-                {
-                    "nominative": "моё",
-                    "genitive": "моего",
-                    "accusative": {"inanimate": "моё", "animate": "моё"},
-                    "dative": "моему",
-                    "instrumental": "моим"
-                },
-                {
-                    "nominative": "твоё",
-                    "genitive": "твоего",
-                    "accusative": {"inanimate": "твоё", "animate": "твоё"},
-                    "dative": "твоему",
-                    "instrumental": "твоим"
-                },
-                {
-                    "nominative": "наше",
-                    "genitive": "нашего",
-                    "accusative": {"inanimate": "наше", "animate": "наше"},
-                    "dative": "нашему",
-                    "instrumental": "нашим"
-                },
-                {
-                    "nominative": "ваше",
-                    "genitive": "вашего",
-                    "accusative": {"inanimate": "ваше", "animate": "ваше"},
-                    "dative": "вашему",
-                    "instrumental": "вашим"
-                }
-            ],
-            "plural": [
-                {
-                    "nominative": "мои",
-                    "genitive": "моих",
-                    "accusative": {"inanimate": "мои", "animate": "моих"},
-                    "dative": "моим",
-                    "instrumental": "моими"
-                },
-                {
-                    "nominative": "твои",
-                    "genitive": "твоих",
-                    "accusative": {"inanimate": "твои", "animate": "твоих"},
-                    "dative": "твоим",
-                    "instrumental": "твоими"
-                },
-                {
-                    "nominative": "наши",
-                    "genitive": "наших",
-                    "accusative": {"inanimate": "наши", "animate": "наших"},
-                    "dative": "нашим",
-                    "instrumental": "нашими"
-                },
-                {
-                    "nominative": "ваши",
-                    "genitive": "ваших",
-                    "accusative": {"inanimate": "ваши", "animate": "ваших"},
-                    "dative": "вашим",
-                    "instrumental": "вашими"
-                }
-            ]
-        }
-    },
-
     "pronounChoicePhrases": [
         // Personal
         {
@@ -462,10 +274,10 @@ class Dictionary {
 
         // Choose personal or possesive randomly
         if (Math.random() > 0.5) {
-            const pronouns = DICTIONARY.pronouns.personal;
+            const pronouns = PRONOUNS.personal;
             chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
         } else {
-            const pronouns = DICTIONARY.pronouns.possessive;
+            const pronouns = PRONOUNS.possessive;
 
             // Possesive pronouns have genders, choose gender randomly
             const genders = Object.keys(pronouns);
@@ -530,12 +342,12 @@ class Dictionary {
         let chosenPronoun = undefined;
         if (phrase.pronounType === "personal") {
             // Choose a personal pronoun
-            const pronouns = DICTIONARY.pronouns.personal;
+            const pronouns = PRONOUNS.personal;
             chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
 
         } else {
             // Choose a possesive pronoun
-            const pronouns = DICTIONARY.pronouns.possessive[phrase.gender];
+            const pronouns = PRONOUNS.possessive[phrase.gender];
             chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
         }
 
