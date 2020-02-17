@@ -1,5 +1,6 @@
 DICTIONARY = {
     "caseRules": {
+        // TODO: remove use of masculine/feminine/neuter in rules
         "genitive": [
             /*0*/"For masculine nouns ending in a consonant, add а",
             /*1*/"For masculine nouns ending in й or ь, replace with я",
@@ -44,6 +45,55 @@ DICTIONARY = {
         ]
     },
 
+    "pluralRules": {
+        "nominative": [
+            /*0*/"For nouns ending in a consonant, add ы",
+            /*1*/"For nouns ending in й, я, or ь, replace with и",
+            /*2*/"For nouns ending in а, replace with ы",
+            /*3*/"For nouns ending in о, replace with а",
+            /*4*/"For nouns ending in е, replace with я"
+        ],
+
+        "genitive": [
+            /*0*/"For nouns ending in a consonant (except ж, ч, ш, щ), add ов",
+            /*1*/"For nouns ending in й or ц, add ев",
+            /*2*/"For nouns ending in ж, ч, ш, or щ, add ей",
+            /*3*/"For nouns ending in а, remove а",
+            /*4*/"For nouns ending in a consonant followed by я, replace я with ь",
+            /*5*/"For nouns ending in a vowel followed by я, replace я with й",
+            /*6*/"For nouns ending in о, remove о",
+            /*7*/"For nouns ending in е, add й",
+            /*8*/"For nouns ending in ие, replace е with й",
+            /*9*/"For nouns ending ь, replace with ей",
+
+        ],
+
+        // TODO: there might be a better way to explain this, as the user might not know the
+        // nominative and genitive rules
+        "accusative": [
+            /*0*/"For inanimate nouns, the accusative plural declension is the same as the nominative plural",
+            /*1*/"For animate nouns, the accusative plural declension is the same as the genitive plural"
+        ],
+
+        "dative": [
+            /*0*/"For nouns ending in a consonant, add ам",
+            /*1*/"For nouns ending in й, ь, е, or я, replace with ям",
+            /*2*/"For nouns ending in а or о, replace with ам",
+        ],
+
+        "instrumental": [
+            /*0*/"For nouns ending in a consonant, add ами",
+            /*1*/"For nouns ending in а or о, replace with ами",
+            /*2*/"For nouns ending in й, ь, е, or я, replace with ями"
+        ],
+
+        "prepositional": [
+            /*0*/"For nouns ending in a consonant, add ах",
+            /*1*/"For nouns ending in а or о, replace with ах",
+            /*2*/"For nouns ending in й, ь, е, or я, replace with ях"
+        ]
+    },
+
     "spellingRules": [
         // Spelling rules for most cases
         /*0*/"Except here this would put ы after one of 'г, к, х, ж, ч, ш, щ', so instead use и",
@@ -52,8 +102,11 @@ DICTIONARY = {
         /*3*/"Except here this would put ю after one of 'г, к, х, ж, ч, ш, щ, ц', so instead use у",
 
         // Spelling rules for instrumental case
-        /*0*/"Except here this would put ом after one of 'ж, ч, ш, щ, ц', so instead use ем",
-        /*1*/"Except here this would put ой after one of 'ж, ч, ш, щ, ц', so instead use ей"
+        /*4*/"Except here this would put ом after one of 'ж, ч, ш, щ, ц', so instead use ем",
+        /*5*/"Except here this would put ой after one of 'ж, ч, ш, щ, ц', so instead use ей",
+
+        // Spelling rule for feminine genitive plural
+        /*6*/"Except here an о or е is added before the last letter to aid pronunciation",
     ],
 
     "nounChoicePhrases": [
