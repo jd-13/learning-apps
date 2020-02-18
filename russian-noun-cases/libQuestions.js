@@ -66,15 +66,25 @@ var SimpleQuestion = function (_BaseQuestion) {
             var chosenNoun = Dictionary.getRandomNoun(isAnimate = true);
             console.log("Chose noun: " + chosenNoun.getSingularDeclension("nominative").text);
 
-            var _chosenNoun$getRandom = chosenNoun.getRandomCase("nominative"),
+            // Decide whether to ask for singular or plural
+            var plural = Math.random() > 0.5;
+
+            var _chosenNoun$getRandom = chosenNoun.getRandomCase(excludeCase = "nominative", plural),
                 _chosenNoun$getRandom2 = _slicedToArray(_chosenNoun$getRandom, 2),
                 chosenCase = _chosenNoun$getRandom2[0],
                 chosenDeclension = _chosenNoun$getRandom2[1];
 
-            // Get the text for the feedback
+            var feedbackLine1 = "";
 
-
-            var feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule];
+            if (plural) {
+                feedbackLine1 = dictionary.pluralRules[chosenCase][chosenDeclension.caseRule];
+                this._questionText = "What is the plural " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
+                this._answer = chosenNoun.getPluralDeclension(chosenCase).text;
+            } else {
+                feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule];
+                this._questionText = "What is the singular " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
+                this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
+            }
 
             // Check if we need to explain a spelling rule
             var feedbackLine2 = "";
@@ -82,9 +92,6 @@ var SimpleQuestion = function (_BaseQuestion) {
                 feedbackLine2 = dictionary.spellingRules[chosenDeclension.spellingRule];
             }
 
-            // Store the results
-            this._questionText = "What is the " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
-            this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
             this._feedbackText = [feedbackLine1, feedbackLine2];
         }
     }, {

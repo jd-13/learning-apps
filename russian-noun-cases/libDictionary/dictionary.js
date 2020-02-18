@@ -261,15 +261,25 @@ class Noun {
         this._json = json;
     }
 
-    getRandomCase(excludeCase=undefined) {
+    getRandomCase(excludeCase=undefined, plural) {
+
+        // Use singular here as the result is the same for singular or plural
         let availableCases = Object.keys(this._json.singular);
 
+        // Exclude a case if requested
         if (excludeCase != undefined) {
             availableCases.splice(availableCases.indexOf(excludeCase), 1);
         }
 
+        // Randomly choose the case
         const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
-        const chosenCase = this._json.singular[chosenCaseKey];
+
+        let chosenCase = "";
+        if (plural) {
+            chosenCase = this._json.plural[chosenCaseKey];
+        } else {
+            chosenCase = this._json.singular[chosenCaseKey]
+        }
 
         return [chosenCaseKey, chosenCase];
     }

@@ -36,10 +36,22 @@ class SimpleQuestion extends BaseQuestion {
         const chosenNoun = Dictionary.getRandomNoun(isAnimate=true);
         console.log(`Chose noun: ${chosenNoun.getSingularDeclension("nominative").text}`);
 
-        const [chosenCase, chosenDeclension] = chosenNoun.getRandomCase("nominative");
+        // Decide whether to ask for singular or plural
+        let plural = (Math.random() > 0.5);
 
-        // Get the text for the feedback
-        const feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule];
+        const [chosenCase, chosenDeclension] = chosenNoun.getRandomCase(excludeCase="nominative", plural);
+
+        let feedbackLine1 = "";
+
+        if (plural) {
+            feedbackLine1 = dictionary.pluralRules[chosenCase][chosenDeclension.caseRule]
+            this._questionText = `What is the plural ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
+            this._answer = chosenNoun.getPluralDeclension(chosenCase).text;
+        } else {
+            feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule]
+            this._questionText = `What is the singular ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
+            this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
+        }
 
         // Check if we need to explain a spelling rule
         let feedbackLine2 = "";
@@ -47,9 +59,6 @@ class SimpleQuestion extends BaseQuestion {
             feedbackLine2 = dictionary.spellingRules[chosenDeclension.spellingRule];
         }
 
-        // Store the results
-        this._questionText = `What is the ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
-        this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
         this._feedbackText = [feedbackLine1, feedbackLine2]
     }
 
