@@ -98,7 +98,12 @@ var SimpleQuestion = function (_BaseQuestion) {
         key: "_setupPronoun",
         value: function _setupPronoun() {
 
-            var chosenPronoun = Dictionary.getRandomPronoun();
+            // Choose personal or possessive pronouns
+            var usePersonal = true;
+            if (Math.random() > 0.5) {
+                usePersonal = false;
+            }
+            var chosenPronoun = usePersonal ? Dictionary.getRandomPersonalPronoun() : Dictionary.getRandomPossessivePronoun();
             console.log("Chose pronoun: " + chosenPronoun.getDeclension("nominative"));
 
             var _chosenPronoun$getRan = chosenPronoun.getRandomCase(),
@@ -107,12 +112,12 @@ var SimpleQuestion = function (_BaseQuestion) {
                 isAnimate = _chosenPronoun$getRan2[1],
                 chosenCase = _chosenPronoun$getRan2[2];
 
-            // For the accusative case we need to specify in the question text whether the object should
-            // be animate or inanimate
+            // For accusative case possessive pronouns we need to specify in the question text whether
+            // the object should be animate or inanimate
 
 
             var questionSuffix = "";
-            if (chosenCaseKey === "accusative") {
+            if (!usePersonal && chosenCaseKey === "accusative") {
                 if (isAnimate) {
                     questionSuffix = " (animate)";
                 } else {

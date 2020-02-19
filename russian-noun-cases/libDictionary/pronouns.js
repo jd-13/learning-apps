@@ -1,65 +1,69 @@
 PRONOUNS = {
-    "personal": [
-        {
-            "nominative": "я",
-            "genitive": "меня",
-            "accusative": "меня",
-            "dative": "мне",
-            "instrumental": "мной"
-        },
-        {
-            "nominative": "ты",
-            "genitive": "тебя",
-            "accusative": "тебя",
-            "dative": "тебе",
-            "instrumental": "тобой"
-        },
-        // TODO: confirm where we need to use него, неё, них
-        // {
-        //     "nominative": "он",
-        //     "genitive": "его",
-        //     "accusative": "его",
-        //     "dative": "ему",
-        //     "instrumental": "им"
-        // },
-        // {
-        //     "nominative": "она",
-        //     "genitive": "её",
-        //     "accusative": "её",
-        //     "dative": "ей",
-        //     "instrumental": "ей"
-        // },
-        // {
-        //     "nominative": "оно",
-        //     "genitive": "его",
-        //     "accusative": "его",
-        //     "dative": "ему",
-        //     "instrumental": "им"
-        // },
-        // {
-        //     "nominative": "они",
-        //     "genitive": "их",
-        //     "accusative": "их",
-        //     "dative": "им",
-        //     "instrumental": "ими"
-        // },
-        {
-            "nominative": "вы",
-            "genitive": "вас",
-            "accusative": "вас",
-            "dative": "вам",
-            "instrumental": "вами"
-        },
+    "personal": {
+        "singular": [
+            {
+                "nominative": "я",
+                "genitive": "меня",
+                "accusative": "меня",
+                "dative": "мне",
+                "instrumental": "мной"
+            },
+            {
+                "nominative": "ты",
+                "genitive": "тебя",
+                "accusative": "тебя",
+                "dative": "тебе",
+                "instrumental": "тобой"
+            },
+            // TODO: confirm where we need to use него, неё
+            // {
+            //     "nominative": "он",
+            //     "genitive": "его",
+            //     "accusative": "его",
+            //     "dative": "ему",
+            //     "instrumental": "им"
+            // },
+            // {
+            //     "nominative": "она",
+            //     "genitive": "её",
+            //     "accusative": "её",
+            //     "dative": "ей",
+            //     "instrumental": "ей"
+            // },
+            // {
+            //     "nominative": "оно",
+            //     "genitive": "его",
+            //     "accusative": "его",
+            //     "dative": "ему",
+            //     "instrumental": "им"
+            // },
+        ],
+        "plural": [
+            {
+                "nominative": "вы",
+                "genitive": "вас",
+                "accusative": "вас",
+                "dative": "вам",
+                "instrumental": "вами"
+            },
+            {
+                "nominative": "мы",
+                "genitive": "нас",
+                "accusative": "нас",
+                "dative": "нам",
+                "instrumental": "нами"
+            }
 
-        // TODO: handle plurals nouns
-        // {
-        //     "nominative": "мы",
-        //     "genitive": "нас",
-        //     "accusative": "нас",
-        //     "dative": "нам",
-        //     "instrumental": "нами"
-        // }
-    ],
+            // TODO: confirm where we need to use них
+            // {
+            //     "nominative": "они",
+            //     "genitive": "их",
+            //     "accusative": "их",
+            //     "dative": "им",
+            //     "instrumental": "ими"
+            // },
+        ]
+    },
 
     "possessive":
     {

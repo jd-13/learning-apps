@@ -214,14 +214,16 @@ DICTIONARY = {
     ],
 
     "pronounChoicePhrases": [
-        // Personal
+        // TODO: restructure this, it's a little messy
+        // Personal (uses isPlural but not gender or isAnimate)
         {
             "text": "|| учител",
             "targetCase": "nominative",
             "pronounType": "personal",
+            "isPlural": true
         },
 
-        // Possessive
+        // Possessive (uses gender and isAnimate but not isPlural)
         {
             "text": "|| дом",
             "targetCase": "nominative",
@@ -446,7 +448,12 @@ class PronounChoicePhrase {
      * substituted into the given phrase.
      */
     getCorrectAndIncorrectPronounDeclensions() {
-        const chosenPronoun = Dictionary.getRandomPronoun(this._json.pronounType, this._json.gender);
+        let chosenPronoun = undefined;
+        if (this._json.pronounType === "personal") {
+            chosenPronoun = Dictionary.getRandomPersonalPronoun(this._json.isPlural);
+        } else {
+            chosenPronoun = Dictionary.getRandomPossesivePronoun(this._json.gender);
+        }
 
         const correctPronounCase = this._getCorrectPronounDeclension(chosenPronoun);
         const incorrectChoices = this._getIncorrectPronounDeclensions(chosenPronoun);
@@ -473,16 +480,34 @@ class Dictionary {
     }
 
     /**
-     * Returns a randomly chosen pronoun from the dictionary.
+     * Returns a randomly chosen personal pronoun from the dictionary.
      */
-    static getRandomPronoun(pronounType=undefined, gender=undefined) {
+    static getRandomPersonalPronoun(isPlural=undefined) {
         let chosenPronoun = undefined;
 
-        // Pick a pronoun type randomly
-        if (pronounType === undefined) {
-            const types = ["personal", "posessive"]
-            pronounType = types[Math.floor(Math.random() * types.length)];
+        // Pick isPlural randomly
+        if (isPlural === undefined) {
+            isPlural = (Math.random() > 0.5);
         }
+
+        // Choose a personal pronoun
+        let pronouns = undefined;
+        if (isPlural) {
+            pronouns = PRONOUNS.personal.plural;
+        } else {
+            pronouns = PRONOUNS.personal.singular;
+        }
+
+        chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+
+        return new Pronoun(chosenPronoun);
+    }
+
+    /**
+     * Returns a randomly chosen possessive pronoun from the dictionary.
+     */
+    static getRandomPossessivePronoun(gender=undefined) {
+        let chosenPronoun = undefined;
 
         // Pick a gender randomly
         if (gender === undefined) {
@@ -490,15 +515,9 @@ class Dictionary {
             gender = genders[Math.floor(Math.random() * genders.length)];
         }
 
-        if (pronounType === "personal") {
-            // Choose a personal pronoun
-            const pronouns = PRONOUNS.personal;
-            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
-        } else {
-            // Choose a possesive pronoun
-            const pronouns = PRONOUNS.possessive[gender];
-            chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
-        }
+        // Choose a possesive pronoun
+        const pronouns = PRONOUNS.possessive[gender];
+        chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
 
         return new Pronoun(chosenPronoun);
     }

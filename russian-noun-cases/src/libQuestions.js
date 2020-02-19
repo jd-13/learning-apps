@@ -64,15 +64,20 @@ class SimpleQuestion extends BaseQuestion {
 
     _setupPronoun() {
 
-        const chosenPronoun = Dictionary.getRandomPronoun();
+        // Choose personal or possessive pronouns
+        let usePersonal = true;
+        if (Math.random() > 0.5) {
+            usePersonal = false;
+        }
+        const chosenPronoun = usePersonal ? Dictionary.getRandomPersonalPronoun() : Dictionary.getRandomPossessivePronoun();
         console.log(`Chose pronoun: ${chosenPronoun.getDeclension("nominative")}`);
 
         const [chosenCaseKey, isAnimate, chosenCase] = chosenPronoun.getRandomCase();
 
-        // For the accusative case we need to specify in the question text whether the object should
-        // be animate or inanimate
+        // For accusative case possessive pronouns we need to specify in the question text whether
+        // the object should be animate or inanimate
         let questionSuffix = "";
-        if (chosenCaseKey === "accusative") {
+        if (!usePersonal && (chosenCaseKey === "accusative")) {
             if (isAnimate) {
                 questionSuffix = " (animate)";
             } else {
