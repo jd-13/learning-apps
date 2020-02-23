@@ -1,10 +1,34 @@
 var enabledCases = {
-    "Genitive": true,
-    "Accusative": true,
-    "Dative": true,
-    "Instrumental": true,
-    "Prepositional": true
+    "genitive": true,
+    "accusative": true,
+    "dative": true,
+    "instrumental": true,
+    "prepositional": true
 };
+
+function getEnabledCasesList() {
+    var retVal = [];
+
+    Object.keys(enabledCases).forEach(function (caseKey) {
+        if (enabledCases[caseKey]) {
+            retVal.push(caseKey);
+        }
+    });
+
+    return retVal;
+}
+
+function getDisabledCasesList() {
+    var retVal = [];
+
+    Object.keys(enabledCases).forEach(function (caseKey) {
+        if (!enabledCases[caseKey]) {
+            retVal.push(caseKey);
+        }
+    });
+
+    return retVal;
+}
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -43,6 +67,11 @@ var main = function main() {
             enabledCases[caseKey] = !enabledCases[caseKey];
             ReactDOM.render(React.createElement(CasesDropdownElement, { enabledCases: enabledCases }), dropdownContainer);
         });
+    });
+
+    // Disable the modal when the background is clicked
+    $(".modal-background").click(function () {
+        $(this).parent().removeClass("is-active");
     });
 
     // Load the first question

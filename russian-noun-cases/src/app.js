@@ -1,10 +1,34 @@
 let enabledCases = {
-    "Genitive": true,
-    "Accusative": true,
-    "Dative": true,
-    "Instrumental": true,
-    "Prepositional": true
+    "genitive": true,
+    "accusative": true,
+    "dative": true,
+    "instrumental": true,
+    "prepositional": true
 };
+
+function getEnabledCasesList() {
+    let retVal = [];
+
+    Object.keys(enabledCases).forEach(function(caseKey) {
+        if (enabledCases[caseKey]) {
+            retVal.push(caseKey);
+        }
+    });
+
+    return retVal;
+}
+
+function getDisabledCasesList() {
+    let retVal = [];
+
+    Object.keys(enabledCases).forEach(function(caseKey) {
+        if (!enabledCases[caseKey]) {
+            retVal.push(caseKey);
+        }
+    });
+
+    return retVal;
+}
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -45,6 +69,10 @@ const main = function() {
         });
     });
 
+    // Disable the modal when the background is clicked
+    $(".modal-background").click(function() {
+        $(this).parent().removeClass("is-active");
+    });
 
     // Load the first question
     let question = newQuestion(DICTIONARY);

@@ -30,8 +30,12 @@ var NextButtonElement = function (_React$Component) {
             ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
             // Load the next question
-            question = newQuestion(DICTIONARY);
-            question.renderQuestion();
+            if (getEnabledCasesList().length == 0) {
+                $("#warningModal").addClass("is-active");
+            } else {
+                question = newQuestion(DICTIONARY);
+                question.renderQuestion();
+            }
         }
     }, {
         key: "render",
@@ -176,6 +180,24 @@ var CasesDropdownElement = function (_React$Component4) {
                     React.createElement(
                         "div",
                         { "class": "dropdown-content" },
+                        React.createElement(
+                            "div",
+                            { "class": "dropdown-item" },
+                            React.createElement(
+                                "p",
+                                null,
+                                "Enable and disable cases for the question selection"
+                            ),
+                            React.createElement(
+                                "div",
+                                { "class": "has-text-grey-light is-size-7" },
+                                React.createElement(
+                                    "p",
+                                    null,
+                                    "This currently does not affect multiple choice questions"
+                                )
+                            )
+                        ),
                         Object.keys(this.props.enabledCases).map(function (caseKey) {
                             var id = caseKey + "checkbox";
 

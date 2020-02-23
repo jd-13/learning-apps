@@ -263,14 +263,16 @@ class Noun {
         this._json = json;
     }
 
-    getRandomCase(excludeCase=undefined, plural) {
+    getRandomCase(excludeCases=undefined, plural) {
 
         // Use singular here as the result is the same for singular or plural
         let availableCases = Object.keys(this._json.singular);
 
-        // Exclude a case if requested
-        if (excludeCase != undefined) {
-            availableCases.splice(availableCases.indexOf(excludeCase), 1);
+        // Exclude cases if requested
+        if (excludeCases != undefined) {
+            availableCases = availableCases.filter(function(element) {
+                return excludeCases.indexOf(element) < 0;
+            });
         }
 
         // Randomly choose the case
@@ -369,9 +371,17 @@ class Pronoun {
     /**
      * Returns a randomly chosen case and declension for this pronoun.
      */
-    getRandomCase() {
-        // Choose a case at random, exclude the first case as this will always be nominative
-        const availableCases = Object.keys(this._json).slice(1);
+    getRandomCase(excludeCases=undefined) {
+        // Choose a case at random
+        let availableCases = Object.keys(this._json);
+
+        // Exclude cases if requested
+        if (excludeCases != undefined) {
+            availableCases = availableCases.filter(function(element) {
+                return excludeCases.indexOf(element) < 0;
+            });
+        }
+
         const chosenCaseKey = availableCases[Math.floor(Math.random() * availableCases.length)];
         let chosenCase = this._json[chosenCaseKey];
 

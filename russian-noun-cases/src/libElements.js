@@ -16,8 +16,12 @@ class NextButtonElement extends React.Component {
         ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
 
         // Load the next question
-        question = newQuestion(DICTIONARY);
-        question.renderQuestion();
+        if (getEnabledCasesList().length == 0) {
+            $("#warningModal").addClass("is-active");
+        } else {
+            question = newQuestion(DICTIONARY);
+            question.renderQuestion();
+        }
     }
 
     render() {
@@ -99,6 +103,11 @@ class CasesDropdownElement extends React.Component {
 
                 <div class="dropdown-menu" id="dropdown-menu7" role="menu">
                     <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <p>Enable and disable cases for the question selection</p>
+                            <div class="has-text-grey-light is-size-7"><p>This currently does not affect multiple choice questions</p></div>
+                        </div>
+
                         {Object.keys(this.props.enabledCases).map(function(caseKey) {
                             const id = caseKey + "checkbox";
 

@@ -69,7 +69,7 @@ var SimpleQuestion = function (_BaseQuestion) {
             // Decide whether to ask for singular or plural
             var plural = Math.random() > 0.5;
 
-            var _chosenNoun$getRandom = chosenNoun.getRandomCase(excludeCase = "nominative", plural),
+            var _chosenNoun$getRandom = chosenNoun.getRandomCase(excludeCases = ["nominative"].concat(_toConsumableArray(getDisabledCasesList())), plural),
                 _chosenNoun$getRandom2 = _slicedToArray(_chosenNoun$getRandom, 2),
                 chosenCase = _chosenNoun$getRandom2[0],
                 chosenDeclension = _chosenNoun$getRandom2[1];
@@ -106,7 +106,7 @@ var SimpleQuestion = function (_BaseQuestion) {
             var chosenPronoun = usePersonal ? Dictionary.getRandomPersonalPronoun() : Dictionary.getRandomPossessivePronoun();
             console.log("Chose pronoun: " + chosenPronoun.getDeclension("nominative"));
 
-            var _chosenPronoun$getRan = chosenPronoun.getRandomCase(),
+            var _chosenPronoun$getRan = chosenPronoun.getRandomCase(excludeCases = ["nominative"].concat(_toConsumableArray(getDisabledCasesList()))),
                 _chosenPronoun$getRan2 = _slicedToArray(_chosenPronoun$getRan, 3),
                 chosenCaseKey = _chosenPronoun$getRan2[0],
                 isAnimate = _chosenPronoun$getRan2[1],

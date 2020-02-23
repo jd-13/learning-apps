@@ -39,7 +39,8 @@ class SimpleQuestion extends BaseQuestion {
         // Decide whether to ask for singular or plural
         let plural = (Math.random() > 0.5);
 
-        const [chosenCase, chosenDeclension] = chosenNoun.getRandomCase(excludeCase="nominative", plural);
+        const [chosenCase, chosenDeclension] =
+            chosenNoun.getRandomCase(excludeCases=["nominative", ...getDisabledCasesList()], plural);
 
         let feedbackLine1 = "";
 
@@ -72,7 +73,8 @@ class SimpleQuestion extends BaseQuestion {
         const chosenPronoun = usePersonal ? Dictionary.getRandomPersonalPronoun() : Dictionary.getRandomPossessivePronoun();
         console.log(`Chose pronoun: ${chosenPronoun.getDeclension("nominative")}`);
 
-        const [chosenCaseKey, isAnimate, chosenCase] = chosenPronoun.getRandomCase();
+        const [chosenCaseKey, isAnimate, chosenCase] =
+            chosenPronoun.getRandomCase(excludeCases=["nominative", ...getDisabledCasesList()]);
 
         // For accusative case possessive pronouns we need to specify in the question text whether
         // the object should be animate or inanimate
