@@ -1,6 +1,7 @@
 const feedbackDiv = document.querySelector("#feedback");
 const questionDiv = document.querySelector("#questionContainer");
-const buttonsDiv = document.querySelector("#mainButtons")
+const buttonsDiv = document.querySelector("#mainButtons");
+const dropdownDiv = document.querySelector("#dropdownContainer");
 
 class NextButtonElement extends React.Component {
     constructor(props) {
@@ -70,6 +71,47 @@ class MainButtonsElement extends React.Component {
                 </div>
                 <div className="column is-narrow has-text-centered">
                     <NextButtonElement disabled={this.props.nextButtonDisabled}/>
+                </div>
+            </div>
+        )
+    }
+}
+
+class CasesDropdownElement extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        // For the nested JSX
+        let that = this;
+
+        return (
+            <div class="dropdown is-up" id="casesDropdown">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu7" id="casesDropdownButton">
+                        <span>Cases</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-up" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="dropdown-menu" id="dropdown-menu7" role="menu">
+                    <div class="dropdown-content">
+                        {Object.keys(this.props.enabledCases).map(function(caseKey) {
+                            const id = caseKey + "checkbox";
+
+                            let buttonClass = "button is-primary"
+                            if (!that.props.enabledCases[caseKey]) {
+                                buttonClass += " is-inverted";
+                            }
+
+                            return  <div class="dropdown-item">
+                                        <button class={buttonClass} id={id}>{caseKey}</button>
+                                    </div>
+                        })}
+                    </div>
                 </div>
             </div>
         )
