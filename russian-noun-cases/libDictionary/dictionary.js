@@ -452,7 +452,7 @@ class PronounChoicePhrase {
         if (this._json.pronounType === "personal") {
             chosenPronoun = Dictionary.getRandomPersonalPronoun(this._json.isPlural);
         } else {
-            chosenPronoun = Dictionary.getRandomPossesivePronoun(this._json.gender);
+            chosenPronoun = Dictionary.getRandomPossessivePronoun(this._json.gender);
         }
 
         const correctPronounCase = this._getCorrectPronounDeclension(chosenPronoun);
