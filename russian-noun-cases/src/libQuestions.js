@@ -39,16 +39,21 @@ class SimpleQuestion extends BaseQuestion {
         // Decide whether to ask for singular or plural
         let plural = (Math.random() > 0.5);
 
-        const [chosenCase, chosenDeclension] =
-            chosenNoun.getRandomCase(excludeCases=["nominative", ...getDisabledCasesList()], plural);
-
+        let chosenDeclension = undefined;
         let feedbackLine1 = "";
 
         if (plural) {
+            let chosenCase = undefined;
+            [chosenCase, chosenDeclension] = chosenNoun.getRandomCase(excludeCases=getDisabledCasesList(), plural);
+
             feedbackLine1 = dictionary.pluralRules[chosenCase][chosenDeclension.caseRule]
             this._questionText = `What is the plural ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
             this._answer = chosenNoun.getPluralDeclension(chosenCase).text;
         } else {
+            let chosenCase = undefined;
+            // Exclude nominative case for singular
+            [chosenCase, chosenDeclension] = chosenNoun.getRandomCase(excludeCases=["nominative", ...getDisabledCasesList()], plural);
+
             feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule]
             this._questionText = `What is the singular ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
             this._answer = chosenNoun.getSingularDeclension(chosenCase).text;

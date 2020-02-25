@@ -69,21 +69,38 @@ var SimpleQuestion = function (_BaseQuestion) {
             // Decide whether to ask for singular or plural
             var plural = Math.random() > 0.5;
 
-            var _chosenNoun$getRandom = chosenNoun.getRandomCase(excludeCases = ["nominative"].concat(_toConsumableArray(getDisabledCasesList())), plural),
-                _chosenNoun$getRandom2 = _slicedToArray(_chosenNoun$getRandom, 2),
-                chosenCase = _chosenNoun$getRandom2[0],
-                chosenDeclension = _chosenNoun$getRandom2[1];
-
+            var chosenDeclension = undefined;
             var feedbackLine1 = "";
 
             if (plural) {
+                var chosenCase = undefined;
+
+                var _chosenNoun$getRandom = chosenNoun.getRandomCase(excludeCases = getDisabledCasesList(), plural);
+
+                var _chosenNoun$getRandom2 = _slicedToArray(_chosenNoun$getRandom, 2);
+
+                chosenCase = _chosenNoun$getRandom2[0];
+                chosenDeclension = _chosenNoun$getRandom2[1];
+
+
                 feedbackLine1 = dictionary.pluralRules[chosenCase][chosenDeclension.caseRule];
                 this._questionText = "What is the plural " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
                 this._answer = chosenNoun.getPluralDeclension(chosenCase).text;
             } else {
-                feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule];
-                this._questionText = "What is the singular " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
-                this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
+                var _chosenCase = undefined;
+                // Exclude nominative case for singular
+
+                var _chosenNoun$getRandom3 = chosenNoun.getRandomCase(excludeCases = ["nominative"].concat(_toConsumableArray(getDisabledCasesList())), plural);
+
+                var _chosenNoun$getRandom4 = _slicedToArray(_chosenNoun$getRandom3, 2);
+
+                _chosenCase = _chosenNoun$getRandom4[0];
+                chosenDeclension = _chosenNoun$getRandom4[1];
+
+
+                feedbackLine1 = dictionary.caseRules[_chosenCase][chosenDeclension.caseRule];
+                this._questionText = "What is the singular " + _chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
+                this._answer = chosenNoun.getSingularDeclension(_chosenCase).text;
             }
 
             // Check if we need to explain a spelling rule
