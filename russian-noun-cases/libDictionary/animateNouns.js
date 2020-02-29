@@ -119,5 +119,25 @@ ANIMATE_NOUNS = [
             "instrumental": {"text": "змеями", "caseRule": 2},
             "prepositional": {"text": "змеях", "caseRule": 2}
         }
+    },
+    {
+        "singular":
+        {
+            "nominative": {"text": "врач"},
+            "genitive": {"text": "врача", "caseRule": 0},
+            "accusative": {"text": "врача", "caseRule": 1},
+            "dative": {"text": "врачу", "caseRule": 0},
+            "instrumental": {"text": "врачом", "caseRule": 0},
+            "prepositional": {"text": "враче", "caseRule": 0}
+        },
+        "plural":
+        {
+            "nominative": {"text": "врачи", "caseRule": 0, "spellingRule": 0},
+            "genitive": {"text": "врачей", "caseRule": 2},
+            "accusative": {"text": "врачей", "caseRule": 1},
+            "dative": {"text": "врачам", "caseRule": 0},
+            "instrumental": {"text": "врачами", "caseRule": 0},
+            "prepositional": {"text": "врачах", "caseRule": 0}
+        }
     }
 ]

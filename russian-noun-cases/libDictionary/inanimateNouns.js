@@ -218,5 +218,25 @@ INANIMATE_NOUNS = [
             "instrumental": {"text": "шубами", "caseRule": 1},
             "prepositional": {"text": "шубах", "caseRule": 1}
         }
+    },
+    {
+        "singular":
+        {
+            "nominative": {"text": "багаж"},
+            "genitive": {"text": "багажа", "caseRule": 0},
+            "accusative": {"text": "багаж", "caseRule": 0},
+            "dative": {"text": "багажу", "caseRule": 0},
+            "instrumental": {"text": "багажом", "caseRule": 0},
+            "prepositional": {"text": "багаже", "caseRule": 0}
+        },
+        "plural":
+        {
+            "nominative": {"text": "багажи", "caseRule": 0, "spellingRule": 0},
+            "genitive": {"text": "багажей", "caseRule": 2},
+            "accusative": {"text": "багажи", "caseRule": 0},
+            "dative": {"text": "багажам", "caseRule": 0},
+            "instrumental": {"text": "багажами", "caseRule": 0},
+            "prepositional": {"text": "багажах", "caseRule": 0}
+        }
     }
 ]
