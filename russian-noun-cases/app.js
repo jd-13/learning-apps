@@ -6,6 +6,8 @@ var enabledCases = {
     "prepositional": true
 };
 
+var needsNewQuestion = false;
+
 function getEnabledCasesList() {
     var retVal = [];
 
@@ -40,13 +42,20 @@ function shuffleArray(array) {
 }
 
 /**
- * Randomly generates a new question from the provided dictionary.
+ * Randomly generates and renders a new question from the provided dictionary.
  */
 function newQuestion(dictionary) {
     console.log("New question requested");
 
     var questionTypes = [SimpleQuestion, CaseChoiceQuestion];
-    return new questionTypes[Math.floor(Math.random() * questionTypes.length)](dictionary);
+
+    // Load the next question
+    if (getEnabledCasesList().length == 0) {
+        $("#warningModal").addClass("is-active");
+    } else {
+        var question = new questionTypes[Math.floor(Math.random() * questionTypes.length)](dictionary);
+        question.renderQuestion();
+    }
 }
 
 var main = function main() {
@@ -55,17 +64,33 @@ var main = function main() {
     // Add empty feedback element
     ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
-    // Set up the drop-up menu
+    // Render the dropup menu
     ReactDOM.render(React.createElement(CasesDropdownElement, { enabledCases: enabledCases }), dropdownContainer);
+
+    // Allow the dropup to open when clicked
     $("#casesDropdownButton").click(function () {
-        $("#casesDropdown").toggleClass("is-active");
+        var $casesDropdown = $("#casesDropdown");
+
+        // If the menu is being closed, we need to check if the user changed any cases and if so
+        // select a new question
+        if ($casesDropdown.hasClass("is-active") && needsNewQuestion) {
+            // Load the first question
+            newQuestion(DICTIONARY);
+
+            needsNewQuestion = false;
+        }
+
+        $casesDropdown.toggleClass("is-active");
     });
+
+    // Hook the dropup's contents
     Object.keys(enabledCases).forEach(function (caseKey) {
         var caseCheckbox = $("#" + caseKey + "checkbox");
 
         caseCheckbox.click(function () {
             enabledCases[caseKey] = !enabledCases[caseKey];
             ReactDOM.render(React.createElement(CasesDropdownElement, { enabledCases: enabledCases }), dropdownContainer);
+            needsNewQuestion = true;
         });
     });
 
@@ -75,8 +100,7 @@ var main = function main() {
     });
 
     // Load the first question
-    var question = newQuestion(DICTIONARY);
-    question.renderQuestion();
+    newQuestion(DICTIONARY);
 };
 
 $(document).ready(main);

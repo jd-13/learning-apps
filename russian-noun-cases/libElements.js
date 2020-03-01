@@ -30,12 +30,7 @@ var NextButtonElement = function (_React$Component) {
             ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
             // Load the next question
-            if (getEnabledCasesList().length == 0) {
-                $("#warningModal").addClass("is-active");
-            } else {
-                question = newQuestion(DICTIONARY);
-                question.renderQuestion();
-            }
+            newQuestion(DICTIONARY);
         }
     }, {
         key: "render",

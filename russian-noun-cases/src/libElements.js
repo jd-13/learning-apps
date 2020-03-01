@@ -16,12 +16,7 @@ class NextButtonElement extends React.Component {
         ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
 
         // Load the next question
-        if (getEnabledCasesList().length == 0) {
-            $("#warningModal").addClass("is-active");
-        } else {
-            question = newQuestion(DICTIONARY);
-            question.renderQuestion();
-        }
+        newQuestion(DICTIONARY);
     }
 
     render() {
