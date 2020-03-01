@@ -210,6 +210,37 @@ DICTIONARY = {
                     "nounType": "inanimate"
                 }
             ]
+        },
+        { // под окном собака
+            "text": "под || ||",
+            "substitutions": [
+                {
+                    "targetCase": "instrumental",
+                    "nounType": "inanimate"
+                },
+                {
+                    "targetCase": "nominative",
+                    "nounType": "animate"
+                }
+            ]
+        },
+        { // поговори с женщиной
+            "text": "поговори с ||",
+            "substitutions": [
+                {
+                    "targetCase": "instrumental",
+                    "nounType": "animate"
+                }
+            ]
+        },
+        { // мальчик с медведем читают книгу
+            "text": "мальчик с || читают книгу",
+            "substitutions": [
+                {
+                    "targetCase": "instrumental",
+                    "nounType": "animate"
+                }
+            ]
         }
     ],
 
