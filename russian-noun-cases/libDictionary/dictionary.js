@@ -251,7 +251,7 @@ DICTIONARY = {
             "text": "|| учител",
             "targetCase": "nominative",
             "pronounType": "personal",
-            "isPlural": true
+            "isPlural": false
         },
 
         // Possessive (uses gender and isAnimate but not isPlural)
