@@ -43,7 +43,7 @@ class ReportButtonElement extends React.Component {
 
     render() {
         const reportTitle = `Reported: ${this.props.reportTitle}`;
-        const reportBody = `--------------------%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: ${this.props.reportBody}`;
+        const reportBody = `....................%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: ${this.props.reportBody}`;
         const reportUrl = `https://github.com/jd-13/learning-apps/issues/new?title=${reportTitle}&body=${reportBody}&labels=reported-question`;
 
         return (
@@ -169,7 +169,7 @@ class SimpleQuestionElement extends React.Component {
                 <div>{this.props.questionText}</div>
                 <div>
                     <br></br>
-                    <input type="text" name="answer" id="answerInput"/>
+                    <input class="input" type="text" name="answer" id="answerInput"/>
                 </div>
                 <div>
                     <br></br>

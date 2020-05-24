@@ -74,7 +74,7 @@ var ReportButtonElement = function (_React$Component2) {
         key: "render",
         value: function render() {
             var reportTitle = "Reported: " + this.props.reportTitle;
-            var reportBody = "--------------------%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: " + this.props.reportBody;
+            var reportBody = "....................%0AThanks for your report, please add any additional comments above this line and click submit.%0A%0ADebug info: " + this.props.reportBody;
             var reportUrl = "https://github.com/jd-13/learning-apps/issues/new?title=" + reportTitle + "&body=" + reportBody + "&labels=reported-question";
 
             return React.createElement(
@@ -302,7 +302,7 @@ var SimpleQuestionElement = function (_React$Component6) {
                     "div",
                     null,
                     React.createElement("br", null),
-                    React.createElement("input", { type: "text", name: "answer", id: "answerInput" })
+                    React.createElement("input", { "class": "input", type: "text", name: "answer", id: "answerInput" })
                 ),
                 React.createElement(
                     "div",

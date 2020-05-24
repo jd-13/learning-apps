@@ -2,6 +2,10 @@
     margin: 3rem 1.5rem;
 }
 
+#answerInput {
+    max-width: 40%;
+}
+
 /* Make hero smaller on phones */
 @media screen and (max-width: 35em) {
     .hero-body {
