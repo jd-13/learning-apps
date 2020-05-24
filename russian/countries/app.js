@@ -13,7 +13,7 @@ function shuffleArray(array) {
 function newQuestion() {
     console.log("New question requested");
 
-    var questionTypes = [TypedQuestion /*, ChoiceQuestion*/];
+    var questionTypes = [TypedQuestion, ChoiceQuestion];
 
     // Load the next question
     var question = new questionTypes[Math.floor(Math.random() * questionTypes.length)]();
