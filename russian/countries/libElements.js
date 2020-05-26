@@ -202,7 +202,7 @@ var TypedQuestionElement = function (_React$Component5) {
             return React.createElement(
                 "div",
                 null,
-                React.createElement("img", { src: this.props.flagURL, width: "200" }),
+                React.createElement("img", { src: this.props.flagURL, "class": "flag" }),
                 React.createElement("br", null),
                 React.createElement("br", null),
                 React.createElement(
@@ -266,7 +266,7 @@ var ChoiceQuestionElement = function (_React$Component6) {
             return React.createElement(
                 "div",
                 null,
-                React.createElement("img", { src: this.props.flagURL, width: "200" }),
+                React.createElement("img", { src: this.props.flagURL, "class": "flag" }),
                 React.createElement("br", null),
                 React.createElement("br", null),
                 React.createElement(

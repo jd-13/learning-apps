@@ -120,7 +120,7 @@ class TypedQuestionElement extends React.Component {
 
         return (
             <div>
-                <img src={this.props.flagURL} width="200"></img>
+                <img src={this.props.flagURL} class="flag"></img>
 
                 <br></br>
                 <br></br>
@@ -164,7 +164,7 @@ class ChoiceQuestionElement extends React.Component {
 
         return (
             <div>
-                <img src={this.props.flagURL} width="200"></img>
+                <img src={this.props.flagURL} class="flag"></img>
 
                 <br></br>
                 <br></br>
