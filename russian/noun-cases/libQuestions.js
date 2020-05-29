@@ -197,12 +197,12 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
         key: "_setupNoun",
         value: function _setupNoun(dictionary) {
             // Choose a phrase from the dictionary
-            var chosenPhrase = Dictionary.getRandomNounChoicePhrase();
+            var chosenPhrase = Dictionary.getRandomNounChoicePhrase(excludeCases = getDisabledCasesList());
             console.log("Chose noun phrase: " + chosenPhrase._json.text);
 
             // Prepare the question text
 
-            var _chosenPhrase$getPrep = chosenPhrase.getPreparedText(),
+            var _chosenPhrase$getPrep = chosenPhrase.getPreparedText(excludeCases = getDisabledCasesList()),
                 _chosenPhrase$getPrep2 = _slicedToArray(_chosenPhrase$getPrep, 2),
                 questionSubst = _chosenPhrase$getPrep2[0],
                 questionText = _chosenPhrase$getPrep2[1];

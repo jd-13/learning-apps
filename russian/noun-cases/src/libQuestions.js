@@ -134,11 +134,11 @@ class CaseChoiceQuestion extends BaseQuestion {
      */
     _setupNoun(dictionary) {
         // Choose a phrase from the dictionary
-        const chosenPhrase = Dictionary.getRandomNounChoicePhrase();
+        const chosenPhrase = Dictionary.getRandomNounChoicePhrase(excludeCases=getDisabledCasesList());
         console.log(`Chose noun phrase: ${chosenPhrase._json.text}`);
 
         // Prepare the question text
-        const [questionSubst, questionText] = chosenPhrase.getPreparedText();
+        const [questionSubst, questionText] = chosenPhrase.getPreparedText(excludeCases=getDisabledCasesList());
 
         // Choose a noun to substitute into the phrase
         const chosenNoun = Dictionary.getRandomNoun(isAnimate=(questionSubst.nounType === "animate"));

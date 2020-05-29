@@ -363,9 +363,36 @@ class NounChoicePhrase {
      * Does all but one of the substitutions in the phrase, returning the phrase and the
      * substitution data for the substitution it hasn't performed.
      */
-    getPreparedText() {
-        const questionSubstIdx = Math.floor(Math.random() * this._json.substitutions.length);
-        const questionSubst = this._json.substitutions[questionSubstIdx];
+    getPreparedText(excludeCases=undefined) {
+        // Build an array of indicies the represent the possible substitutions and shuffle them so
+        // that we can iterate through them randomly
+        let shuffledIndicies = [...Array(this._json.substitutions.length).keys()];
+        shuffleArray(shuffledIndicies);
+
+        // Stop at the first substitution which we can use
+        let questionSubstIdx = undefined;
+        let questionSubst = undefined;
+        for (const substitutionIndex of shuffledIndicies) {
+            const thisSubstitution = this._json.substitutions[substitutionIndex];
+
+            if (excludeCases === undefined) {
+
+                // If no cases are exluded, just return the first phrase
+                questionSubstIdx = substitutionIndex;
+                questionSubst = thisSubstitution
+                break;
+
+            } else {
+
+                // If the phrase contains a case substitution that is not in the exclusion list, return it
+                if (!excludeCases.includes(thisSubstitution.targetCase)) {
+                    questionSubstIdx = substitutionIndex;
+                    questionSubst = thisSubstitution;
+                    break;
+                }
+
+            }
+        }
 
         // Substitute the correct noun forms into the substitutions that we're not quiz'ing the user
         // on
@@ -566,16 +593,41 @@ class Dictionary {
     /**
      * Returns a randomly chosen noun phrase.
      */
-    static getRandomNounChoicePhrase() {
+    static getRandomNounChoicePhrase(excludeCases=undefined) {
         // Lookup a random choice phrase from the dictionary
         const phrases = DICTIONARY.nounChoicePhrases;
-        return new NounChoicePhrase(phrases[Math.floor(Math.random() * phrases.length)]);
+
+        // Build an array of the indicies and shuffle them so that we can iterate through the
+        // phrases randomly
+        let shuffledIndicies = [...Array(phrases.length).keys()];
+        shuffleArray(shuffledIndicies);
+
+        // Stop at the first phrase which contains a target case we can use
+        for (const phraseIndex of shuffledIndicies) {
+            const thisPhrase = phrases[phraseIndex];
+
+            if (excludeCases === undefined) {
+
+                // If no cases are exluded, just return the first phrase
+                return new NounChoicePhrase(thisPhrase);
+
+            } else {
+
+                // If the phrase contains a case substitution that is not in the exclusion list, return it
+                for (const substitution of thisPhrase.substitutions) {
+                    if (!excludeCases.includes(substitution.targetCase)){
+                        return new NounChoicePhrase(thisPhrase);
+                    }
+                }
+            }
+        }
     }
 
     /**
      * Returns a randomly chosen pronoun phrase from the dictionary.
      */
     static getRandomPronounChoicePhrase() {
+        // TODO: add case exclusions for this - we need to add a phrase for each case first
         const phrases = DICTIONARY.pronounChoicePhrases;
         return new PronounChoicePhrase(phrases[Math.floor(Math.random() * phrases.length)]);
     }
