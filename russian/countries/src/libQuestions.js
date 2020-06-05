@@ -40,22 +40,22 @@ class TypedQuestion extends BaseQuestion {
     _setupCountry(chosenCountry) {
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = "Что это за страна?";
-        this._answer = chosenCountry.getCountryName();
+        this._answers = [chosenCountry.getCountryName()];
         this._feedbackText = `Это ${chosenCountry.getCountryName()}`;
     }
 
     _setupGenitive(chosenCountry) {
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = "Они из ...";
-        this._answer = chosenCountry.getGenitive();
+        this._answers = [chosenCountry.getGenitive()];
         this._feedbackText = `Они из ${chosenCountry.getGenitive()}`;
     }
 
     _setupLanguage(chosenCountry) {
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = "Они говорят по- ...";
-        this._answer = chosenCountry.getLanguage();
-        this._feedbackText = `Они говорят по-${chosenCountry.getLanguage()}`;
+        this._answers = chosenCountry.getLanguages();
+        this._feedbackText = `Они говорят по-${chosenCountry.getLanguages()}`;
     }
 
     _setupNationality(chosenCountry) {
@@ -64,17 +64,17 @@ class TypedQuestion extends BaseQuestion {
 
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = `${chosenPronoun} - это ...`;
-        this._answer = chosenCountry.getNationality(chosenGender);
+        this._answers = [chosenCountry.getNationality(chosenGender)];
         this._feedbackText = `${chosenPronoun} ${chosenCountry.getNationality(chosenGender)}`;
     }
 
     renderQuestion() {
         // Render the question
-        ReactDOM.render(<TypedQuestionElement flagURL={this._flagURL} questionText={this._questionText} answer={this._answer} feedbackText={this._feedbackText}/>, questionDiv);
+        ReactDOM.render(<TypedQuestionElement flagURL={this._flagURL} questionText={this._questionText} answers={this._answers} feedbackText={this._feedbackText}/>, questionDiv);
 
         // Render the buttons
         const reportTitle = this._questionText;
-        const reportBody = `[${this._answer}]`;
+        const reportBody = `[${this._answers}]`;
         ReactDOM.render(<MainButtonsElement reportTitle={reportTitle} reportBody={reportBody} nextButtonDisabled={true}/>, buttonsDiv);
     }
 }
@@ -110,7 +110,7 @@ class ChoiceQuestion extends BaseQuestion {
         // Store the results
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = "Что это за страна?";
-        this._answer = chosenCountry.getCountryName();
+        this._answers = [chosenCountry.getCountryName()];
         this._feedbackText = `Это ${chosenCountry.getCountryName()}`;
     }
 
@@ -124,22 +124,22 @@ class ChoiceQuestion extends BaseQuestion {
         // Store the results
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = "Они из ...";
-        this._answer = chosenCountry.getGenitive();
+        this._answers = [chosenCountry.getGenitive()];
         this._feedbackText = `Они из ${chosenCountry.getGenitive()}`;
     }
 
     _setupLanguage(chosenCountry) {
         // Choose two incorrect countries at random
         // TODO: there may be duplicates
-        this._incorrectChoices = [Countries.getRandomCountry().getLanguage(),
-                                  Countries.getRandomCountry().getLanguage()];
+        this._incorrectChoices = [Countries.getRandomCountry().getRandomLanguage(),
+                                  Countries.getRandomCountry().getRandomLanguage()];
         console.log(`Incorrect choices: ${this._incorrectChoices}`);
 
         // Store the results
         this._flagURL = chosenCountry.getFlagURL();
         this._questionText = "Они говорят по- ...";
-        this._answer = chosenCountry.getLanguage();
-        this._feedbackText = `Они говорят по-${chosenCountry.getLanguage()}`;
+        this._answers = chosenCountry.getLanguages();
+        this._feedbackText = `Они говорят по-${chosenCountry.getLanguages()}`;
     }
 
     _setupNationality(chosenCountry) {
@@ -154,7 +154,7 @@ class ChoiceQuestion extends BaseQuestion {
         }
 
         // Store the answer and remove it from the dictionary
-        this._answer = nationalities[chosenGender];
+        this._answers = [nationalities[chosenGender]];
         console.log(this.answer);
         delete nationalities[chosenGender];
 
@@ -171,15 +171,15 @@ class ChoiceQuestion extends BaseQuestion {
     renderQuestion() {
         // Prepare the answer choices
         shuffledAnswers = [...this._incorrectChoices];
-        shuffledAnswers.push(this._answer);
+        shuffledAnswers.push(this._answers);
         shuffleArray(shuffledAnswers);
 
         // Render the question
-        ReactDOM.render(<ChoiceQuestionElement flagURL={this._flagURL} questionText={this._questionText} answer={this._answer} shuffledAnswers={shuffledAnswers} incorrectChoices={this._incorrectChoices} feedbackText={this._feedbackText}/>, questionDiv);
+        ReactDOM.render(<ChoiceQuestionElement flagURL={this._flagURL} questionText={this._questionText} answers={this._answers} shuffledAnswers={shuffledAnswers} incorrectChoices={this._incorrectChoices} feedbackText={this._feedbackText}/>, questionDiv);
 
         // Render the buttons
         const reportTitle = this._questionText;
-        const reportBody = `[${this._shuffledAnswers}][${this._answer}]`;
+        const reportBody = `[${this._shuffledAnswers}][${this._answers}]`;
         ReactDOM.render(<MainButtonsElement reportTitle={reportTitle} reportBody={reportBody} nextButtonDisabled={true}/>, buttonsDiv);
     }
 }

@@ -3,7 +3,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
         "country": "Россия",
         "genitive": "России",
-        "language": "русски",
+        "languages": ["русски"],
         "nationality": {
             "masculine": "русскии",
             "feminine": "русская",
@@ -14,7 +14,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland_%28Pantone%29.svg",
         "country": "Швейцария",
         "genitive": "Швейцарии",
-        "language": "немецки",
+        "languages": ["немецки"],
         "nationality": {
             "masculine": "швейцарец",
             "feminine": "швейцарка",
@@ -25,7 +25,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg",
         "country": "Италия",
         "genitive": "Италии",
-        "language": "итальянски",
+        "languages": ["итальянски"],
         "nationality": {
             "masculine": "итальянец",
             "feminine": "итальянка",
@@ -36,7 +36,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
         "country": "Франция",
         "genitive": "Франции",
-        "language": "французски",
+        "languages": ["французски"],
         "nationality": {
             "masculine": "француз",
             "feminine": "француженка",
@@ -47,7 +47,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg",
         "country": "Германия",
         "genitive": "Германии",
-        "language": "немецки",
+        "languages": ["немецки"],
         "nationality": {
             "masculine": "немец",
             "feminine": "немка",
@@ -58,7 +58,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg",
         "country": "Англия",
         "genitive": "Англии",
-        "language": "английски",
+        "languages": ["английски"],
         "nationality": {
             "masculine": "англичанин",
             "feminine": "англичанка",
@@ -69,7 +69,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg",
         "country": "Испания",
         "genitive": "Испании",
-        "language": "испански",
+        "languages": ["испански"],
         "nationality": {
             "masculine": "испанец",
             "feminine": "испанка",
@@ -80,7 +80,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
         "country": "Америка",
         "genitive": "Америки",
-        "language": "английски",
+        "languages": ["английски"],
         "nationality": {
             "masculine": "американец",
             "feminine": "американка",
@@ -91,7 +91,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg",
         "country": "Мексика",
         "genitive": "Мексики",
-        "language": "испански",
+        "languages": ["испански"],
         "nationality": {
             "masculine": "мексиканец",
             "feminine": "мексиканка",
@@ -102,7 +102,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg",
         "country": "Аргентина",
         "genitive": "Аргентины",
-        "language": "испански",
+        "languages": ["испански"],
         "nationality": {
             "masculine": "аргентинец",
             "feminine": "аргентинка",
@@ -113,7 +113,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg",
         "country": "Канада",
         "genitive": "Канады",
-        "language": "английски", //TODO: could also accept Французски
+        "languages": ["английски", "Французски"],
         "nationality": {
             "masculine": "канадец",
             "feminine": "канадка",
@@ -124,7 +124,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
         "country": "Китай",
         "genitive": "Китая",
-        "language": "китайски",
+        "languages": ["китайски"],
         "nationality": {
             "masculine": "китаец",
             "feminine": "китаянка",
@@ -141,8 +141,12 @@ class Country {
     getFlagURL() { return this._json["flag"]; }
     getCountryName() { return this._json["country"]; }
     getGenitive() { return this._json["genitive"]; }
-    getLanguage() { return this._json["language"]; }
+    getLanguages() { return this._json["languages"]; }
     getNationality(gender) { return this._json["nationality"][gender]; }
+
+    getRandomLanguage() {
+        return this._json["languages"][Math.floor(Math.random() * this._json["languages"].length)]
+    }
 }
 
 /**

@@ -65,7 +65,7 @@ var TypedQuestion = function (_BaseQuestion) {
         value: function _setupCountry(chosenCountry) {
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = "Что это за страна?";
-            this._answer = chosenCountry.getCountryName();
+            this._answers = [chosenCountry.getCountryName()];
             this._feedbackText = "\u042D\u0442\u043E " + chosenCountry.getCountryName();
         }
     }, {
@@ -73,7 +73,7 @@ var TypedQuestion = function (_BaseQuestion) {
         value: function _setupGenitive(chosenCountry) {
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = "Они из ...";
-            this._answer = chosenCountry.getGenitive();
+            this._answers = [chosenCountry.getGenitive()];
             this._feedbackText = "\u041E\u043D\u0438 \u0438\u0437 " + chosenCountry.getGenitive();
         }
     }, {
@@ -81,8 +81,8 @@ var TypedQuestion = function (_BaseQuestion) {
         value: function _setupLanguage(chosenCountry) {
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = "Они говорят по- ...";
-            this._answer = chosenCountry.getLanguage();
-            this._feedbackText = "\u041E\u043D\u0438 \u0433\u043E\u0432\u043E\u0440\u044F\u0442 \u043F\u043E-" + chosenCountry.getLanguage();
+            this._answers = chosenCountry.getLanguages();
+            this._feedbackText = "\u041E\u043D\u0438 \u0433\u043E\u0432\u043E\u0440\u044F\u0442 \u043F\u043E-" + chosenCountry.getLanguages();
         }
     }, {
         key: "_setupNationality",
@@ -95,18 +95,18 @@ var TypedQuestion = function (_BaseQuestion) {
 
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = chosenPronoun + " - \u044D\u0442\u043E ...";
-            this._answer = chosenCountry.getNationality(chosenGender);
+            this._answers = [chosenCountry.getNationality(chosenGender)];
             this._feedbackText = chosenPronoun + " " + chosenCountry.getNationality(chosenGender);
         }
     }, {
         key: "renderQuestion",
         value: function renderQuestion() {
             // Render the question
-            ReactDOM.render(React.createElement(TypedQuestionElement, { flagURL: this._flagURL, questionText: this._questionText, answer: this._answer, feedbackText: this._feedbackText }), questionDiv);
+            ReactDOM.render(React.createElement(TypedQuestionElement, { flagURL: this._flagURL, questionText: this._questionText, answers: this._answers, feedbackText: this._feedbackText }), questionDiv);
 
             // Render the buttons
             var reportTitle = this._questionText;
-            var reportBody = "[" + this._answer + "]";
+            var reportBody = "[" + this._answers + "]";
             ReactDOM.render(React.createElement(MainButtonsElement, { reportTitle: reportTitle, reportBody: reportBody, nextButtonDisabled: true }), buttonsDiv);
         }
     }]);
@@ -146,7 +146,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
             // Store the results
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = "Что это за страна?";
-            this._answer = chosenCountry.getCountryName();
+            this._answers = [chosenCountry.getCountryName()];
             this._feedbackText = "\u042D\u0442\u043E " + chosenCountry.getCountryName();
         }
     }, {
@@ -160,7 +160,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
             // Store the results
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = "Они из ...";
-            this._answer = chosenCountry.getGenitive();
+            this._answers = [chosenCountry.getGenitive()];
             this._feedbackText = "\u041E\u043D\u0438 \u0438\u0437 " + chosenCountry.getGenitive();
         }
     }, {
@@ -168,14 +168,14 @@ var ChoiceQuestion = function (_BaseQuestion2) {
         value: function _setupLanguage(chosenCountry) {
             // Choose two incorrect countries at random
             // TODO: there may be duplicates
-            this._incorrectChoices = [Countries.getRandomCountry().getLanguage(), Countries.getRandomCountry().getLanguage()];
+            this._incorrectChoices = [Countries.getRandomCountry().getRandomLanguage(), Countries.getRandomCountry().getRandomLanguage()];
             console.log("Incorrect choices: " + this._incorrectChoices);
 
             // Store the results
             this._flagURL = chosenCountry.getFlagURL();
             this._questionText = "Они говорят по- ...";
-            this._answer = chosenCountry.getLanguage();
-            this._feedbackText = "\u041E\u043D\u0438 \u0433\u043E\u0432\u043E\u0440\u044F\u0442 \u043F\u043E-" + chosenCountry.getLanguage();
+            this._answers = chosenCountry.getLanguages();
+            this._feedbackText = "\u041E\u043D\u0438 \u0433\u043E\u0432\u043E\u0440\u044F\u0442 \u043F\u043E-" + chosenCountry.getLanguages();
         }
     }, {
         key: "_setupNationality",
@@ -195,7 +195,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
                 "plural": chosenCountry.getNationality("plural")
 
                 // Store the answer and remove it from the dictionary
-            };this._answer = nationalities[chosenGender];
+            };this._answers = [nationalities[chosenGender]];
             console.log(this.answer);
             delete nationalities[chosenGender];
 
@@ -212,15 +212,15 @@ var ChoiceQuestion = function (_BaseQuestion2) {
         value: function renderQuestion() {
             // Prepare the answer choices
             shuffledAnswers = [].concat(_toConsumableArray(this._incorrectChoices));
-            shuffledAnswers.push(this._answer);
+            shuffledAnswers.push(this._answers);
             shuffleArray(shuffledAnswers);
 
             // Render the question
-            ReactDOM.render(React.createElement(ChoiceQuestionElement, { flagURL: this._flagURL, questionText: this._questionText, answer: this._answer, shuffledAnswers: shuffledAnswers, incorrectChoices: this._incorrectChoices, feedbackText: this._feedbackText }), questionDiv);
+            ReactDOM.render(React.createElement(ChoiceQuestionElement, { flagURL: this._flagURL, questionText: this._questionText, answers: this._answers, shuffledAnswers: shuffledAnswers, incorrectChoices: this._incorrectChoices, feedbackText: this._feedbackText }), questionDiv);
 
             // Render the buttons
             var reportTitle = this._questionText;
-            var reportBody = "[" + this._shuffledAnswers + "][" + this._answer + "]";
+            var reportBody = "[" + this._shuffledAnswers + "][" + this._answers + "]";
             ReactDOM.render(React.createElement(MainButtonsElement, { reportTitle: reportTitle, reportBody: reportBody, nextButtonDisabled: true }), buttonsDiv);
         }
     }]);

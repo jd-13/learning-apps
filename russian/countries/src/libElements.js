@@ -97,10 +97,18 @@ class TypedQuestionElement extends React.Component {
     }
 
     onSubmit(e) {
-        console.log(this.props.answer);
+        console.log(this.props.answers);
+
+        let isCorrect = false;
+        for (const acceptedAnswer of this.props.answers) {
+            if ($("#answerInput").val().toLowerCase() === acceptedAnswer.toLowerCase()) {
+                isCorrect = true;
+                break;
+            }
+        }
 
         // Check the answer
-        if ($("#answerInput").val().toLowerCase() === this.props.answer.toLowerCase()) {
+        if (isCorrect) {
             ReactDOM.render(<FeedbackElement isCorrect={"Correct!"} feedbackText={this.props.feedbackText}/>,
                             feedbackDiv);
         } else {
@@ -147,7 +155,15 @@ class ChoiceQuestionElement extends React.Component {
     onAnswer(e) {
         const answerText = e.target.textContent.toLowerCase();
 
-        if (answerText === this.props.answer.toLowerCase()) {
+        let isCorrect = false;
+        for (const acceptedAnswer of this.props.answers) {
+            if (answerText === acceptedAnswer.toLowerCase()) {
+                isCorrect = true;
+                break;
+            }
+        }
+
+        if (isCorrect) {
             ReactDOM.render(<FeedbackElement isCorrect={"Correct!"} feedbackText={this.props.feedbackText}/>,
                             feedbackDiv);
         } else {

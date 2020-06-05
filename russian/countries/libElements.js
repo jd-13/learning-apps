@@ -177,10 +177,40 @@ var TypedQuestionElement = function (_React$Component5) {
     _createClass(TypedQuestionElement, [{
         key: "onSubmit",
         value: function onSubmit(e) {
-            console.log(this.props.answer);
+            console.log(this.props.answers);
 
-            // Check the answer
-            if ($("#answerInput").val().toLowerCase() === this.props.answer.toLowerCase()) {
+            var isCorrect = false;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.props.answers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var acceptedAnswer = _step.value;
+
+                    if ($("#answerInput").val().toLowerCase() === acceptedAnswer.toLowerCase()) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+
+                // Check the answer
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            if (isCorrect) {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Correct!", feedbackText: this.props.feedbackText }), feedbackDiv);
             } else {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Oops!", feedbackText: this.props.feedbackText }), feedbackDiv);
@@ -249,7 +279,36 @@ var ChoiceQuestionElement = function (_React$Component6) {
         value: function onAnswer(e) {
             var answerText = e.target.textContent.toLowerCase();
 
-            if (answerText === this.props.answer.toLowerCase()) {
+            var isCorrect = false;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = this.props.answers[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var acceptedAnswer = _step2.value;
+
+                    if (answerText === acceptedAnswer.toLowerCase()) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            if (isCorrect) {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Correct!", feedbackText: this.props.feedbackText }), feedbackDiv);
             } else {
                 ReactDOM.render(React.createElement(FeedbackElement, { isCorrect: "Oops!", feedbackText: this.props.feedbackText }), feedbackDiv);
