@@ -87,7 +87,7 @@ class ChoiceQuestion extends BaseQuestion {
         shuffleArray(shuffledAnswers);
 
         // Render the question
-        ReactDOM.render(<CaseChoiceQuestionElement questionText={this._questionText} answer={this._answer} shuffledAnswers={shuffledAnswers} incorrectChoices={this._incorrectChoices} feedbackLine1={this._feedbackText[0]} feedbackLine2={this._feedbackText[1]}/>, questionDiv);
+        ReactDOM.render(<ChoiceQuestionElement questionText={this._questionText} answer={this._answer} shuffledAnswers={shuffledAnswers} incorrectChoices={this._incorrectChoices} feedbackLine1={this._feedbackText[0]} feedbackLine2={this._feedbackText[1]}/>, questionDiv);
 
         // Render the buttons
         const reportTitle = this._questionText;

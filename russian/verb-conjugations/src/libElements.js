@@ -76,52 +76,6 @@ class MainButtonsElement extends React.Component {
     }
 }
 
-class CasesDropdownElement extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        // For the nested JSX
-        let that = this;
-
-        return (
-            <div class="dropdown is-up" id="casesDropdown">
-                <div class="dropdown-trigger">
-                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu7" id="casesDropdownButton">
-                        <span>Cases</span>
-                        <span class="icon is-small">
-                            <i class="fas fa-angle-up" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-
-                <div class="dropdown-menu" id="dropdown-menu7" role="menu">
-                    <div class="dropdown-content">
-                        <div class="dropdown-item">
-                            <p>Enable and disable cases for the question selection</p>
-                            <div class="has-text-grey-light is-size-7"><p>This currently does not affect multiple choice questions</p></div>
-                        </div>
-
-                        {Object.keys(this.props.enabledCases).map(function(caseKey) {
-                            const id = caseKey + "checkbox";
-
-                            let buttonClass = "button is-primary"
-                            if (!that.props.enabledCases[caseKey]) {
-                                buttonClass += " is-inverted";
-                            }
-
-                            return  <div class="dropdown-item">
-                                        <button class={buttonClass} id={id}>{caseKey}</button>
-                                    </div>
-                        })}
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
 class FeedbackElement extends React.Component {
     constructor(props) {
         super(props);
@@ -180,7 +134,7 @@ class SimpleQuestionElement extends React.Component {
     }
 }
 
-class CaseChoiceQuestionElement extends React.Component {
+class ChoiceQuestionElement extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -208,8 +162,6 @@ class CaseChoiceQuestionElement extends React.Component {
 
         return (
             <div>
-                <div>Choose the correct case for the noun/pronoun in the below phrase:</div>
-                <br></br>
                 <div className="columns is-vcentered is-centered is-mobile">
                     <div className="column is-narrow">{splitPhrase[0]}</div>
                     <div className="column is-narrow">

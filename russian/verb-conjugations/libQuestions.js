@@ -129,7 +129,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
             shuffleArray(shuffledAnswers);
 
             // Render the question
-            ReactDOM.render(React.createElement(CaseChoiceQuestionElement, { questionText: this._questionText, answer: this._answer, shuffledAnswers: shuffledAnswers, incorrectChoices: this._incorrectChoices, feedbackLine1: this._feedbackText[0], feedbackLine2: this._feedbackText[1] }), questionDiv);
+            ReactDOM.render(React.createElement(ChoiceQuestionElement, { questionText: this._questionText, answer: this._answer, shuffledAnswers: shuffledAnswers, incorrectChoices: this._incorrectChoices, feedbackLine1: this._feedbackText[0], feedbackLine2: this._feedbackText[1] }), questionDiv);
 
             // Render the buttons
             var reportTitle = this._questionText;

@@ -133,95 +133,8 @@ var MainButtonsElement = function (_React$Component3) {
     return MainButtonsElement;
 }(React.Component);
 
-var CasesDropdownElement = function (_React$Component4) {
-    _inherits(CasesDropdownElement, _React$Component4);
-
-    function CasesDropdownElement(props) {
-        _classCallCheck(this, CasesDropdownElement);
-
-        return _possibleConstructorReturn(this, (CasesDropdownElement.__proto__ || Object.getPrototypeOf(CasesDropdownElement)).call(this, props));
-    }
-
-    _createClass(CasesDropdownElement, [{
-        key: "render",
-        value: function render() {
-            // For the nested JSX
-            var that = this;
-
-            return React.createElement(
-                "div",
-                { "class": "dropdown is-up", id: "casesDropdown" },
-                React.createElement(
-                    "div",
-                    { "class": "dropdown-trigger" },
-                    React.createElement(
-                        "button",
-                        { "class": "button", "aria-haspopup": "true", "aria-controls": "dropdown-menu7", id: "casesDropdownButton" },
-                        React.createElement(
-                            "span",
-                            null,
-                            "Cases"
-                        ),
-                        React.createElement(
-                            "span",
-                            { "class": "icon is-small" },
-                            React.createElement("i", { "class": "fas fa-angle-up", "aria-hidden": "true" })
-                        )
-                    )
-                ),
-                React.createElement(
-                    "div",
-                    { "class": "dropdown-menu", id: "dropdown-menu7", role: "menu" },
-                    React.createElement(
-                        "div",
-                        { "class": "dropdown-content" },
-                        React.createElement(
-                            "div",
-                            { "class": "dropdown-item" },
-                            React.createElement(
-                                "p",
-                                null,
-                                "Enable and disable cases for the question selection"
-                            ),
-                            React.createElement(
-                                "div",
-                                { "class": "has-text-grey-light is-size-7" },
-                                React.createElement(
-                                    "p",
-                                    null,
-                                    "This currently does not affect multiple choice questions"
-                                )
-                            )
-                        ),
-                        Object.keys(this.props.enabledCases).map(function (caseKey) {
-                            var id = caseKey + "checkbox";
-
-                            var buttonClass = "button is-primary";
-                            if (!that.props.enabledCases[caseKey]) {
-                                buttonClass += " is-inverted";
-                            }
-
-                            return React.createElement(
-                                "div",
-                                { "class": "dropdown-item" },
-                                React.createElement(
-                                    "button",
-                                    { "class": buttonClass, id: id },
-                                    caseKey
-                                )
-                            );
-                        })
-                    )
-                )
-            );
-        }
-    }]);
-
-    return CasesDropdownElement;
-}(React.Component);
-
-var FeedbackElement = function (_React$Component5) {
-    _inherits(FeedbackElement, _React$Component5);
+var FeedbackElement = function (_React$Component4) {
+    _inherits(FeedbackElement, _React$Component4);
 
     function FeedbackElement(props) {
         _classCallCheck(this, FeedbackElement);
@@ -258,8 +171,8 @@ var FeedbackElement = function (_React$Component5) {
     return FeedbackElement;
 }(React.Component);
 
-var SimpleQuestionElement = function (_React$Component6) {
-    _inherits(SimpleQuestionElement, _React$Component6);
+var SimpleQuestionElement = function (_React$Component5) {
+    _inherits(SimpleQuestionElement, _React$Component5);
 
     function SimpleQuestionElement(props) {
         _classCallCheck(this, SimpleQuestionElement);
@@ -282,7 +195,7 @@ var SimpleQuestionElement = function (_React$Component6) {
     }, {
         key: "render",
         value: function render() {
-            var _this8 = this;
+            var _this7 = this;
 
             // Clear the previous answer if one exists
             var answerInput = document.querySelector("#answerInput");
@@ -311,7 +224,7 @@ var SimpleQuestionElement = function (_React$Component6) {
                     React.createElement(
                         "button",
                         { type: "button", className: "button", id: "submitBtn", onClick: function onClick(e) {
-                                return _this8.onSubmit(e);
+                                return _this7.onSubmit(e);
                             } },
                         "Submit"
                     )
@@ -323,16 +236,16 @@ var SimpleQuestionElement = function (_React$Component6) {
     return SimpleQuestionElement;
 }(React.Component);
 
-var CaseChoiceQuestionElement = function (_React$Component7) {
-    _inherits(CaseChoiceQuestionElement, _React$Component7);
+var ChoiceQuestionElement = function (_React$Component6) {
+    _inherits(ChoiceQuestionElement, _React$Component6);
 
-    function CaseChoiceQuestionElement(props) {
-        _classCallCheck(this, CaseChoiceQuestionElement);
+    function ChoiceQuestionElement(props) {
+        _classCallCheck(this, ChoiceQuestionElement);
 
-        return _possibleConstructorReturn(this, (CaseChoiceQuestionElement.__proto__ || Object.getPrototypeOf(CaseChoiceQuestionElement)).call(this, props));
+        return _possibleConstructorReturn(this, (ChoiceQuestionElement.__proto__ || Object.getPrototypeOf(ChoiceQuestionElement)).call(this, props));
     }
 
-    _createClass(CaseChoiceQuestionElement, [{
+    _createClass(ChoiceQuestionElement, [{
         key: "onAnswer",
         value: function onAnswer(e) {
             var answerText = e.target.textContent.toLowerCase();
@@ -357,12 +270,6 @@ var CaseChoiceQuestionElement = function (_React$Component7) {
             return React.createElement(
                 "div",
                 null,
-                React.createElement(
-                    "div",
-                    null,
-                    "Choose the correct case for the noun/pronoun in the below phrase:"
-                ),
-                React.createElement("br", null),
                 React.createElement(
                     "div",
                     { className: "columns is-vcentered is-centered is-mobile" },
@@ -399,5 +306,5 @@ var CaseChoiceQuestionElement = function (_React$Component7) {
         }
     }]);
 
-    return CaseChoiceQuestionElement;
+    return ChoiceQuestionElement;
 }(React.Component);
