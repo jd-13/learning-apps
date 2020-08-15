@@ -244,7 +244,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
         key: "_setupPronoun",
         value: function _setupPronoun() {
             // Choose a phrase from the dictionary
-            var chosenPhrase = Dictionary.getRandomPronounChoicePhrase();
+            var chosenPhrase = Dictionary.getRandomPronounChoicePhrase(excludeCases = getDisabledCasesList());
             console.log("Chose pronoun phrase: " + chosenPhrase.getText());
 
             // Lookup the correct case of the noun for this phrase

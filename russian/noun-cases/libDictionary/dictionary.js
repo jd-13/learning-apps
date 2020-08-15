@@ -109,6 +109,7 @@ DICTIONARY = {
         /*6*/"Except here an о or е is added before the last letter to aid pronunciation",
     ],
 
+    // Noun choice phrases - these may contain multiple nouns that could be substituted
     "nounChoicePhrases": [
         { // мяч собаки
             "text": "|| ||",
@@ -244,6 +245,7 @@ DICTIONARY = {
         }
     ],
 
+    // Pronoun choice phrases - these may contain only a single pronoun that could be substituted
     "pronounChoicePhrases": [
         // TODO: restructure this, it's a little messy
         // Personal (uses isPlural but not gender or isAnimate)
@@ -252,6 +254,24 @@ DICTIONARY = {
             "targetCase": "nominative",
             "pronounType": "personal",
             "isPlural": false
+        },
+        {
+            "text": "как || зовут?",
+            "targetCase": "genitive",
+            "pronounType": "personal",
+            "isPlural": false
+        },
+        {
+            "text": "сколько || лет?",
+            "targetCase": "dative",
+            "pronounType": "personal",
+            "isPlural": false
+        },
+        {
+            "text": "он хотел бы поехать с ||?",
+            "targetCase": "instrumental",
+            "pronounType": "personal",
+            "isPlural": true
         },
 
         // Possessive (uses gender and isAnimate but not isPlural)
@@ -594,7 +614,6 @@ class Dictionary {
      * Returns a randomly chosen noun phrase.
      */
     static getRandomNounChoicePhrase(excludeCases=undefined) {
-        // Lookup a random choice phrase from the dictionary
         const phrases = DICTIONARY.nounChoicePhrases;
 
         // Build an array of the indicies and shuffle them so that we can iterate through the
@@ -615,7 +634,7 @@ class Dictionary {
 
                 // If the phrase contains a case substitution that is not in the exclusion list, return it
                 for (const substitution of thisPhrase.substitutions) {
-                    if (!excludeCases.includes(substitution.targetCase)){
+                    if (!excludeCases.includes(substitution.targetCase)) {
                         return new NounChoicePhrase(thisPhrase);
                     }
                 }
@@ -626,9 +645,29 @@ class Dictionary {
     /**
      * Returns a randomly chosen pronoun phrase from the dictionary.
      */
-    static getRandomPronounChoicePhrase() {
-        // TODO: add case exclusions for this - we need to add a phrase for each case first
+    static getRandomPronounChoicePhrase(excludeCases=undefined) {
         const phrases = DICTIONARY.pronounChoicePhrases;
-        return new PronounChoicePhrase(phrases[Math.floor(Math.random() * phrases.length)]);
+
+        // Build an array of the indicies and shuffle them so that we can iterate through the
+        // phrases randomly
+        let shuffledIndicies = [...Array(phrases.length).keys()];
+        shuffleArray(shuffledIndicies);
+
+        // Stop at the first phrase which contains a target case we can use
+        for (const phraseIndex of shuffledIndicies) {
+            const thisPhrase = phrases[phraseIndex];
+
+            if (excludeCases === undefined) {
+
+                // If no cases are exluded, just return the first phrase
+                return new PronounChoicePhrase(thisPhrase);
+
+            } else if (!excludeCases.includes(thisPhrase.targetCase)) {
+
+                // If the substitution in this pronoun phrase uses a case that isn't excluded, return it
+                return new PronounChoicePhrase(thisPhrase);
+
+            }
+        }
     }
 }

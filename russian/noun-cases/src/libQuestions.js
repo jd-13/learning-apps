@@ -174,7 +174,7 @@ class CaseChoiceQuestion extends BaseQuestion {
 
     _setupPronoun() {
         // Choose a phrase from the dictionary
-        const chosenPhrase = Dictionary.getRandomPronounChoicePhrase();
+        const chosenPhrase = Dictionary.getRandomPronounChoicePhrase(excludeCases=getDisabledCasesList());
         console.log(`Chose pronoun phrase: ${chosenPhrase.getText()}`);
 
         // Lookup the correct case of the noun for this phrase
