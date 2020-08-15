@@ -77,6 +77,9 @@ var main = function main() {
             // Load the first question
             newQuestion(DICTIONARY);
 
+            // Clear the feedback and text fields
+            ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
+
             needsNewQuestion = false;
         }
 
