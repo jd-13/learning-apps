@@ -100,7 +100,7 @@ class CasesDropdownElement extends React.Component {
                     <div class="dropdown-content">
                         <div class="dropdown-item">
                             <p>Enable and disable cases for the question selection</p>
-                            <div class="has-text-grey-light is-size-7"><p>This currently does not affect multiple choice questions</p></div>
+                            <div class="has-text-grey-light is-size-7"><p>Nominative case is always enabled</p></div>
                         </div>
 
                         {Object.keys(this.props.enabledCases).map(function(caseKey) {

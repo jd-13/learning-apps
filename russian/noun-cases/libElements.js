@@ -189,7 +189,7 @@ var CasesDropdownElement = function (_React$Component4) {
                                 React.createElement(
                                     "p",
                                     null,
-                                    "This currently does not affect multiple choice questions"
+                                    "Nominative case is always enabled"
                                 )
                             )
                         ),
