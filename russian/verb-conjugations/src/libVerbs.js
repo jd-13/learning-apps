@@ -120,6 +120,66 @@ VERBS =
             "third plural": "ходят"
         }
     },
+    {
+        "infinitive": "ходить",
+        "present":
+        {
+            "first singular": "хожу",
+            "second singular": "ходишь",
+            "third singular": "ходит",
+            "first plural": "ходим",
+            "second plural": "ходите",
+            "third plural": "ходят"
+        }
+    },
+    {
+        "infinitive": "танцевать",
+        "present":
+        {
+            "first singular": "танцую",
+            "second singular": "танцуешь",
+            "third singular": "танцует",
+            "first plural": "танцуем",
+            "second plural": "танцуете",
+            "third plural": "танцуют"
+        }
+    },
+    {
+        "infinitive": "рисовать",
+        "present":
+        {
+            "first singular": "рисую",
+            "second singular": "рисуешь",
+            "third singular": "рисует",
+            "first plural": "рисуем",
+            "second plural": "рисуете",
+            "third plural": "рисуют"
+        }
+    },
+    {
+        "infinitive": "фотографировать",
+        "present":
+        {
+            "first singular": "фотографирую",
+            "second singular": "фотографируешь",
+            "third singular": "фотографирует",
+            "first plural": "фотографируем",
+            "second plural": "фотографируете",
+            "third plural": "фотографируют"
+        }
+    },
+    {
+        "infinitive": "путешествовать",
+        "present":
+        {
+            "first singular": "путешествую",
+            "second singular": "путешествуешь",
+            "third singular": "путешествует",
+            "first plural": "путешествуем",
+            "second plural": "путешествуете",
+            "third plural": "путешествуют"
+        }
+    },
 ]
 
 class Verb {
