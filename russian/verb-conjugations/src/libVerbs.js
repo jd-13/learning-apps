@@ -121,18 +121,6 @@ VERBS =
         }
     },
     {
-        "infinitive": "ходить",
-        "present":
-        {
-            "first singular": "хожу",
-            "second singular": "ходишь",
-            "third singular": "ходит",
-            "first plural": "ходим",
-            "second plural": "ходите",
-            "third plural": "ходят"
-        }
-    },
-    {
         "infinitive": "танцевать",
         "present":
         {
@@ -178,6 +166,54 @@ VERBS =
             "first plural": "путешествуем",
             "second plural": "путешествуете",
             "third plural": "путешествуют"
+        }
+    },
+    {
+        "infinitive": "готовить",
+        "present":
+        {
+            "first singular": "готовлю",
+            "second singular": "готовишь",
+            "third singular": "готовит",
+            "first plural": "готовим",
+            "second plural": "готовите",
+            "third plural": "готовят"
+        }
+    },
+    {
+        "infinitive": "спать",
+        "present":
+        {
+            "first singular": "сплю",
+            "second singular": "спишь",
+            "third singular": "спит",
+            "first plural": "спим",
+            "second plural": "спите",
+            "third plural": "спят"
+        }
+    },
+    {
+        "infinitive": "писать",
+        "present":
+        {
+            "first singular": "пишу",
+            "second singular": "пишешь",
+            "third singular": "пишет",
+            "first plural": "пишем",
+            "second plural": "пишете",
+            "third plural": "пишут"
+        }
+    },
+    {
+        "infinitive": "петь",
+        "present":
+        {
+            "first singular": "пою",
+            "second singular": "поёшь",
+            "third singular": "поёт",
+            "first plural": "поём",
+            "second plural": "поёте",
+            "third plural": "поют"
         }
     },
 ]
