@@ -7,7 +7,7 @@ NUMBERS = {
 
         // Final positiion digits (if present in a number, they will always be last)
         0: "ноль",
-        1: ["один", "одна", "одно"], // TODO: we can't handle this yet
+        1: ["один", "одна", "одно"],
         2: "два",
         3: "три",
         4: "четыре",
@@ -144,9 +144,21 @@ var Numbers = function () {
             // Ones
             if (!isDone) {
 
-                // Don't put a "ноль" on the end of a number like 20, 350 etc
-                if (ones !== "0" || chosenNumber.length === 1) {
+                if (ones === "1") {
+                    // One is a special case as it is gendered
+                    var genders = ["masculine", "feminine", "neuter"];
+                    var chosenGenderIdx = Math.floor(Math.random() * genders.length);
+
+                    translatedString += NUMBERS.cardinal[Number(ones)][chosenGenderIdx];
+                    chosenNumber += " (" + genders[chosenGenderIdx] + ")";
+                } else {
+                    // Numbers other than one are ok
                     translatedString += NUMBERS.cardinal[Number(ones)];
+
+                    // Don't put a "ноль" on the end of a number like 20, 350 etc
+                    if (ones !== "0" || chosenNumber.length === 1) {
+                        translatedString += NUMBERS.cardinal[Number(ones)];
+                    }
                 }
             }
 
@@ -160,7 +172,7 @@ var Numbers = function () {
     }, {
         key: "getRandomOrdinal",
         value: function getRandomOrdinal() {
-            var chosenNumber = Math.floor(Math.random() * 1000).toString();
+            var chosenNumber = Math.floor(Math.random() * 999 + 1).toString(); // +1 because 0th doesn't count
             var translatedString = "";
 
             var hundreds = chosenNumber.length >= 3 ? chosenNumber[chosenNumber.length - 3] : undefined;
