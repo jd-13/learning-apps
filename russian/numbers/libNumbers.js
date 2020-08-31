@@ -7,7 +7,7 @@ NUMBERS = {
 
         // Final positiion digits (if present in a number, they will always be last)
         0: "ноль",
-        1: ["один", "одна", "одно"],
+        1: ["один", "одна", "одно"], // TODO: we can't handle this yet
         2: "два",
         3: "три",
         4: "четыре",
@@ -134,7 +134,7 @@ var Numbers = function () {
                 } else if (tens === "1" && ones !== 0) {
                     // Teens
                     isDone = true;
-                    translatedString += NUMBERS.cardinal[Number(tens) + Number(ones)] + " ";
+                    translatedString += NUMBERS.cardinal[Number(tens) * 10 + Number(ones)] + " ";
                 } else {
                     // Normal 10s
                     translatedString += NUMBERS.cardinal[Number(tens) * 10] + " ";
@@ -178,6 +178,7 @@ var Numbers = function () {
                 } else {
                     // Hundreds will be ordinal
                     translatedString = NUMBERS.ordinal[Number(hundreds) * 100];
+                    chosenNumber += "th";
                     isDone = true;
                 }
             }
@@ -191,10 +192,12 @@ var Numbers = function () {
                 } else if (tens !== "1" && ones === "0") {
                     // The tens are ordinal
                     translatedString += NUMBERS.ordinal[Number(tens) * 10];
+                    chosenNumber += "th";
                     isDone = true;
                 } else {
                     // The teens are ordinal
-                    translatedString += NUMBERS.ordinal[Number(tens) + Number(ones)];
+                    translatedString += NUMBERS.ordinal[Number(tens) * 10 + Number(ones)];
+                    chosenNumber += "th";
                     isDone = true;
                 }
             }
@@ -203,6 +206,16 @@ var Numbers = function () {
             if (!isDone) {
                 // The final digit must be ordinal
                 translatedString += NUMBERS.ordinal[Number(ones)];
+
+                if (ones === "1") {
+                    chosenNumber += "st";
+                } else if (ones == "2") {
+                    chosenNumber += "nd";
+                } else if (ones == "3") {
+                    chosenNumber += "rd";
+                } else {
+                    chosenNumber += "th";
+                }
             }
 
             return [chosenNumber, translatedString.trim()];
