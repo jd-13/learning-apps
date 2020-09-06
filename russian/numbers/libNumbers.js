@@ -110,8 +110,8 @@ var Numbers = function () {
         /**
          * Returns a randomly chosen cardinal number from the dictionary.
          */
-        value: function getRandomCardinal() {
-            var chosenNumber = Math.floor(Math.random() * 1000).toString();
+        value: function getRandomCardinal(maxNumber) {
+            var chosenNumber = Math.floor(Math.random() * maxNumber).toString();
             var translatedString = "";
 
             var hundreds = chosenNumber.length >= 3 ? chosenNumber[chosenNumber.length - 3] : undefined;
@@ -152,9 +152,6 @@ var Numbers = function () {
                     translatedString += NUMBERS.cardinal[Number(ones)][chosenGenderIdx];
                     chosenNumber += " (" + genders[chosenGenderIdx] + ")";
                 } else {
-                    // Numbers other than one are ok
-                    translatedString += NUMBERS.cardinal[Number(ones)];
-
                     // Don't put a "ноль" on the end of a number like 20, 350 etc
                     if (ones !== "0" || chosenNumber.length === 1) {
                         translatedString += NUMBERS.cardinal[Number(ones)];
@@ -171,8 +168,8 @@ var Numbers = function () {
 
     }, {
         key: "getRandomOrdinal",
-        value: function getRandomOrdinal() {
-            var chosenNumber = Math.floor(Math.random() * 999 + 1).toString(); // +1 because 0th doesn't count
+        value: function getRandomOrdinal(maxNumber) {
+            var chosenNumber = Math.floor(Math.random() * (maxNumber - 1) + 1).toString(); // +1 because 0th doesn't count
             var translatedString = "";
 
             var hundreds = chosenNumber.length >= 3 ? chosenNumber[chosenNumber.length - 3] : undefined;

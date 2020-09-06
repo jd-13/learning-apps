@@ -26,7 +26,7 @@ class SimpleQuestion extends BaseQuestion {
     _setup() {
         // Choose a number at random
         const [chosenNumber, translatedString] =
-            Math.random() > 0.5 ? Numbers.getRandomCardinal() : Numbers.getRandomOrdinal();
+            Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber);
 
         console.log(`Chose number: ${chosenNumber}`);
 
@@ -57,7 +57,7 @@ class ChoiceQuestion extends BaseQuestion {
     _setup() {
         // Choose a number at random
         const [chosenNumber, translatedString] =
-            Math.random() > 0.5 ? Numbers.getRandomCardinal() : Numbers.getRandomOrdinal();
+            Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber);
 
         console.log(`Chose number: ${chosenNumber}`);
 
@@ -65,7 +65,7 @@ class ChoiceQuestion extends BaseQuestion {
         this._incorrectChoices = []
         for (let idx = 0; idx < 2; idx++) {
             const [_, incorrectChoice] =
-                Math.random() > 0.5 ? Numbers.getRandomCardinal() : Numbers.getRandomOrdinal();
+                Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber);
 
             this._incorrectChoices.push(incorrectChoice);
         }

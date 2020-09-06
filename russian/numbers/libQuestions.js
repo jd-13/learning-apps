@@ -56,7 +56,7 @@ var SimpleQuestion = function (_BaseQuestion) {
         key: "_setup",
         value: function _setup() {
             // Choose a number at random
-            var _ref = Math.random() > 0.5 ? Numbers.getRandomCardinal() : Numbers.getRandomOrdinal(),
+            var _ref = Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber),
                 _ref2 = _slicedToArray(_ref, 2),
                 chosenNumber = _ref2[0],
                 translatedString = _ref2[1];
@@ -101,7 +101,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
         key: "_setup",
         value: function _setup() {
             // Choose a number at random
-            var _ref3 = Math.random() > 0.5 ? Numbers.getRandomCardinal() : Numbers.getRandomOrdinal(),
+            var _ref3 = Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber),
                 _ref4 = _slicedToArray(_ref3, 2),
                 chosenNumber = _ref4[0],
                 translatedString = _ref4[1];
@@ -111,7 +111,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
             // Select 2 incorrect choices
             this._incorrectChoices = [];
             for (var idx = 0; idx < 2; idx++) {
-                var _ref5 = Math.random() > 0.5 ? Numbers.getRandomCardinal() : Numbers.getRandomOrdinal(),
+                var _ref5 = Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber),
                     _ref6 = _slicedToArray(_ref5, 2),
                     _ = _ref6[0],
                     incorrectChoice = _ref6[1];

@@ -76,6 +76,51 @@ class MainButtonsElement extends React.Component {
     }
 }
 
+class CasesDropdownElement extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        // For the nested JSX
+        let that = this;
+
+        return (
+            <div class="dropdown is-up" id="casesDropdown">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu7" id="casesDropdownButton">
+                        <span>Difficulty</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-up" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="dropdown-menu" id="dropdown-menu7" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <p>Choose which numbers to include in the question selections</p>
+                        </div>
+
+                        <div class="dropdown-item">
+                            {that.props.availableRanges.map(function(thisRange) {
+                                const id = thisRange + "checkbox";
+
+                                let buttonClass = "button is-primary"
+                                if (that.props.selectedMaxNumber !== Number(thisRange)) {
+                                    buttonClass += " is-inverted";
+                                }
+
+                                return  <button class={buttonClass} id={id}>0-{thisRange}</button>
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 class FeedbackElement extends React.Component {
     constructor(props) {
         super(props);

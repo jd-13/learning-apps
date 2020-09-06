@@ -102,8 +102,8 @@ class Numbers {
     /**
      * Returns a randomly chosen cardinal number from the dictionary.
      */
-    static getRandomCardinal() {
-        let chosenNumber = Math.floor(Math.random() * 1000).toString();
+    static getRandomCardinal(maxNumber) {
+        let chosenNumber = Math.floor(Math.random() * maxNumber).toString();
         let translatedString = "";
 
         const hundreds = chosenNumber.length >= 3 ? chosenNumber[chosenNumber.length - 3] : undefined;
@@ -147,9 +147,6 @@ class Numbers {
                 chosenNumber += ` (${genders[chosenGenderIdx]})`;
 
             } else {
-                // Numbers other than one are ok
-                translatedString += NUMBERS.cardinal[Number(ones)];
-
                 // Don't put a "ноль" on the end of a number like 20, 350 etc
                 if (ones !== "0" || chosenNumber.length === 1) {
                     translatedString += NUMBERS.cardinal[Number(ones)];
@@ -164,8 +161,8 @@ class Numbers {
     /**
      * Returns a randomly chosen ordinal number from the dictionary.
      */
-    static getRandomOrdinal() {
-        let chosenNumber = Math.floor(Math.random() * 999 + 1).toString(); // +1 because 0th doesn't count
+    static getRandomOrdinal(maxNumber) {
+        let chosenNumber = Math.floor(Math.random() * (maxNumber - 1) + 1).toString(); // +1 because 0th doesn't count
         let translatedString = "";
 
         const hundreds = chosenNumber.length >= 3 ? chosenNumber[chosenNumber.length - 3] : undefined;
