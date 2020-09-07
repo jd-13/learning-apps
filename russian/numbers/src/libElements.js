@@ -114,6 +114,19 @@ class CasesDropdownElement extends React.Component {
                                 return  <button class={buttonClass} id={id}>0-{thisRange}</button>
                             })}
                         </div>
+
+                        <div class="dropdown-item">
+                            {Object.keys(that.props.enabledNumbers).map(function(thisType) {
+                                const id = thisType + "checkbox";
+
+                                let buttonClass = "button is-info"
+                                if (!that.props.enabledNumbers[thisType]) {
+                                    buttonClass += " is-inverted";
+                                }
+
+                                return  <button class={buttonClass} id={id}>{thisType}</button>
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>

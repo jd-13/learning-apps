@@ -34,10 +34,23 @@ var BaseQuestion = function () {
     return BaseQuestion;
 }();
 
+function getRandomNumber(maxNumber) {
+    var availableFunctions = [];
+
+    if (enabledNumbers["cardinal"]) {
+        availableFunctions.push(Numbers.getRandomCardinal);
+    }
+
+    if (enabledNumbers["ordinal"]) {
+        availableFunctions.push(Numbers.getRandomOrdinal);
+    }
+
+    return availableFunctions[Math.floor(Math.random() * availableFunctions.length)](maxNumber);
+}
+
 /**
  * Generates and renders a question which asks the user to type the correct conjugation.
  */
-
 
 var SimpleQuestion = function (_BaseQuestion) {
     _inherits(SimpleQuestion, _BaseQuestion);
@@ -56,10 +69,10 @@ var SimpleQuestion = function (_BaseQuestion) {
         key: "_setup",
         value: function _setup() {
             // Choose a number at random
-            var _ref = Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber),
-                _ref2 = _slicedToArray(_ref, 2),
-                chosenNumber = _ref2[0],
-                translatedString = _ref2[1];
+            var _getRandomNumber = getRandomNumber(selectedMaxNumber),
+                _getRandomNumber2 = _slicedToArray(_getRandomNumber, 2),
+                chosenNumber = _getRandomNumber2[0],
+                translatedString = _getRandomNumber2[1];
 
             console.log("Chose number: " + chosenNumber);
 
@@ -101,20 +114,20 @@ var ChoiceQuestion = function (_BaseQuestion2) {
         key: "_setup",
         value: function _setup() {
             // Choose a number at random
-            var _ref3 = Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber),
-                _ref4 = _slicedToArray(_ref3, 2),
-                chosenNumber = _ref4[0],
-                translatedString = _ref4[1];
+            var _getRandomNumber3 = getRandomNumber(selectedMaxNumber),
+                _getRandomNumber4 = _slicedToArray(_getRandomNumber3, 2),
+                chosenNumber = _getRandomNumber4[0],
+                translatedString = _getRandomNumber4[1];
 
             console.log("Chose number: " + chosenNumber);
 
             // Select 2 incorrect choices
             this._incorrectChoices = [];
             for (var idx = 0; idx < 2; idx++) {
-                var _ref5 = Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber),
-                    _ref6 = _slicedToArray(_ref5, 2),
-                    _ = _ref6[0],
-                    incorrectChoice = _ref6[1];
+                var _getRandomNumber5 = getRandomNumber(selectedMaxNumber),
+                    _getRandomNumber6 = _slicedToArray(_getRandomNumber5, 2),
+                    _ = _getRandomNumber6[0],
+                    incorrectChoice = _getRandomNumber6[1];
 
                 this._incorrectChoices.push(incorrectChoice);
             }

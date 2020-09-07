@@ -1,6 +1,7 @@
 var needsNewQuestion = false;
 var selectedMaxNumber = 1000;
 var availableRanges = ["10", "20", "100", "1000"];
+var enabledNumbers = { "cardinal": true, "ordinal": true };
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -31,7 +32,7 @@ var main = function main() {
     ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
     // Render the dropup menu
-    ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges }), dropdownContainer);
+    ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
 
     // Allow the dropup to open when clicked
     $("#casesDropdownButton").click(function () {
@@ -52,7 +53,7 @@ var main = function main() {
         $casesDropdown.toggleClass("is-active");
     });
 
-    // Hook the dropup's contents
+    // Hook the dropup range buttons
 
     var _loop = function _loop(thisRange) {
         var $rangeCheckbox = $("#" + thisRange + "checkbox");
@@ -60,7 +61,7 @@ var main = function main() {
         $rangeCheckbox.click(function () {
             console.log("Setting max number to " + thisRange);
             selectedMaxNumber = Number(thisRange);
-            ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges }), dropdownContainer);
+            ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
             needsNewQuestion = true;
         });
     };
@@ -76,7 +77,7 @@ var main = function main() {
             _loop(thisRange);
         }
 
-        // Load the first question
+        // Hook the dropup enabled numbers buttons
     } catch (err) {
         _didIteratorError = true;
         _iteratorError = err;
@@ -88,6 +89,43 @@ var main = function main() {
         } finally {
             if (_didIteratorError) {
                 throw _iteratorError;
+            }
+        }
+    }
+
+    var _loop2 = function _loop2(thisType) {
+        var $typeCheckbox = $("#" + thisType + "checkbox");
+
+        $typeCheckbox.click(function () {
+            enabledNumbers[thisType] = !enabledNumbers[thisType];
+            ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
+            needsNewQuestion = true;
+        });
+    };
+
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = Object.keys(enabledNumbers)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var thisType = _step2.value;
+
+            _loop2(thisType);
+        }
+
+        // Load the first question
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
             }
         }
     }

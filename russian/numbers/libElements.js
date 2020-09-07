@@ -202,6 +202,24 @@ var CasesDropdownElement = function (_React$Component4) {
                                     thisRange
                                 );
                             })
+                        ),
+                        React.createElement(
+                            "div",
+                            { "class": "dropdown-item" },
+                            Object.keys(that.props.enabledNumbers).map(function (thisType) {
+                                var id = thisType + "checkbox";
+
+                                var buttonClass = "button is-info";
+                                if (!that.props.enabledNumbers[thisType]) {
+                                    buttonClass += " is-inverted";
+                                }
+
+                                return React.createElement(
+                                    "button",
+                                    { "class": buttonClass, id: id },
+                                    thisType
+                                );
+                            })
                         )
                     )
                 )

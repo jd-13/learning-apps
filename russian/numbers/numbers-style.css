@@ -6,6 +6,10 @@
     max-width: 40%;
 }
 
+.dropdown-item .button {
+    margin: 2px;
+}
+
 /* Make hero smaller on phones */
 @media screen and (max-width: 35em) {
     .hero-body {

@@ -1,6 +1,7 @@
 let needsNewQuestion = false;
 let selectedMaxNumber = 1000;
 const availableRanges = ["10", "20", "100", "1000"];
+let enabledNumbers = { "cardinal": true, "ordinal": true };
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -31,7 +32,7 @@ const main = function() {
     ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
 
     // Render the dropup menu
-    ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges}/>, dropdownContainer);
+    ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
 
     // Allow the dropup to open when clicked
     $("#casesDropdownButton").click(function () {
@@ -52,14 +53,25 @@ const main = function() {
         $casesDropdown.toggleClass("is-active");
     });
 
-    // Hook the dropup's contents
+    // Hook the dropup range buttons
     for (let thisRange of availableRanges) {
         const $rangeCheckbox = $(`#${thisRange}checkbox`);
 
         $rangeCheckbox.click(function () {
             console.log(`Setting max number to ${thisRange}`);
             selectedMaxNumber = Number(thisRange);
-            ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges}/>, dropdownContainer);
+            ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
+            needsNewQuestion = true;
+        });
+    }
+
+    // Hook the dropup enabled numbers buttons
+    for (let thisType of Object.keys(enabledNumbers)) {
+        const $typeCheckbox = $(`#${thisType}checkbox`);
+
+        $typeCheckbox.click(function () {
+            enabledNumbers[thisType] = !enabledNumbers[thisType];
+            ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
             needsNewQuestion = true;
         });
     }

@@ -13,6 +13,20 @@ class BaseQuestion {
     }
 }
 
+function getRandomNumber(maxNumber) {
+    let availableFunctions = [];
+
+    if (enabledNumbers["cardinal"]) {
+        availableFunctions.push(Numbers.getRandomCardinal);
+    }
+
+    if (enabledNumbers["ordinal"]) {
+        availableFunctions.push(Numbers.getRandomOrdinal);
+    }
+
+    return availableFunctions[Math.floor(Math.random() * availableFunctions.length)](maxNumber);
+}
+
 /**
  * Generates and renders a question which asks the user to type the correct conjugation.
  */
@@ -25,9 +39,7 @@ class SimpleQuestion extends BaseQuestion {
 
     _setup() {
         // Choose a number at random
-        const [chosenNumber, translatedString] =
-            Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber);
-
+        const [chosenNumber, translatedString] = getRandomNumber(selectedMaxNumber);
         console.log(`Chose number: ${chosenNumber}`);
 
         this._questionText = `Translate: ${chosenNumber}`;
@@ -56,17 +68,13 @@ class ChoiceQuestion extends BaseQuestion {
 
     _setup() {
         // Choose a number at random
-        const [chosenNumber, translatedString] =
-            Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber);
-
+        const [chosenNumber, translatedString] = getRandomNumber(selectedMaxNumber)
         console.log(`Chose number: ${chosenNumber}`);
 
         // Select 2 incorrect choices
         this._incorrectChoices = []
         for (let idx = 0; idx < 2; idx++) {
-            const [_, incorrectChoice] =
-                Math.random() > 0.5 ? Numbers.getRandomCardinal(selectedMaxNumber) : Numbers.getRandomOrdinal(selectedMaxNumber);
-
+            const [_, incorrectChoice] = getRandomNumber(selectedMaxNumber);
             this._incorrectChoices.push(incorrectChoice);
         }
 
