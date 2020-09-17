@@ -182,6 +182,16 @@ PRONOUNS = {
         "second plural": "поёте",
         "third plural": "поют"
     }
+}, {
+    "infinitive": "уметь",
+    "present": {
+        "first singular": "умею",
+        "second singular": "умеешь",
+        "third singular": "умеет",
+        "first plural": "умеем",
+        "second plural": "умеете",
+        "third plural": "умеют"
+    }
 }];
 
 var Verb = function () {
