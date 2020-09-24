@@ -228,6 +228,56 @@ VERBS =
             "third plural": "умеют"
         }
     },
+    {
+        "infinitive": "жить",
+        "present":
+        {
+            "first singular": "живу",
+            "second singular": "живёшь",
+            "third singular": "живёт",
+            "first plural": "живём",
+            "second plural": "живёте",
+            "third plural": "живут"
+        }
+    },
+
+    // These could be separated into an intermediate/advanced mode?
+    {
+        "infinitive": "загорать",
+        "present":
+        {
+            "first singular": "загораю",
+            "second singular": "загораешь",
+            "third singular": "загорает",
+            "first plural": "загораем",
+            "second plural": "загораете",
+            "third plural": "загорают"
+        }
+    },
+    {
+        "infinitive": "ужинать",
+        "present":
+        {
+            "first singular": "ужинаю",
+            "second singular": "ужинаешь",
+            "third singular": "ужинает",
+            "first plural": "ужинаем",
+            "second plural": "ужинаете",
+            "third plural": "ужинают"
+        }
+    },
+    {
+        "infinitive": "помочь",
+        "present":
+        {
+            "first singular": "помогу",
+            "second singular": "поможешь",
+            "third singular": "поможет",
+            "first plural": "поможем",
+            "second plural": "поможете",
+            "third plural": "помогут"
+        }
+    },
 ]
 
 class Verb {
