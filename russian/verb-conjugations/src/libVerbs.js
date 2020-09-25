@@ -278,6 +278,18 @@ VERBS =
             "third plural": "помогут"
         }
     },
+    {
+        "infinitive": "предлагать",
+        "present":
+        {
+            "first singular": "предлагаю",
+            "second singular": "предлагаешь",
+            "third singular": "предлагает",
+            "first plural": "предлагаем",
+            "second plural": "предлагаете",
+            "third plural": "предлагают"
+        }
+    },
 ]
 
 class Verb {
