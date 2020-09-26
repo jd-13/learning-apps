@@ -302,6 +302,42 @@ VERBS =
             "third plural": "принимают"
         }
     },
+    {
+        "infinitive": "есть",
+        "present":
+        {
+            "first singular": "ем",
+            "second singular": "ешь",
+            "third singular": "ест",
+            "first plural": "едим",
+            "second plural": "едите",
+            "third plural": "едят"
+        }
+    },
+    {
+        "infinitive": "сказать",
+        "present":
+        {
+            "first singular": "скажу",
+            "second singular": "скажешь",
+            "third singular": "скажет",
+            "first plural": "скажем",
+            "second plural": "скажете",
+            "third plural": "скажут"
+        }
+    },
+    {
+        "infinitive": "идти",
+        "present":
+        {
+            "first singular": "иду",
+            "second singular": "идёшь",
+            "third singular": "идёт",
+            "first plural": "идём",
+            "second plural": "идёте",
+            "third plural": "идут"
+        }
+    },
 ]
 
 class Verb {
