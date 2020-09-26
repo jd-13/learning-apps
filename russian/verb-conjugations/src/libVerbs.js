@@ -290,6 +290,18 @@ VERBS =
             "third plural": "предлагают"
         }
     },
+    {
+        "infinitive": "принимать",
+        "present":
+        {
+            "first singular": "принимаю",
+            "second singular": "принимаешь",
+            "third singular": "принимает",
+            "first plural": "принимаем",
+            "second plural": "принимаете",
+            "third plural": "принимают"
+        }
+    },
 ]
 
 class Verb {
