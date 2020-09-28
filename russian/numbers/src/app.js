@@ -32,15 +32,15 @@ const main = function() {
     ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
 
     // Render the dropup menu
-    ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
+    ReactDOM.render(<SettingsDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
 
     // Allow the dropup to open when clicked
-    $("#casesDropdownButton").click(function () {
-        const $casesDropdown = $("#casesDropdown");
+    $("#settingsDropdownButton").click(function () {
+        const $settingsDropdown = $("#settingsDropdown");
 
         // If the menu is being closed, we need to check if the user changed any settings and if so
         // select a new question
-        if ($casesDropdown.hasClass("is-active") && needsNewQuestion) {
+        if ($settingsDropdown.hasClass("is-active") && needsNewQuestion) {
             // Load the first question
             newQuestion();
 
@@ -50,7 +50,7 @@ const main = function() {
             needsNewQuestion = false;
         }
 
-        $casesDropdown.toggleClass("is-active");
+        $settingsDropdown.toggleClass("is-active");
     });
 
     // Hook the dropup range buttons
@@ -60,7 +60,7 @@ const main = function() {
         $rangeCheckbox.click(function () {
             console.log(`Setting max number to ${thisRange}`);
             selectedMaxNumber = Number(thisRange);
-            ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
+            ReactDOM.render(<SettingsDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
             needsNewQuestion = true;
         });
     }
@@ -71,7 +71,7 @@ const main = function() {
 
         $typeCheckbox.click(function () {
             enabledNumbers[thisType] = !enabledNumbers[thisType];
-            ReactDOM.render(<CasesDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
+            ReactDOM.render(<SettingsDropdownElement selectedMaxNumber={selectedMaxNumber} availableRanges={availableRanges} enabledNumbers={enabledNumbers}/>, dropdownContainer);
             needsNewQuestion = true;
         });
     }

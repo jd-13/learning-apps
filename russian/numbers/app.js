@@ -32,15 +32,15 @@ var main = function main() {
     ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
     // Render the dropup menu
-    ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
+    ReactDOM.render(React.createElement(SettingsDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
 
     // Allow the dropup to open when clicked
-    $("#casesDropdownButton").click(function () {
-        var $casesDropdown = $("#casesDropdown");
+    $("#settingsDropdownButton").click(function () {
+        var $settingsDropdown = $("#settingsDropdown");
 
         // If the menu is being closed, we need to check if the user changed any settings and if so
         // select a new question
-        if ($casesDropdown.hasClass("is-active") && needsNewQuestion) {
+        if ($settingsDropdown.hasClass("is-active") && needsNewQuestion) {
             // Load the first question
             newQuestion();
 
@@ -50,7 +50,7 @@ var main = function main() {
             needsNewQuestion = false;
         }
 
-        $casesDropdown.toggleClass("is-active");
+        $settingsDropdown.toggleClass("is-active");
     });
 
     // Hook the dropup range buttons
@@ -61,7 +61,7 @@ var main = function main() {
         $rangeCheckbox.click(function () {
             console.log("Setting max number to " + thisRange);
             selectedMaxNumber = Number(thisRange);
-            ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
+            ReactDOM.render(React.createElement(SettingsDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
             needsNewQuestion = true;
         });
     };
@@ -98,7 +98,7 @@ var main = function main() {
 
         $typeCheckbox.click(function () {
             enabledNumbers[thisType] = !enabledNumbers[thisType];
-            ReactDOM.render(React.createElement(CasesDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
+            ReactDOM.render(React.createElement(SettingsDropdownElement, { selectedMaxNumber: selectedMaxNumber, availableRanges: availableRanges, enabledNumbers: enabledNumbers }), dropdownContainer);
             needsNewQuestion = true;
         });
     };

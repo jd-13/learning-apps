@@ -76,7 +76,7 @@ class MainButtonsElement extends React.Component {
     }
 }
 
-class CasesDropdownElement extends React.Component {
+class SettingsDropdownElement extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -86,9 +86,9 @@ class CasesDropdownElement extends React.Component {
         let that = this;
 
         return (
-            <div class="dropdown is-up" id="casesDropdown">
+            <div class="dropdown is-up" id="settingsDropdown">
                 <div class="dropdown-trigger">
-                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu7" id="casesDropdownButton">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu7" id="settingsDropdownButton">
                         <span>Difficulty</span>
                         <span class="icon is-small">
                             <i class="fas fa-angle-up" aria-hidden="true"></i>
@@ -124,7 +124,7 @@ class CasesDropdownElement extends React.Component {
                                     buttonClass += " is-inverted";
                                 }
 
-                                return  <button class={buttonClass} id={id}>{thisType}</button>
+                                return <button class={buttonClass} id={id}>{thisType}</button>
                             })}
                         </div>
                     </div>

@@ -133,16 +133,16 @@ var MainButtonsElement = function (_React$Component3) {
     return MainButtonsElement;
 }(React.Component);
 
-var CasesDropdownElement = function (_React$Component4) {
-    _inherits(CasesDropdownElement, _React$Component4);
+var SettingsDropdownElement = function (_React$Component4) {
+    _inherits(SettingsDropdownElement, _React$Component4);
 
-    function CasesDropdownElement(props) {
-        _classCallCheck(this, CasesDropdownElement);
+    function SettingsDropdownElement(props) {
+        _classCallCheck(this, SettingsDropdownElement);
 
-        return _possibleConstructorReturn(this, (CasesDropdownElement.__proto__ || Object.getPrototypeOf(CasesDropdownElement)).call(this, props));
+        return _possibleConstructorReturn(this, (SettingsDropdownElement.__proto__ || Object.getPrototypeOf(SettingsDropdownElement)).call(this, props));
     }
 
-    _createClass(CasesDropdownElement, [{
+    _createClass(SettingsDropdownElement, [{
         key: "render",
         value: function render() {
             // For the nested JSX
@@ -150,13 +150,13 @@ var CasesDropdownElement = function (_React$Component4) {
 
             return React.createElement(
                 "div",
-                { "class": "dropdown is-up", id: "casesDropdown" },
+                { "class": "dropdown is-up", id: "settingsDropdown" },
                 React.createElement(
                     "div",
                     { "class": "dropdown-trigger" },
                     React.createElement(
                         "button",
-                        { "class": "button", "aria-haspopup": "true", "aria-controls": "dropdown-menu7", id: "casesDropdownButton" },
+                        { "class": "button", "aria-haspopup": "true", "aria-controls": "dropdown-menu7", id: "settingsDropdownButton" },
                         React.createElement(
                             "span",
                             null,
@@ -227,7 +227,7 @@ var CasesDropdownElement = function (_React$Component4) {
         }
     }]);
 
-    return CasesDropdownElement;
+    return SettingsDropdownElement;
 }(React.Component);
 
 var FeedbackElement = function (_React$Component5) {
