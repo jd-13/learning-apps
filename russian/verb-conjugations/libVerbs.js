@@ -13,14 +13,24 @@ PRONOUNS = {
 
     // TODO: Currently only present tense verbs
 };VERBS = [{
-    "infinitive": "думать",
+    "infinitive": "говорить",
     "present": {
-        "first singular": "думаю",
-        "second singular": "думаешь",
-        "third singular": "думает",
-        "first plural": "думаем",
-        "second plural": "думаете",
-        "third plural": "думают"
+        "first singular": "говорю",
+        "second singular": "говоришь",
+        "third singular": "говорит",
+        "first plural": "говорим",
+        "second plural": "говорите",
+        "third plural": "говорят"
+    }
+}, {
+    "infinitive": "готовить",
+    "present": {
+        "first singular": "готовлю",
+        "second singular": "готовишь",
+        "third singular": "готовит",
+        "first plural": "готовим",
+        "second plural": "готовите",
+        "third plural": "готовят"
     }
 }, {
     "infinitive": "гулять",
@@ -31,6 +41,26 @@ PRONOUNS = {
         "first plural": "гуляем",
         "second plural": "гуляете",
         "third plural": "гуляют"
+    }
+}, {
+    "infinitive": "думать",
+    "present": {
+        "first singular": "думаю",
+        "second singular": "думаешь",
+        "third singular": "думает",
+        "first plural": "думаем",
+        "second plural": "думаете",
+        "third plural": "думают"
+    }
+}, {
+    "infinitive": "жить",
+    "present": {
+        "first singular": "живу",
+        "second singular": "живёшь",
+        "third singular": "живёт",
+        "first plural": "живём",
+        "second plural": "живёте",
+        "third plural": "живут"
     }
 }, {
     "infinitive": "играть",
@@ -53,114 +83,14 @@ PRONOUNS = {
         "third plural": "изучают"
     }
 }, {
-    "infinitive": "отдыхать",
+    "infinitive": "петь",
     "present": {
-        "first singular": "отдыхаю",
-        "second singular": "отдыхаешь",
-        "third singular": "отдыхает",
-        "first plural": "отдыхаем",
-        "second plural": "отдыхаете",
-        "third plural": "отдыхают"
-    }
-}, {
-    "infinitive": "слушать",
-    "present": {
-        "first singular": "слушаю",
-        "second singular": "слушаешь",
-        "third singular": "слушает",
-        "first plural": "слушаем",
-        "second plural": "слушаете",
-        "third plural": "слушают"
-    }
-}, {
-    "infinitive": "читать",
-    "present": {
-        "first singular": "читаю",
-        "second singular": "читаешь",
-        "third singular": "читает",
-        "first plural": "читаем",
-        "second plural": "читаете",
-        "third plural": "читают"
-    }
-}, {
-    "infinitive": "говорить",
-    "present": {
-        "first singular": "говорю",
-        "second singular": "говоришь",
-        "third singular": "говорит",
-        "first plural": "говорим",
-        "second plural": "говорите",
-        "third plural": "говорят"
-    }
-}, {
-    "infinitive": "ходить",
-    "present": {
-        "first singular": "хожу",
-        "second singular": "ходишь",
-        "third singular": "ходит",
-        "first plural": "ходим",
-        "second plural": "ходите",
-        "third plural": "ходят"
-    }
-}, {
-    "infinitive": "танцевать",
-    "present": {
-        "first singular": "танцую",
-        "second singular": "танцуешь",
-        "third singular": "танцует",
-        "first plural": "танцуем",
-        "second plural": "танцуете",
-        "third plural": "танцуют"
-    }
-}, {
-    "infinitive": "рисовать",
-    "present": {
-        "first singular": "рисую",
-        "second singular": "рисуешь",
-        "third singular": "рисует",
-        "first plural": "рисуем",
-        "second plural": "рисуете",
-        "third plural": "рисуют"
-    }
-}, {
-    "infinitive": "фотографировать",
-    "present": {
-        "first singular": "фотографирую",
-        "second singular": "фотографируешь",
-        "third singular": "фотографирует",
-        "first plural": "фотографируем",
-        "second plural": "фотографируете",
-        "third plural": "фотографируют"
-    }
-}, {
-    "infinitive": "путешествовать",
-    "present": {
-        "first singular": "путешествую",
-        "second singular": "путешествуешь",
-        "third singular": "путешествует",
-        "first plural": "путешествуем",
-        "second plural": "путешествуете",
-        "third plural": "путешествуют"
-    }
-}, {
-    "infinitive": "готовить",
-    "present": {
-        "first singular": "готовлю",
-        "second singular": "готовишь",
-        "third singular": "готовит",
-        "first plural": "готовим",
-        "second plural": "готовите",
-        "third plural": "готовят"
-    }
-}, {
-    "infinitive": "спать",
-    "present": {
-        "first singular": "сплю",
-        "second singular": "спишь",
-        "third singular": "спит",
-        "first plural": "спим",
-        "second plural": "спите",
-        "third plural": "спят"
+        "first singular": "пою",
+        "second singular": "поёшь",
+        "third singular": "поёт",
+        "first plural": "поём",
+        "second plural": "поёте",
+        "third plural": "поют"
     }
 }, {
     "infinitive": "писать",
@@ -173,14 +103,34 @@ PRONOUNS = {
         "third plural": "пишут"
     }
 }, {
-    "infinitive": "петь",
+    "infinitive": "слушать",
     "present": {
-        "first singular": "пою",
-        "second singular": "поёшь",
-        "third singular": "поёт",
-        "first plural": "поём",
-        "second plural": "поёте",
-        "third plural": "поют"
+        "first singular": "слушаю",
+        "second singular": "слушаешь",
+        "third singular": "слушает",
+        "first plural": "слушаем",
+        "second plural": "слушаете",
+        "third plural": "слушают"
+    }
+}, {
+    "infinitive": "спать",
+    "present": {
+        "first singular": "сплю",
+        "second singular": "спишь",
+        "third singular": "спит",
+        "first plural": "спим",
+        "second plural": "спите",
+        "third plural": "спят"
+    }
+}, {
+    "infinitive": "танцевать",
+    "present": {
+        "first singular": "танцую",
+        "second singular": "танцуешь",
+        "third singular": "танцует",
+        "first plural": "танцуем",
+        "second plural": "танцуете",
+        "third plural": "танцуют"
     }
 }, {
     "infinitive": "уметь",
@@ -193,37 +143,57 @@ PRONOUNS = {
         "third plural": "умеют"
     }
 }, {
-    "infinitive": "жить",
+    "infinitive": "ходить",
     "present": {
-        "first singular": "живу",
-        "second singular": "живёшь",
-        "third singular": "живёт",
-        "first plural": "живём",
-        "second plural": "живёте",
-        "third plural": "живут"
+        "first singular": "хожу",
+        "second singular": "ходишь",
+        "third singular": "ходит",
+        "first plural": "ходим",
+        "second plural": "ходите",
+        "third plural": "ходят"
+    }
+}, {
+    "infinitive": "читать",
+    "present": {
+        "first singular": "читаю",
+        "second singular": "читаешь",
+        "third singular": "читает",
+        "first plural": "читаем",
+        "second plural": "читаете",
+        "third plural": "читают"
     }
 },
 
 // These could be separated into an intermediate/advanced mode?
 {
-    "infinitive": "загорать",
+    "infinitive": "есть",
     "present": {
-        "first singular": "загораю",
-        "second singular": "загораешь",
-        "third singular": "загорает",
-        "first plural": "загораем",
-        "second plural": "загораете",
-        "third plural": "загорают"
+        "first singular": "ем",
+        "second singular": "ешь",
+        "third singular": "ест",
+        "first plural": "едим",
+        "second plural": "едите",
+        "third plural": "едят"
     }
 }, {
-    "infinitive": "ужинать",
+    "infinitive": "идти",
     "present": {
-        "first singular": "ужинаю",
-        "second singular": "ужинаешь",
-        "third singular": "ужинает",
-        "first plural": "ужинаем",
-        "second plural": "ужинаете",
-        "third plural": "ужинают"
+        "first singular": "иду",
+        "second singular": "идёшь",
+        "third singular": "идёт",
+        "first plural": "идём",
+        "second plural": "идёте",
+        "third plural": "идут"
+    }
+}, {
+    "infinitive": "отдыхать",
+    "present": {
+        "first singular": "отдыхаю",
+        "second singular": "отдыхаешь",
+        "third singular": "отдыхает",
+        "first plural": "отдыхаем",
+        "second plural": "отдыхаете",
+        "third plural": "отдыхают"
     }
 }, {
     "infinitive": "помочь",
@@ -256,14 +226,24 @@ PRONOUNS = {
         "third plural": "принимают"
     }
 }, {
-    "infinitive": "есть",
+    "infinitive": "путешествовать",
     "present": {
-        "first singular": "ем",
-        "second singular": "ешь",
-        "third singular": "ест",
-        "first plural": "едим",
-        "second plural": "едите",
-        "third plural": "едят"
+        "first singular": "путешествую",
+        "second singular": "путешествуешь",
+        "third singular": "путешествует",
+        "first plural": "путешествуем",
+        "second plural": "путешествуете",
+        "third plural": "путешествуют"
+    }
+}, {
+    "infinitive": "рисовать",
+    "present": {
+        "first singular": "рисую",
+        "second singular": "рисуешь",
+        "third singular": "рисует",
+        "first plural": "рисуем",
+        "second plural": "рисуете",
+        "third plural": "рисуют"
     }
 }, {
     "infinitive": "сказать",
@@ -276,14 +256,34 @@ PRONOUNS = {
         "third plural": "скажут"
     }
 }, {
-    "infinitive": "идти",
+    "infinitive": "ужинать",
     "present": {
-        "first singular": "иду",
-        "second singular": "идёшь",
-        "third singular": "идёт",
-        "first plural": "идём",
-        "second plural": "идёте",
-        "third plural": "идут"
+        "first singular": "ужинаю",
+        "second singular": "ужинаешь",
+        "third singular": "ужинает",
+        "first plural": "ужинаем",
+        "second plural": "ужинаете",
+        "third plural": "ужинают"
+    }
+}, {
+    "infinitive": "фотографировать",
+    "present": {
+        "first singular": "фотографирую",
+        "second singular": "фотографируешь",
+        "third singular": "фотографирует",
+        "first plural": "фотографируем",
+        "second plural": "фотографируете",
+        "third plural": "фотографируют"
+    }
+}, {
+    "infinitive": "загорать",
+    "present": {
+        "first singular": "загораю",
+        "second singular": "загораешь",
+        "third singular": "загорает",
+        "first plural": "загораем",
+        "second plural": "загораете",
+        "third plural": "загорают"
     }
 }];
 
