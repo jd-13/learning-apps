@@ -12,7 +12,9 @@ PRONOUNS = {
     "они": "third plural"
 
     // TODO: Currently only present tense verbs
-};VERBS = [{
+};VERBS = [
+// Easy (0-14)
+{
     "infinitive": "говорить",
     "present": {
         "first singular": "говорю",
@@ -164,7 +166,7 @@ PRONOUNS = {
     }
 },
 
-// These could be separated into an intermediate/advanced mode?
+// Intermediate (15:)
 {
     "infinitive": "есть",
     "present": {
@@ -347,7 +349,7 @@ var Verbs = function () {
          * Returns a randomly chosen verb from the dictionary.
          */
         value: function getRandomVerb() {
-            return new Verb(VERBS[Math.floor(Math.random() * VERBS.length)]);
+            return new Verb(VERBS[Math.floor(Math.random() * selectedDifficulty)]);
         }
     }, {
         key: "getRandomPronoun",

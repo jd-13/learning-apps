@@ -76,6 +76,51 @@ class MainButtonsElement extends React.Component {
     }
 }
 
+class SettingsDropdownElement extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        // For the nested JSX
+        let that = this;
+
+        return (
+            <div class="dropdown is-up" id="settingsDropdown">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu7" id="settingsDropdownButton">
+                        <span>Difficulty</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-up" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="dropdown-menu" id="dropdown-menu7" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <p>Choose the number of verbs to learn to conjugate</p>
+                        </div>
+
+                        <div class="dropdown-item">
+                            {that.props.availableDifficulties.map(function(thisDifficulty) {
+                                const id = thisDifficulty + "checkbox";
+
+                                let buttonClass = "button is-primary"
+                                if (that.props.selectedDifficulty !== Number(thisDifficulty)) {
+                                    buttonClass += " is-inverted";
+                                }
+
+                                return <button class={buttonClass} id={id}>{thisDifficulty}</button>
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 class FeedbackElement extends React.Component {
     constructor(props) {
         super(props);
