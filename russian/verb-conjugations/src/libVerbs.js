@@ -339,6 +339,18 @@ VERBS =
             "third plural": "загорают"
         }
     },
+    {
+        "infinitive": "сообщать",
+        "present":
+        {
+            "first singular": "сообщаю",
+            "second singular": "сообщаешь",
+            "third singular": "сообщает",
+            "first plural": "сообщаем",
+            "second plural": "сообщаете",
+            "third plural": "сообщают"
+        }
+    },
 ]
 
 class Verb {
