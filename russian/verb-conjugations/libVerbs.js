@@ -178,6 +178,16 @@ PRONOUNS = {
         "third plural": "едят"
     }
 }, {
+    "infinitive": "жевать",
+    "present": {
+        "first singular": "жую",
+        "second singular": "жуёшь",
+        "third singular": "жуёт",
+        "first plural": "жуем",
+        "second plural": "жуёте",
+        "third plural": "жуют"
+    }
+}, {
     "infinitive": "идти",
     "present": {
         "first singular": "иду",
@@ -186,6 +196,16 @@ PRONOUNS = {
         "first plural": "идём",
         "second plural": "идёте",
         "third plural": "идут"
+    }
+}, {
+    "infinitive": "обедать",
+    "present": {
+        "first singular": "обедаю",
+        "second singular": "обедаешь",
+        "third singular": "обедает",
+        "first plural": "обедаем",
+        "second plural": "обедаете",
+        "third plural": "обедают"
     }
 }, {
     "infinitive": "отдыхать",
@@ -276,6 +296,16 @@ PRONOUNS = {
         "first plural": "фотографируем",
         "second plural": "фотографируете",
         "third plural": "фотографируют"
+    }
+}, {
+    "infinitive": "завтракать",
+    "present": {
+        "first singular": "завтракаю",
+        "second singular": "завтракаешь",
+        "third singular": "завтракает",
+        "first plural": "завтракаем",
+        "second plural": "завтракаете",
+        "third plural": "завтракают"
     }
 }, {
     "infinitive": "загорать",
