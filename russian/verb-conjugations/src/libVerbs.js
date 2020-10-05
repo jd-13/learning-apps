@@ -196,6 +196,18 @@ VERBS =
 
     // Intermediate (15:)
     {
+        "infinitive": "вставать",
+        "present":
+        {
+            "first singular": "встаю",
+            "second singular": "встаёшь",
+            "third singular": "встаёт",
+            "first plural": "встаём",
+            "second plural": "встаёте",
+            "third plural": "встают"
+        }
+    },
+    {
         "infinitive": "есть",
         "present":
         {
@@ -229,6 +241,18 @@ VERBS =
             "first plural": "идём",
             "second plural": "идёте",
             "third plural": "идут"
+        }
+    },
+    {
+        "infinitive": "ложиться",
+        "present":
+        {
+            "first singular": "ложусь",
+            "second singular": "ложишься",
+            "third singular": "ложится",
+            "first plural": "ложимся",
+            "second plural": "ложитесь",
+            "third plural": "ложатся"
         }
     },
     {
