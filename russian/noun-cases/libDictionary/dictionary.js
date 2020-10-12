@@ -111,19 +111,6 @@ DICTIONARY = {
 
     // Noun choice phrases - these may contain multiple nouns that could be substituted
     "nounChoicePhrases": [
-        { // мяч собаки
-            "text": "|| ||",
-            "substitutions": [
-                {
-                    "targetCase": "nominative",
-                    "nounType": "inanimate"
-                },
-                {
-                    "targetCase": "genitive",
-                    "nounType": "animate"
-                }
-            ]
-        },
         { // у меня есть яблоки
             "text": "у || есть ||",
             "substitutions": [
@@ -137,11 +124,11 @@ DICTIONARY = {
                 }
             ]
         },
-        { // чай пожалуйста
-            "text": "|| пожалуйста",
+        { // дай мне чай пожалуйста
+            "text": "дай мне || пожалуйста",
             "substitutions": [
                 {
-                    "targetCase": "nominative",
+                    "targetCase": "accusative",
                     "nounType": "inanimate"
                 }
             ]
