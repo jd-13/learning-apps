@@ -208,6 +208,18 @@ VERBS =
         }
     },
     {
+        "infinitive": "верить",
+        "present":
+        {
+            "first singular": "верю",
+            "second singular": "веришь",
+            "third singular": "верит",
+            "first plural": "верим",
+            "second plural": "верите",
+            "third plural": "верят"
+        }
+    },
+    {
         "infinitive": "есть",
         "present":
         {
@@ -244,6 +256,18 @@ VERBS =
         }
     },
     {
+        "infinitive": "купаться",
+        "present":
+        {
+            "first singular": "купаюсь",
+            "second singular": "купаешься",
+            "third singular": "купается",
+            "first plural": "купаемся",
+            "second plural": "купаетесь",
+            "third plural": "купаются"
+        }
+    },
+    {
         "infinitive": "ложиться",
         "present":
         {
@@ -253,6 +277,18 @@ VERBS =
             "first plural": "ложимся",
             "second plural": "ложитесь",
             "third plural": "ложатся"
+        }
+    },
+    {
+        "infinitive": "мочь",
+        "present":
+        {
+            "first singular": "могу",
+            "second singular": "можешь",
+            "third singular": "может",
+            "first plural": "можем",
+            "second plural": "можете",
+            "third plural": "могут"
         }
     },
     {
@@ -277,6 +313,18 @@ VERBS =
             "first plural": "отдыхаем",
             "second plural": "отдыхаете",
             "third plural": "отдыхают"
+        }
+    },
+    {
+        "infinitive": "отправить",
+        "present":
+        {
+            "first singular": "отправлю",
+            "second singular": "отправишь",
+            "third singular": "отправит",
+            "first plural": "отправим",
+            "second plural": "отправите",
+            "third plural": "отправят"
         }
     },
     {
