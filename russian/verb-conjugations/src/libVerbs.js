@@ -220,6 +220,18 @@ VERBS =
         }
     },
     {
+        "infinitive": "висеть",
+        "present":
+        {
+            "first singular": "вишу",
+            "second singular": "висишь",
+            "third singular": "висит",
+            "first plural": "висим",
+            "second plural": "висите",
+            "third plural": "висят"
+        }
+    },
+    {
         "infinitive": "есть",
         "present":
         {
@@ -265,6 +277,18 @@ VERBS =
             "first plural": "купаемся",
             "second plural": "купаетесь",
             "third plural": "купаются"
+        }
+    },
+    {
+        "infinitive": "лежать",
+        "present":
+        {
+            "first singular": "лежу",
+            "second singular": "лежишь",
+            "third singular": "лежит",
+            "first plural": "лежим",
+            "second plural": "лежите",
+            "third plural": "лежат"
         }
     },
     {
@@ -388,6 +412,18 @@ VERBS =
         }
     },
     {
+        "infinitive": "сидеть",
+        "present":
+        {
+            "first singular": "сижу",
+            "second singular": "сидишь",
+            "third singular": "сидит",
+            "first plural": "сидим",
+            "second plural": "сидите",
+            "third plural": "сидят"
+        }
+    },
+    {
         "infinitive": "сказать",
         "present":
         {
@@ -397,6 +433,18 @@ VERBS =
             "first plural": "скажем",
             "second plural": "скажете",
             "third plural": "скажут"
+        }
+    },
+    {
+        "infinitive": "стоять",
+        "present":
+        {
+            "first singular": "стою",
+            "second singular": "стоишь",
+            "third singular": "стоит",
+            "first plural": "стоим",
+            "second plural": "стоите",
+            "third plural": "стоят"
         }
     },
     {
