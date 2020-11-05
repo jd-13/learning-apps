@@ -3,6 +3,16 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 COUNTRIES = [{
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg",
+    "country": "Австралия",
+    "genitive": "Австралии",
+    "languages": ["английски"],
+    "nationality": {
+        "masculine": "австралиец",
+        "feminine": "австралийка",
+        "plural": "австралийцы"
+    }
+}, {
     "flag": "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
     "country": "Америка",
     "genitive": "Америки",
@@ -33,6 +43,26 @@ COUNTRIES = [{
         "plural": "аргентинцы"
     }
 }, {
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg",
+    "country": "Бельгия",
+    "genitive": "Бельгии",
+    "languages": ["нидерландский", "французски"],
+    "nationality": {
+        "masculine": "бельгиец",
+        "feminine": "бельгийка",
+        "plural": "бельгийцы"
+    }
+}, {
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Denmark.svg",
+    "country": "Дания",
+    "genitive": "Дании",
+    "languages": ["датский"],
+    "nationality": {
+        "masculine": "датчанин",
+        "feminine": "датчанка",
+        "plural": "датчане"
+    }
+}, {
     "flag": "https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg",
     "country": "Германия",
     "genitive": "Германии",
@@ -41,6 +71,16 @@ COUNTRIES = [{
         "masculine": "немец",
         "feminine": "немка",
         "plural": "немцы"
+    }
+}, {
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg",
+    "country": "Греция",
+    "genitive": "Греции",
+    "languages": ["греческий"],
+    "nationality": {
+        "masculine": "грек",
+        "feminine": "гречанка",
+        "plural": "греки"
     }
 }, {
     "flag": "https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg",
@@ -93,6 +133,26 @@ COUNTRIES = [{
         "plural": "мексиканцы"
     }
 }, {
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg",
+    "country": "Норвегия",
+    "genitive": "Норвегии",
+    "languages": ["норвежский"],
+    "nationality": {
+        "masculine": "норвежец",
+        "feminine": "норвежка",
+        "plural": "норвежцы"
+    }
+}, {
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg",
+    "country": "Португалия",
+    "genitive": "Португалии",
+    "languages": ["португальский"],
+    "nationality": {
+        "masculine": "португалец",
+        "feminine": "португалка",
+        "plural": "португальцы"
+    }
+}, {
     "flag": "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
     "country": "Россия",
     "genitive": "России",
@@ -101,6 +161,16 @@ COUNTRIES = [{
         "masculine": "русскии",
         "feminine": "русская",
         "plural": "русские"
+    }
+}, {
+    "flag": "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg",
+    "country": "Украина",
+    "genitive": "Украины",
+    "languages": ["украинский"],
+    "nationality": {
+        "masculine": "украинец",
+        "feminine": "украинка",
+        "plural": "украинцы"
     }
 }, {
     "flag": "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
