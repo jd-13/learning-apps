@@ -47,7 +47,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg",
         "country": "Бельгия",
         "genitive": "Бельгии",
-        "languages": ["нидерландский", "французски"],
+        "languages": ["нидерландски", "французски"],
         "nationality": {
             "masculine": "бельгиец",
             "feminine": "бельгийка",
@@ -58,7 +58,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Denmark.svg",
         "country": "Дания",
         "genitive": "Дании",
-        "languages": ["датский"],
+        "languages": ["датски"],
         "nationality": {
             "masculine": "датчанин",
             "feminine": "датчанка",
@@ -80,7 +80,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg",
         "country": "Греция",
         "genitive": "Греции",
-        "languages": ["греческий"],
+        "languages": ["гречески"],
         "nationality": {
             "masculine": "грек",
             "feminine": "гречанка",
@@ -146,7 +146,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg",
         "country": "Норвегия",
         "genitive": "Норвегии",
-        "languages": ["норвежский"],
+        "languages": ["норвежски"],
         "nationality": {
             "masculine": "норвежец",
             "feminine": "норвежка",
@@ -157,7 +157,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg",
         "country": "Португалия",
         "genitive": "Португалии",
-        "languages": ["португальский"],
+        "languages": ["португальски"],
         "nationality": {
             "masculine": "португалец",
             "feminine": "португалка",
@@ -179,7 +179,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg",
         "country": "Украина",
         "genitive": "Украины",
-        "languages": ["украинский"],
+        "languages": ["украински"],
         "nationality": {
             "masculine": "украинец",
             "feminine": "украинка",
