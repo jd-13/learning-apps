@@ -171,7 +171,14 @@ class ChoiceQuestion extends BaseQuestion {
     renderQuestion() {
         // Prepare the answer choices
         shuffledAnswers = [...this._incorrectChoices];
-        shuffledAnswers.push(this._answers);
+
+        // If there are multiple correct answers, just choose one
+        let answer = this._answers;
+        if (typeof answer === "object") {
+            answer = answer[Math.floor(Math.random() * answer.length)];
+        }
+
+        shuffledAnswers.push(answer);
         shuffleArray(shuffledAnswers);
 
         // Render the question
