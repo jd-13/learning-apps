@@ -113,7 +113,7 @@ COUNTRIES = [
         "flag": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg",
         "country": "Канада",
         "genitive": "Канады",
-        "languages": ["английски", "Французски"],
+        "languages": ["английски", "французски"],
         "nationality": {
             "masculine": "канадец",
             "feminine": "канадка",
