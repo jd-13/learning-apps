@@ -410,7 +410,7 @@ class NounChoicePhrase {
 
             if (substitutionNumber != questionSubstIdx) {
                 const thisSubstitution = this._json.substitutions[substitutionNumber];
-                const thisNoun = Dictionary.getRandomNoun((thisSubstitution.nounType === "isAnimate"));
+                const thisNoun = Dictionary.getRandomNoun(thisSubstitution.nounType === "animate");
 
                 preparedText = preparedText.substring(0, idx)
                                + thisNoun.getSingularDeclension(thisSubstitution.targetCase).text
