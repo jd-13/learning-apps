@@ -16,7 +16,7 @@ class NextButtonElement extends React.Component {
         ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
 
         // Load the next question
-        newQuestion(DICTIONARY);
+        newQuestion();
     }
 
     render() {

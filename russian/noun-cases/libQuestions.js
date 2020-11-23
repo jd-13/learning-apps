@@ -42,7 +42,7 @@ var BaseQuestion = function () {
 var SimpleQuestion = function (_BaseQuestion) {
     _inherits(SimpleQuestion, _BaseQuestion);
 
-    function SimpleQuestion(dictionary) {
+    function SimpleQuestion() {
         _classCallCheck(this, SimpleQuestion);
 
         var _this = _possibleConstructorReturn(this, (SimpleQuestion.__proto__ || Object.getPrototypeOf(SimpleQuestion)).call(this));
@@ -51,7 +51,7 @@ var SimpleQuestion = function (_BaseQuestion) {
 
         // Choose a noun or pronoun
         if (Math.random() > 0.5) {
-            _this._setupNoun(dictionary);
+            _this._setupNoun();
         } else {
             _this._setupPronoun();
         }
@@ -60,7 +60,7 @@ var SimpleQuestion = function (_BaseQuestion) {
 
     _createClass(SimpleQuestion, [{
         key: "_setupNoun",
-        value: function _setupNoun(dictionary) {
+        value: function _setupNoun() {
 
             // Choose a noun at random
             var chosenNoun = Dictionary.getRandomNoun(isAnimate = true);
@@ -83,7 +83,7 @@ var SimpleQuestion = function (_BaseQuestion) {
                 chosenDeclension = _chosenNoun$getRandom2[1];
 
 
-                feedbackLine1 = dictionary.pluralRules[chosenCase][chosenDeclension.caseRule];
+                feedbackLine1 = PLURAL_RULES[chosenCase][chosenDeclension.caseRule];
                 this._questionText = "What is the plural " + chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
                 this._answer = chosenNoun.getPluralDeclension(chosenCase).text;
             } else {
@@ -98,7 +98,7 @@ var SimpleQuestion = function (_BaseQuestion) {
                 chosenDeclension = _chosenNoun$getRandom4[1];
 
 
-                feedbackLine1 = dictionary.caseRules[_chosenCase][chosenDeclension.caseRule];
+                feedbackLine1 = CASE_RULES[_chosenCase][chosenDeclension.caseRule];
                 this._questionText = "What is the singular " + _chosenCase + " case of " + chosenNoun.getSingularDeclension("nominative").text + "?";
                 this._answer = chosenNoun.getSingularDeclension(_chosenCase).text;
             }
@@ -106,7 +106,7 @@ var SimpleQuestion = function (_BaseQuestion) {
             // Check if we need to explain a spelling rule
             var feedbackLine2 = "";
             if (chosenDeclension.hasOwnProperty("spellingRule")) {
-                feedbackLine2 = dictionary.spellingRules[chosenDeclension.spellingRule];
+                feedbackLine2 = SPELLING_RULES[chosenDeclension.spellingRule];
             }
 
             this._feedbackText = [feedbackLine1, feedbackLine2];
@@ -169,7 +169,7 @@ var SimpleQuestion = function (_BaseQuestion) {
 var CaseChoiceQuestion = function (_BaseQuestion2) {
     _inherits(CaseChoiceQuestion, _BaseQuestion2);
 
-    function CaseChoiceQuestion(dictionary) {
+    function CaseChoiceQuestion() {
         _classCallCheck(this, CaseChoiceQuestion);
 
         var _this2 = _possibleConstructorReturn(this, (CaseChoiceQuestion.__proto__ || Object.getPrototypeOf(CaseChoiceQuestion)).call(this));
@@ -178,7 +178,7 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
 
         // Choose a noun or pronoun
         if (Math.random() > 0.5) {
-            _this2._setupNoun(dictionary);
+            _this2._setupNoun();
         } else {
             _this2._setupPronoun();
         }
@@ -188,14 +188,12 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
     /**
      * Chooses a phrase from the dictionary, then substitutes a noun for the || characters, choosing
      * the correct form of the noun and two incorrect forms.
-     *
-     * @param {*} dictionary
      */
 
 
     _createClass(CaseChoiceQuestion, [{
         key: "_setupNoun",
-        value: function _setupNoun(dictionary) {
+        value: function _setupNoun() {
             // Choose a phrase from the dictionary
             var chosenPhrase = Dictionary.getRandomNounChoicePhrase(excludeCases = getDisabledCasesList());
             console.log("Chose noun phrase: " + chosenPhrase._json.text);
@@ -227,12 +225,12 @@ var CaseChoiceQuestion = function (_BaseQuestion2) {
 
             // Nominative case has no case rule
             if (correctNounCase.hasOwnProperty("caseRule")) {
-                feedbackLine1 = feedbackLine1.concat(": " + dictionary.caseRules[questionSubst.targetCase][correctNounCase.caseRule]);
+                feedbackLine1 = feedbackLine1.concat(": " + CASE_RULES[questionSubst.targetCase][correctNounCase.caseRule]);
             }
 
             var feedbackLine2 = "";
             if (correctNounCase.hasOwnProperty("spellingRule")) {
-                feedbackLine2 = dictionary.spellingRules[correctNounCase.spellingRule];
+                feedbackLine2 = SPELLING_RULES[correctNounCase.spellingRule];
             }
 
             // Store the results

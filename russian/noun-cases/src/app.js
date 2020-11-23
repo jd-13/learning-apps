@@ -44,7 +44,7 @@ function shuffleArray(array) {
 /**
  * Randomly generates and renders a new question from the provided dictionary.
  */
-function newQuestion(dictionary) {
+function newQuestion() {
     console.log("New question requested");
 
     const questionTypes = [SimpleQuestion, CaseChoiceQuestion];
@@ -53,7 +53,7 @@ function newQuestion(dictionary) {
     if (getEnabledCasesList().length == 0) {
         $("#warningModal").addClass("is-active");
     } else {
-        let question = new questionTypes[Math.floor(Math.random() * questionTypes.length)](dictionary);
+        let question = new questionTypes[Math.floor(Math.random() * questionTypes.length)]();
         question.renderQuestion();
     }
 }
@@ -75,7 +75,7 @@ const main = function() {
         // select a new question
         if ($casesDropdown.hasClass("is-active") && needsNewQuestion) {
             // Load the first question
-            newQuestion(DICTIONARY);
+            newQuestion();
 
             // Clear the feedback and text fields
             ReactDOM.render(<FeedbackElement feedbackLine1="" feedbackLine2=""/>, feedbackDiv);
@@ -103,7 +103,7 @@ const main = function() {
     });
 
     // Load the first question
-    newQuestion(DICTIONARY);
+    newQuestion();
 }
 
 $(document).ready(main);

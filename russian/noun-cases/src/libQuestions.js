@@ -17,20 +17,20 @@ class BaseQuestion {
  * Generates and renders a question which asks the user to type the correct case.
  */
 class SimpleQuestion extends BaseQuestion {
-    constructor(dictionary) {
+    constructor() {
         super();
 
         console.log("Creating SimpleQuestion");
 
         // Choose a noun or pronoun
         if (Math.random() > 0.5) {
-            this._setupNoun(dictionary);
+            this._setupNoun();
         } else {
             this._setupPronoun();
         }
     }
 
-    _setupNoun(dictionary) {
+    _setupNoun() {
 
         // Choose a noun at random
         const chosenNoun = Dictionary.getRandomNoun(isAnimate=true);
@@ -46,7 +46,7 @@ class SimpleQuestion extends BaseQuestion {
             let chosenCase = undefined;
             [chosenCase, chosenDeclension] = chosenNoun.getRandomCase(excludeCases=getDisabledCasesList(), plural);
 
-            feedbackLine1 = dictionary.pluralRules[chosenCase][chosenDeclension.caseRule]
+            feedbackLine1 = PLURAL_RULES[chosenCase][chosenDeclension.caseRule]
             this._questionText = `What is the plural ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
             this._answer = chosenNoun.getPluralDeclension(chosenCase).text;
         } else {
@@ -54,7 +54,7 @@ class SimpleQuestion extends BaseQuestion {
             // Exclude nominative case for singular
             [chosenCase, chosenDeclension] = chosenNoun.getRandomCase(excludeCases=["nominative", ...getDisabledCasesList()], plural);
 
-            feedbackLine1 = dictionary.caseRules[chosenCase][chosenDeclension.caseRule]
+            feedbackLine1 = CASE_RULES[chosenCase][chosenDeclension.caseRule]
             this._questionText = `What is the singular ${chosenCase} case of ${chosenNoun.getSingularDeclension("nominative").text}?`;
             this._answer = chosenNoun.getSingularDeclension(chosenCase).text;
         }
@@ -62,7 +62,7 @@ class SimpleQuestion extends BaseQuestion {
         // Check if we need to explain a spelling rule
         let feedbackLine2 = "";
         if (chosenDeclension.hasOwnProperty("spellingRule")) {
-            feedbackLine2 = dictionary.spellingRules[chosenDeclension.spellingRule];
+            feedbackLine2 = SPELLING_RULES[chosenDeclension.spellingRule];
         }
 
         this._feedbackText = [feedbackLine1, feedbackLine2]
@@ -113,14 +113,14 @@ class SimpleQuestion extends BaseQuestion {
 }
 
 class CaseChoiceQuestion extends BaseQuestion {
-    constructor(dictionary) {
+    constructor() {
         super();
 
         console.log("Creating CaseChoiceQuestion");
 
         // Choose a noun or pronoun
         if (Math.random() > 0.5) {
-            this._setupNoun(dictionary);
+            this._setupNoun();
         } else {
             this._setupPronoun();
         }
@@ -129,10 +129,8 @@ class CaseChoiceQuestion extends BaseQuestion {
     /**
      * Chooses a phrase from the dictionary, then substitutes a noun for the || characters, choosing
      * the correct form of the noun and two incorrect forms.
-     *
-     * @param {*} dictionary
      */
-    _setupNoun(dictionary) {
+    _setupNoun() {
         // Choose a phrase from the dictionary
         const chosenPhrase = Dictionary.getRandomNounChoicePhrase(excludeCases=getDisabledCasesList());
         console.log(`Chose noun phrase: ${chosenPhrase._json.text}`);
@@ -158,12 +156,12 @@ class CaseChoiceQuestion extends BaseQuestion {
 
         // Nominative case has no case rule
         if (correctNounCase.hasOwnProperty("caseRule")) {
-            feedbackLine1 = feedbackLine1.concat(`: ${dictionary.caseRules[questionSubst.targetCase][correctNounCase.caseRule]}`);
+            feedbackLine1 = feedbackLine1.concat(`: ${CASE_RULES[questionSubst.targetCase][correctNounCase.caseRule]}`);
         }
 
         let feedbackLine2 = "";
         if (correctNounCase.hasOwnProperty("spellingRule")) {
-            feedbackLine2 = dictionary.spellingRules[correctNounCase.spellingRule];
+            feedbackLine2 = SPELLING_RULES[correctNounCase.spellingRule];
         }
 
         // Store the results

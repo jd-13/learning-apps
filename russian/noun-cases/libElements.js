@@ -30,7 +30,7 @@ var NextButtonElement = function (_React$Component) {
             ReactDOM.render(React.createElement(FeedbackElement, { feedbackLine1: "", feedbackLine2: "" }), feedbackDiv);
 
             // Load the next question
-            newQuestion(DICTIONARY);
+            newQuestion();
         }
     }, {
         key: "render",
