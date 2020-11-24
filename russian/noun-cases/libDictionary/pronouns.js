@@ -15,28 +15,34 @@ PRONOUNS = {
                 "dative": "тебе",
                 "instrumental": "тобой"
             },
-            // TODO: confirm where we need to use него, неё
-            // {
-            //     "nominative": "он",
-            //     "genitive": "его",
-            //     "accusative": "его",
-            //     "dative": "ему",
-            //     "instrumental": "им"
-            // },
-            // {
-            //     "nominative": "она",
-            //     "genitive": "её",
-            //     "accusative": "её",
-            //     "dative": "ей",
-            //     "instrumental": "ей"
-            // },
-            // {
-            //     "nominative": "оно",
-            //     "genitive": "его",
-            //     "accusative": "его",
-            //     "dative": "ему",
-            //     "instrumental": "им"
-            // },
+        ],
+        // TODO: confirm where we need to use него, неё
+        "masculine": [
+            {
+                "nominative": "он",
+                "genitive": "его",
+                "accusative": "его",
+                "dative": "ему",
+                "instrumental": "им"
+            },
+        ],
+        "feminine": [
+            {
+                "nominative": "она",
+                "genitive": "её",
+                "accusative": "её",
+                "dative": "ей",
+                "instrumental": "ей"
+            },
+        ],
+        "neuter": [
+            {
+                "nominative": "оно",
+                "genitive": "его",
+                "accusative": "его",
+                "dative": "ему",
+                "instrumental": "им"
+            }
         ],
         "plural": [
             {
@@ -52,16 +58,16 @@ PRONOUNS = {
                 "accusative": "нас",
                 "dative": "нам",
                 "instrumental": "нами"
-            }
+            },
 
             // TODO: confirm where we need to use них
-            // {
-            //     "nominative": "они",
-            //     "genitive": "их",
-            //     "accusative": "их",
-            //     "dative": "им",
-            //     "instrumental": "ими"
-            // },
+            {
+                "nominative": "они",
+                "genitive": "их",
+                "accusative": "их",
+                "dative": "им",
+                "instrumental": "ими"
+            }
         ]
     },
 

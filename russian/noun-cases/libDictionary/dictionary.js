@@ -230,7 +230,7 @@ class PronounChoicePhrase {
     getCorrectAndIncorrectPronounDeclensions() {
         let chosenPronoun = undefined;
         if (this._json.pronounType === "personal") {
-            chosenPronoun = Dictionary.getRandomPersonalPronoun(this._json.isPlural);
+            chosenPronoun = Dictionary.getRandomPersonalPronoun(this._json.genders);
         } else {
             chosenPronoun = Dictionary.getRandomPossessivePronoun(this._json.gender);
         }
@@ -262,21 +262,16 @@ class Dictionary {
     /**
      * Returns a randomly chosen personal pronoun from the dictionary.
      */
-    static getRandomPersonalPronoun(isPlural=undefined) {
+    static getRandomPersonalPronoun(genders=undefined) {
         let chosenPronoun = undefined;
 
-        // Pick isPlural randomly
-        if (isPlural === undefined) {
-            isPlural = (Math.random() > 0.5);
+        if (genders === undefined) {
+            genders = ["singular", "masculine", "feminine", "neuter", "plural"];
         }
 
         // Choose a personal pronoun
-        let pronouns = undefined;
-        if (isPlural) {
-            pronouns = PRONOUNS.personal.plural;
-        } else {
-            pronouns = PRONOUNS.personal.singular;
-        }
+        const chosenGender = genders[Math.floor(Math.random() * genders.length)];
+        const pronouns = PRONOUNS.personal[chosenGender];
 
         chosenPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
 

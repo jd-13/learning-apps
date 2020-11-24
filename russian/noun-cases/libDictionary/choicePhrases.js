@@ -125,33 +125,39 @@ CHOICE_PHRASES = {
     // Pronoun choice phrases - these may contain only a single pronoun that could be substituted
     "pronouns": [
         // TODO: restructure this, it's a little messy
-        // Personal (uses isPlural but not gender or isAnimate)
+        // Personal (does not use isAnimate)
         {
-            "text": "|| учител",
+            "text": "кто учител? || учител",
             "targetCase": "nominative",
             "pronounType": "personal",
-            "isPlural": false
+            "genders": ["singular", "masculine", "feminine"]
         },
         {
             "text": "как || зовут?",
             "targetCase": "genitive",
             "pronounType": "personal",
-            "isPlural": false
+            "genders": ["singular", "masculine", "feminine"]
         },
         {
             "text": "сколько || лет?",
             "targetCase": "dative",
             "pronounType": "personal",
-            "isPlural": false
+            "genders": ["singular", "masculine", "feminine"]
         },
         {
             "text": "он хотел бы поехать с ||?",
             "targetCase": "instrumental",
             "pronounType": "personal",
-            "isPlural": true
+            "genders": ["singular", "masculine", "feminine", "plural"]
+        },
+        {
+            "text": "теперь || готова",
+            "targetCase": "nominative",
+            "pronounType": "personal",
+            "genders": ["feminine"]
         },
 
-        // Possessive (uses gender and isAnimate but not isPlural)
+        // Possessive (uses gender and isAnimate)
         {
             "text": "|| дом",
             "targetCase": "nominative",
