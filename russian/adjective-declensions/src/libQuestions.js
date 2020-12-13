@@ -27,7 +27,7 @@ class SimpleQuestion extends BaseQuestion {
 
         // Choose an adjective at random
         const chosenAdjective = Adjectives.getRandomAdjective();
-        console.log(`Chose verb: ${chosenAdjective.getDeclension(kMASCULINE)}`);
+        console.log(`Chose adjective: ${chosenAdjective.getDeclension(kMASCULINE)}`);
 
         // Choose a noun at random
         let [chosenDeclension, chosenNoun, _] = chosenAdjective.getRandomDeclensionAndNoun();
@@ -61,7 +61,7 @@ class ChoiceQuestion extends BaseQuestion {
 
         // Choose an adjective at random
         const chosenAdjective = Adjectives.getRandomAdjective();
-        console.log(`Chose verb: ${chosenAdjective.getDeclension(kMASCULINE)}`);
+        console.log(`Chose adjective: ${chosenAdjective.getDeclension(kMASCULINE)}`);
 
         // Choose a noun at random
         let [chosenDeclension, chosenNoun, chosenGender] = chosenAdjective.getRandomDeclensionAndNoun();

@@ -58,7 +58,7 @@ var SimpleQuestion = function (_BaseQuestion) {
 
             // Choose an adjective at random
             var chosenAdjective = Adjectives.getRandomAdjective();
-            console.log("Chose verb: " + chosenAdjective.getDeclension(kMASCULINE));
+            console.log("Chose adjective: " + chosenAdjective.getDeclension(kMASCULINE));
 
             // Choose a noun at random
 
@@ -110,7 +110,7 @@ var ChoiceQuestion = function (_BaseQuestion2) {
 
             // Choose an adjective at random
             var chosenAdjective = Adjectives.getRandomAdjective();
-            console.log("Chose verb: " + chosenAdjective.getDeclension(kMASCULINE));
+            console.log("Chose adjective: " + chosenAdjective.getDeclension(kMASCULINE));
 
             // Choose a noun at random
 
