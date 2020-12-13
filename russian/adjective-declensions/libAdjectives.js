@@ -1,6 +1,6 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ref, _ref2;
+var _ref, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _ref11, _ref12, _ref13, _ref14;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14,67 +14,7 @@ kFEMININE = "feminine";
 kNEUTER = "neuter";
 kPLURAL = "plural";
 
-ADJECTIVES = [(_ref = {}, _defineProperty(_ref, kMASCULINE, { "удобный": ["стул", "диван"] }), _defineProperty(_ref, kFEMININE, { "удобная": ["одежда", "кровать"] }), _defineProperty(_ref, kNEUTER, { "удобное": ["кресло"] }), _defineProperty(_ref, kPLURAL, { "удобные": ["гамаки", "диваны"] }), _ref), (_ref2 = {}, _defineProperty(_ref2, kMASCULINE, { "неудобный": ["диван", "гамак"] }), _defineProperty(_ref2, kFEMININE, { "неудобная": ["одежда"] }), _defineProperty(_ref2, kNEUTER, { "неудобное": ["кресло"] }), _defineProperty(_ref2, kPLURAL, { "неудобные": ["стулья", "кресла"] }), _ref2), {
-    kMASCULINE: { "новый": ["телефон", "стол"] },
-    kFEMININE: { "новая": ["машина", "футболка"] },
-    kNEUTER: { "новое": ["меню", "кино"] },
-    kPLURAL: { "новые": ["дома", "студенты"] }
-}, {
-    kMASCULINE: { "старый": ["дом", "человек"] },
-    kFEMININE: { "старая": ["женщина", "кошка"] },
-    kNEUTER: { "старое": ["пианино"] },
-    kPLURAL: { "старые": ["люди"] }
-}, {
-    kMASCULINE: { "красивый": ["человек"] },
-    kFEMININE: { "красивая": ["картина"] },
-    kNEUTER: { "красивое": ["море"] },
-    kPLURAL: { "красивые": ["фотографии"] }
-}, {
-    kMASCULINE: { "некрасивый": ["завод"] },
-    kFEMININE: { "некрасивая": ["собака"] },
-    kNEUTER: { "некрасивое": ["фото"] },
-    kPLURAL: { "некрасивые": ["животные"] }
-}, {
-    kMASCULINE: { "тёплый": ["камин"] },
-    kFEMININE: { "тёплая": ["батарея", "шапка"] },
-    kNEUTER: { "тёплое": ["пальто"] },
-    kPLURAL: { "тёплые": ["свитеры"] }
-}, {
-    kMASCULINE: { "холодный": ["пол"] },
-    kFEMININE: { "холодная": ["погода", "комната"] },
-    kNEUTER: { "холодное": ["озеро"] },
-    kPLURAL: { "холодные": ["воды"] }
-}, {
-    kMASCULINE: { "добрый": ["день"] },
-    kFEMININE: { "добрая": ["девушка"] },
-    kNEUTER: { "доброе": ["слово"] },
-    kPLURAL: { "добрые": ["учителя"] }
-}, {
-    kMASCULINE: { "злой": ["учитель", "герой"] },
-    kFEMININE: { "злая": ["кошка"] },
-    kNEUTER: { "злое": ["место"] },
-    kPLURAL: { "злые": ["люди"] }
-}, {
-    kMASCULINE: { "длинный": ["волос"] },
-    kFEMININE: { "длинная": ["дорога"] },
-    kNEUTER: { "длинное": ["шоссе"] },
-    kPLURAL: { "длинные": ["письма"] }
-}, {
-    kMASCULINE: { "короткий": ["фильм", "путь"] },
-    kFEMININE: { "короткая": ["песня"] },
-    kNEUTER: { "короткое": ["пальто"] },
-    kPLURAL: { "короткие": ["брюки"] }
-}, {
-    kMASCULINE: { "интересный": ["учебник"] },
-    kFEMININE: { "интересная": ["книга"] },
-    kNEUTER: { "интересное": ["письмо"] },
-    kPLURAL: { "интересные": ["документы"] }
-}, {
-    kMASCULINE: { "скучный": ["преподаватель"] },
-    kFEMININE: { "скучная": ["опера"] },
-    kNEUTER: { "скучное": ["видео"] },
-    kPLURAL: { "скучные": ["бизнесмены"] }
-}];
+ADJECTIVES = [(_ref = {}, _defineProperty(_ref, kMASCULINE, { "удобный": ["стул", "диван"] }), _defineProperty(_ref, kFEMININE, { "удобная": ["одежда", "кровать"] }), _defineProperty(_ref, kNEUTER, { "удобное": ["кресло"] }), _defineProperty(_ref, kPLURAL, { "удобные": ["гамаки", "диваны"] }), _ref), (_ref2 = {}, _defineProperty(_ref2, kMASCULINE, { "неудобный": ["диван", "гамак"] }), _defineProperty(_ref2, kFEMININE, { "неудобная": ["одежда"] }), _defineProperty(_ref2, kNEUTER, { "неудобное": ["кресло"] }), _defineProperty(_ref2, kPLURAL, { "неудобные": ["стулья", "кресла"] }), _ref2), (_ref3 = {}, _defineProperty(_ref3, kMASCULINE, { "новый": ["телефон", "стол"] }), _defineProperty(_ref3, kFEMININE, { "новая": ["машина", "футболка"] }), _defineProperty(_ref3, kNEUTER, { "новое": ["меню", "кино"] }), _defineProperty(_ref3, kPLURAL, { "новые": ["дома", "студенты"] }), _ref3), (_ref4 = {}, _defineProperty(_ref4, kMASCULINE, { "старый": ["дом", "человек"] }), _defineProperty(_ref4, kFEMININE, { "старая": ["женщина", "кошка"] }), _defineProperty(_ref4, kNEUTER, { "старое": ["пианино"] }), _defineProperty(_ref4, kPLURAL, { "старые": ["люди"] }), _ref4), (_ref5 = {}, _defineProperty(_ref5, kMASCULINE, { "красивый": ["человек"] }), _defineProperty(_ref5, kFEMININE, { "красивая": ["картина"] }), _defineProperty(_ref5, kNEUTER, { "красивое": ["море"] }), _defineProperty(_ref5, kPLURAL, { "красивые": ["фотографии"] }), _ref5), (_ref6 = {}, _defineProperty(_ref6, kMASCULINE, { "некрасивый": ["завод"] }), _defineProperty(_ref6, kFEMININE, { "некрасивая": ["собака"] }), _defineProperty(_ref6, kNEUTER, { "некрасивое": ["фото"] }), _defineProperty(_ref6, kPLURAL, { "некрасивые": ["животные"] }), _ref6), (_ref7 = {}, _defineProperty(_ref7, kMASCULINE, { "тёплый": ["камин"] }), _defineProperty(_ref7, kFEMININE, { "тёплая": ["батарея", "шапка"] }), _defineProperty(_ref7, kNEUTER, { "тёплое": ["пальто"] }), _defineProperty(_ref7, kPLURAL, { "тёплые": ["свитеры"] }), _ref7), (_ref8 = {}, _defineProperty(_ref8, kMASCULINE, { "холодный": ["пол"] }), _defineProperty(_ref8, kFEMININE, { "холодная": ["погода", "комната"] }), _defineProperty(_ref8, kNEUTER, { "холодное": ["озеро"] }), _defineProperty(_ref8, kPLURAL, { "холодные": ["воды"] }), _ref8), (_ref9 = {}, _defineProperty(_ref9, kMASCULINE, { "добрый": ["день"] }), _defineProperty(_ref9, kFEMININE, { "добрая": ["девушка"] }), _defineProperty(_ref9, kNEUTER, { "доброе": ["слово"] }), _defineProperty(_ref9, kPLURAL, { "добрые": ["учителя"] }), _ref9), (_ref10 = {}, _defineProperty(_ref10, kMASCULINE, { "злой": ["учитель", "герой"] }), _defineProperty(_ref10, kFEMININE, { "злая": ["кошка"] }), _defineProperty(_ref10, kNEUTER, { "злое": ["место"] }), _defineProperty(_ref10, kPLURAL, { "злые": ["люди"] }), _ref10), (_ref11 = {}, _defineProperty(_ref11, kMASCULINE, { "длинный": ["волос"] }), _defineProperty(_ref11, kFEMININE, { "длинная": ["дорога"] }), _defineProperty(_ref11, kNEUTER, { "длинное": ["шоссе"] }), _defineProperty(_ref11, kPLURAL, { "длинные": ["письма"] }), _ref11), (_ref12 = {}, _defineProperty(_ref12, kMASCULINE, { "короткий": ["фильм", "путь"] }), _defineProperty(_ref12, kFEMININE, { "короткая": ["песня"] }), _defineProperty(_ref12, kNEUTER, { "короткое": ["пальто"] }), _defineProperty(_ref12, kPLURAL, { "короткие": ["брюки"] }), _ref12), (_ref13 = {}, _defineProperty(_ref13, kMASCULINE, { "интересный": ["учебник"] }), _defineProperty(_ref13, kFEMININE, { "интересная": ["книга"] }), _defineProperty(_ref13, kNEUTER, { "интересное": ["письмо"] }), _defineProperty(_ref13, kPLURAL, { "интересные": ["документы"] }), _ref13), (_ref14 = {}, _defineProperty(_ref14, kMASCULINE, { "скучный": ["преподаватель"] }), _defineProperty(_ref14, kFEMININE, { "скучная": ["опера"] }), _defineProperty(_ref14, kNEUTER, { "скучное": ["видео"] }), _defineProperty(_ref14, kPLURAL, { "скучные": ["бизнесмены"] }), _ref14)];
 
 var Adjective = function () {
     function Adjective(json) {
