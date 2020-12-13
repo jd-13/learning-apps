@@ -14,7 +14,67 @@ kFEMININE = "feminine";
 kNEUTER = "neuter";
 kPLURAL = "plural";
 
-ADJECTIVES = [(_ref = {}, _defineProperty(_ref, kMASCULINE, { "удобный": ["стул", "диван"] }), _defineProperty(_ref, kFEMININE, { "удобная": ["одежда"] }), _defineProperty(_ref, kNEUTER, { "удобное": ["кресло"] }), _defineProperty(_ref, kPLURAL, { "удобные": ["гамаки", "диваны"] }), _ref), (_ref2 = {}, _defineProperty(_ref2, kMASCULINE, { "неудобный": ["диван", "гамак"] }), _defineProperty(_ref2, kFEMININE, { "неудобная": ["одежда"] }), _defineProperty(_ref2, kNEUTER, { "неудобное": ["кресло"] }), _defineProperty(_ref2, kPLURAL, { "неудобные": ["стулья", "кресла"] }), _ref2)];
+ADJECTIVES = [(_ref = {}, _defineProperty(_ref, kMASCULINE, { "удобный": ["стул", "диван"] }), _defineProperty(_ref, kFEMININE, { "удобная": ["одежда", "кровать"] }), _defineProperty(_ref, kNEUTER, { "удобное": ["кресло"] }), _defineProperty(_ref, kPLURAL, { "удобные": ["гамаки", "диваны"] }), _ref), (_ref2 = {}, _defineProperty(_ref2, kMASCULINE, { "неудобный": ["диван", "гамак"] }), _defineProperty(_ref2, kFEMININE, { "неудобная": ["одежда"] }), _defineProperty(_ref2, kNEUTER, { "неудобное": ["кресло"] }), _defineProperty(_ref2, kPLURAL, { "неудобные": ["стулья", "кресла"] }), _ref2), {
+    kMASCULINE: { "новый": ["телефон", "стол"] },
+    kFEMININE: { "новая": ["машина", "футболка"] },
+    kNEUTER: { "новое": ["меню", "кино"] },
+    kPLURAL: { "новые": ["дома", "студенты"] }
+}, {
+    kMASCULINE: { "старый": ["дом", "человек"] },
+    kFEMININE: { "старая": ["женщина", "кошка"] },
+    kNEUTER: { "старое": ["пианино"] },
+    kPLURAL: { "старые": ["люди"] }
+}, {
+    kMASCULINE: { "красивый": ["человек"] },
+    kFEMININE: { "красивая": ["картина"] },
+    kNEUTER: { "красивое": ["море"] },
+    kPLURAL: { "красивые": ["фотографии"] }
+}, {
+    kMASCULINE: { "некрасивый": ["завод"] },
+    kFEMININE: { "некрасивая": ["собака"] },
+    kNEUTER: { "некрасивое": ["фото"] },
+    kPLURAL: { "некрасивые": ["животные"] }
+}, {
+    kMASCULINE: { "тёплый": ["камин"] },
+    kFEMININE: { "тёплая": ["батарея", "шапка"] },
+    kNEUTER: { "тёплое": ["пальто"] },
+    kPLURAL: { "тёплые": ["свитеры"] }
+}, {
+    kMASCULINE: { "холодный": ["пол"] },
+    kFEMININE: { "холодная": ["погода", "комната"] },
+    kNEUTER: { "холодное": ["озеро"] },
+    kPLURAL: { "холодные": ["воды"] }
+}, {
+    kMASCULINE: { "добрый": ["день"] },
+    kFEMININE: { "добрая": ["девушка"] },
+    kNEUTER: { "доброе": ["слово"] },
+    kPLURAL: { "добрые": ["учителя"] }
+}, {
+    kMASCULINE: { "злой": ["учитель", "герой"] },
+    kFEMININE: { "злая": ["кошка"] },
+    kNEUTER: { "злое": ["место"] },
+    kPLURAL: { "злые": ["люди"] }
+}, {
+    kMASCULINE: { "длинный": ["волос"] },
+    kFEMININE: { "длинная": ["дорога"] },
+    kNEUTER: { "длинное": ["шоссе"] },
+    kPLURAL: { "длинные": ["письма"] }
+}, {
+    kMASCULINE: { "короткий": ["фильм", "путь"] },
+    kFEMININE: { "короткая": ["песня"] },
+    kNEUTER: { "короткое": ["пальто"] },
+    kPLURAL: { "короткие": ["брюки"] }
+}, {
+    kMASCULINE: { "интересный": ["учебник"] },
+    kFEMININE: { "интересная": ["книга"] },
+    kNEUTER: { "интересное": ["письмо"] },
+    kPLURAL: { "интересные": ["документы"] }
+}, {
+    kMASCULINE: { "скучный": ["преподаватель"] },
+    kFEMININE: { "скучная": ["опера"] },
+    kNEUTER: { "скучное": ["видео"] },
+    kPLURAL: { "скучные": ["бизнесмены"] }
+}];
 
 var Adjective = function () {
     function Adjective(json) {
